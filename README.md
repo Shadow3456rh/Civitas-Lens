@@ -270,7 +270,22 @@ The model is intended to support tasks such as:
 - Incident summarization
 - Multimodal analysis where supported by the selected model/runtime
 
-The exact Gemma 4 variant and runtime will be selected based on the final hardware, latency, input-modality requirements, and current official documentation.
+### Selected Variant: Gemma 4 E4B
+
+| Item | Decision |
+|---|---|
+| Primary model | **Gemma 4 E4B** (instruction-tuned) |
+| Fallback model | **Gemma 4 E2B**, if hardware or latency is constrained |
+| Modalities used | Text, image, and audio, all handled by a single model |
+| Context window | 128K tokens, enough to compare a new observation against several candidate incidents in one prompt |
+| Capabilities used | Multimodal understanding, structured (JSON) output, reasoning, and tool use (stretch goal) |
+| Runtime | Hugging Face Transformers behind a small internal FastAPI inference service. Quantized runtimes such as Ollama or llama.cpp are an option if they support audio input at the time of the final |
+
+**Why E4B and not a larger variant:** according to the official model card, audio input is available only on the small Gemma 4 models, while the larger 26B A4B and 31B models accept text and image only. Since voice reports are a core input, E4B is the variant that lets one model handle text, images, and voice. It is also designed for on-device deployment, which supports private, self-hosted operation.
+
+**Audio constraint:** Gemma 4 audio input is limited to 30 seconds per clip. The interface limits each recording to 30 seconds, and longer recordings are split into chunks that are analyzed in order and merged into one observation.
+
+The variant, runtime, and audio support will be re-verified against the official Gemma 4 documentation at the start of the final hackathon.
 
 ---
 
@@ -302,6 +317,8 @@ Gemma 4 provides a natural-language intelligence layer capable of interpreting u
 - Useful for structured information extraction.
 - Can support semantic and contextual analysis.
 - Can be integrated directly into the application's workflow.
+- Natively multimodal: the small variants accept text, images, and short audio clips, so one model can cover all three report types and keeps the pipeline simple.
+- Supports tool use, which enables an optional bounded agent step (see Section 13).
 - Provides flexibility for experimentation and optimization.
 - Enables the project to demonstrate meaningful use of an open AI model.
 
@@ -554,7 +571,7 @@ User Observation
 +----------------------+
 | Structured           |
 | Observation          |
-| Type / Context      |
+| Type / Context       |
 | Location / Time      |
 | Entities / Indicators|
 +----------+-----------+
@@ -572,17 +589,17 @@ User Observation
 | Relationship Analysis|
 +----------+-----------+
            |
-       +---+---+
-       |       |
-       v       v
-   Related   New
-       |       |
-       v       v
-   Update   Create
-   Existing New
-   Incident Incident
-       |       |
-       +---+---+
+     +-----+-----+
+     |           |
+     v           v
+  Related       New
+     |           |
+     v           v
+  Update        Create
+  Existing      New
+  Incident      Incident
+     |           |
+     +-----+-----+
            |
            v
 +----------------------+
@@ -608,11 +625,9 @@ User Observation
 
 ## 13. Agentic Workflow (If Applicable)
 
-Civitas Lens does **not currently use a fully autonomous agentic architecture**.
+Civitas Lens does **not** use a fully autonomous agent. It uses a controlled AI pipeline in which Gemma 4 performs defined intelligence tasks, while the deterministic backend owns application state, validation, and every database write. One bounded, tool-using agent step is added as a stretch goal where reasoning over existing incidents benefits from it.
 
-Instead, it uses a controlled AI pipeline where Gemma 4 performs defined intelligence tasks and deterministic backend components control the application workflow.
-
-### Current Workflow
+### Core Workflow (MVP)
 
 ```text
 Observation
@@ -645,7 +660,55 @@ This controlled approach provides:
 - Controlled AI decisions
 - Clear separation between AI and business logic
 
-Future versions may introduce agentic workflows for automated evidence gathering, investigation, or intelligent escalation.
+### Bounded Tool-Calling Step (Stretch Goal)
+
+Gemma 4 supports tool use. During relationship analysis, Gemma 4 can act as a small, bounded agent that gathers the context it needs before deciding, instead of receiving a fixed list of candidates.
+
+```text
+New Structured Observation
+            |
+            v
++---------------------------+
+| Gemma 4                   |
+| Relationship Analysis     |
+| (tool-enabled)            |
++-------------+-------------+
+              |
+              | tool calls (max 3)
+              v
++---------------------------+
+| Backend Tool Executor     |
+| search_candidates()       |
+| get_incident()            |
+| get_evidence()            |
++-------------+-------------+
+              |
+              | read-only results
+              v
++---------------------------+
+| Gemma 4 Decision          |
+| Related / Unrelated       |
+| + short reasoning         |
++-------------+-------------+
+              |
+              v
++---------------------------+
+| Backend Validation        |
+| Distance / Time / Category|
++-------------+-------------+
+              |
+              v
+   Incident Creation / Update
+```
+
+**Guardrails:**
+
+- Tools are read-only. Only the backend writes to the database.
+- Each observation is limited to 3 tool calls and a fixed timeout.
+- Gemma 4's decision is a proposal. The backend validates it before any merge.
+- If tool calling fails or returns malformed output, the system falls back to the core workflow, where the deterministic candidate list is passed directly in the prompt.
+
+Future versions may extend this into broader agentic workflows for automated evidence gathering, investigation, or intelligent escalation.
 
 ---
 
@@ -656,22 +719,36 @@ Future versions may introduce agentic workflows for automated evidence gathering
 | Frontend | React.js | User interface and dashboard |
 | UI | Tailwind CSS | Responsive interface |
 | Backend | Python + FastAPI | REST APIs and business logic |
-| AI | Gemma 4 | Core AI intelligence |
-| Voice Processing | Whisper / compatible open-source STT | Voice-to-text |
+| AI Model | Gemma 4 E4B (E2B as fallback) | Core AI intelligence: text, image, and audio understanding |
+| AI Serving | Hugging Face Transformers behind an internal FastAPI inference service | Running Gemma 4 locally |
+| Output Validation | Pydantic | Schema validation of Gemma 4's JSON output, with retry |
+| Voice Input | Gemma 4 native audio (30-second clips) | Voice understanding and speech recognition |
+| Voice Fallback | Whisper / compatible open-source STT (optional) | Fallback if audio input is unavailable in the chosen runtime |
 | Database | PostgreSQL | Structured data |
-| Geospatial | PostGIS | Location-based operations |
+| Geospatial | PostGIS + GeoAlchemy2 | Location-based queries |
 | ORM | SQLAlchemy | Database interaction |
 | Maps | OpenStreetMap | Geographic data |
 | Map Library | Leaflet / React-Leaflet | Interactive maps |
-| Media Storage | Object/File Storage | Images and audio |
-| Authentication | JWT / RBAC | Access control |
-| Containerization | Docker | Deployment consistency |
+| Async Processing | FastAPI BackgroundTasks | Non-blocking AI processing (MVP) |
+| Media Storage | Local file storage (MVP), object storage later | Images and audio |
+| Authentication | JWT with simple role checks | Access control (fine-grained RBAC is a stretch goal) |
+| Containerization | Docker / Docker Compose | Deployment consistency |
 | Version Control | Git | Source management |
 | Repository | GitHub | Collaboration |
 
 ---
 
 ## 15. Expected Features
+
+### Scope for the Final Hackathon
+
+| Priority | Features |
+|---|---|
+| **Must have (MVP)** | Text, image, and short voice report submission with location and timestamp; Gemma 4 extraction and classification into validated JSON; candidate retrieval by location, time, and category; Gemma 4 relationship analysis with backend validation; incident creation and merging with original evidence preserved; dashboard with map, timeline, and AI summary |
+| **Should have** | Incident status workflow; basic search and filtering; relationship explanation |
+| **Stretch** | Bounded tool-calling relationship step; fine-grained role-based access; audit trail; semantic similarity ranking with vector search; alerting |
+
+Demo data: a seeded scenario of several linked reports (voice, image, and text) describing one incident, plus unrelated reports, will be prepared so the incident-linking flow can be demonstrated reliably.
 
 ### Multi-Modal Observation Reporting
 
@@ -722,7 +799,7 @@ Displays:
 - Status
 - Related observations
 
-### Search and Filtering
+### Search and Filtering (Should Have)
 
 Search by:
 
@@ -736,7 +813,7 @@ Search by:
 
 Shows contextual factors behind potential relationships between observations.
 
-### Incident Workflow
+### Incident Workflow (Should Have)
 
 Authorized users can manage:
 
@@ -746,9 +823,9 @@ New → Under Review → Active → Resolved → Archived
 
 ### Privacy and Access Control
 
-Protects sensitive information through authentication and role-based permissions.
+Protects sensitive information through authentication and role-based permissions. Basic roles are part of the MVP; fine-grained RBAC is a stretch goal.
 
-### Audit Trail
+### Audit Trail (Stretch)
 
 Maintains original observations and historical incident updates.
 
@@ -757,6 +834,8 @@ Maintains original observations and historical incident updates.
 ## 16. Implementation Approach
 
 Civitas Lens will be implemented using a modular hybrid AI architecture.
+
+**Build order:** Phases 1 to 5 and the core of Phase 7 are built first to get one complete end-to-end flow working. Should-have and stretch features are added only after that flow works.
 
 ### Phase 1 — User Reporting
 
@@ -774,12 +853,13 @@ The backend will:
 - Validate incoming requests
 - Store original evidence
 - Process uploaded media
-- Convert voice to text
-- Prepare AI inputs
+- Enforce the 30-second audio limit per clip, splitting longer recordings into ordered chunks
+- Prepare AI inputs, with image and audio placed before the text in the prompt
+- Pass audio directly to Gemma 4 (open-source speech-to-text is used only as a fallback)
 
 ### Phase 3 — Gemma 4 Integration
 
-Gemma 4 processes each observation and returns structured information.
+Gemma 4 processes each observation and returns structured information. Output is requested as JSON and validated against a Pydantic schema. If validation fails, the request is retried once and then flagged for review.
 
 ```text
 Raw Observation
@@ -839,6 +919,8 @@ Update   Create
 Incident Incident
 ```
 
+The merge decision is gated by deterministic rules (distance threshold, time window, and category compatibility). Gemma 4's output is treated as a proposal, and any confidence it reports is only a minor additional signal. As a stretch goal, this step can be replaced by the bounded tool-calling workflow described in Section 13.
+
 ### Phase 6 — Incident Intelligence
 
 The system maintains:
@@ -872,8 +954,16 @@ Test cases will include:
 - Multiple observations from different users
 - Voice + text
 - Image + text
+- Audio clips near the 30-second limit and longer recordings that need chunking
+- Malformed or invalid JSON from the model
 - Changing incident context
 - False relationship cases
+
+### Phase 9 — Demo Preparation
+
+- Seed one multi-report incident (voice, image, and text from different users) plus unrelated decoy reports.
+- Prepare a scripted demo path through the dashboard.
+- Keep pre-recorded sample inputs as a fallback if live capture fails.
 
 ---
 
@@ -893,10 +983,10 @@ The final output will be a functional AI-powered incident intelligence platform 
 - Interactive incident map
 - Evidence management
 - Incident dashboard
-- Search and filtering
-- Status management
-- Audit trail
-- Role-based access
+- Search and filtering (should have)
+- Status management (should have)
+- Audit trail (stretch)
+- Role-based access (basic roles in MVP, fine-grained RBAC is a stretch goal)
 
 ### Example
 
@@ -910,11 +1000,11 @@ Gemma 4
    v
 Incident #102
    |
-   +---- Person B → Image
+   +---- Person B -> Image
    |
-   +---- Person C → Text
+   +---- Person C -> Text
    |
-   +---- Person D → Voice
+   +---- Person D -> Voice
               |
               v
        Gemma 4 Relationship Analysis
@@ -926,12 +1016,12 @@ Incident #102
 +--------------------------------+
 | Incident #102                  |
 |                                |
-| AI Summary                    |
-| Location                      |
-| Evidence × 4                  |
-| Timeline                      |
-| Related Observations          |
-| Current Status                |
+| AI Summary                     |
+| Location                       |
+| Evidence x 4                   |
+| Timeline                       |
+| Related Observations           |
+| Current Status                 |
 +--------------------------------+
 ```
 
@@ -1016,7 +1106,7 @@ PostgreSQL       Media Storage
 /PostGIS
 ```
 
-For higher workloads, asynchronous processing and message queues can be introduced so heavy AI operations do not block user-facing requests.
+The MVP uses FastAPI background tasks so AI processing does not block user-facing requests. For higher workloads, message queues and dedicated inference workers can be introduced.
 
 ---
 
@@ -1024,17 +1114,19 @@ For higher workloads, asynchronous processing and message queues can be introduc
 
 | Component | Technology | Purpose |
 |---|---|---|
-| AI Model | Gemma 4 | Core AI intelligence |
+| AI Model | Gemma 4 E4B (E2B fallback) | Core AI intelligence for text, image, and audio |
+| Model Serving | Hugging Face Transformers | Running Gemma 4 locally |
 | Backend | FastAPI | API and backend services |
+| Validation | Pydantic | Validating structured AI output |
 | Frontend | React.js | User interface |
 | UI Framework | Tailwind CSS | Interface styling |
 | Database | PostgreSQL | Structured storage |
-| Geospatial | PostGIS | Spatial queries |
+| Geospatial | PostGIS + GeoAlchemy2 | Spatial queries |
 | ORM | SQLAlchemy | Database interaction |
-| Voice Processing | Whisper / compatible open-source STT | Speech-to-text |
+| Voice Processing | Gemma 4 native audio; Whisper / compatible open-source STT as optional fallback | Voice understanding and speech-to-text |
 | Maps | OpenStreetMap | Geographic data |
 | Map Library | Leaflet / React-Leaflet | Interactive maps |
-| Containers | Docker | Deployment |
+| Containers | Docker / Docker Compose | Deployment |
 | Version Control | Git | Source management |
 | Repository | GitHub | Collaboration |
 
@@ -1060,16 +1152,19 @@ Using open-source components provides:
 |---|---|
 | Multimodal input complexity | Use a standardized preprocessing pipeline for text, image, and voice. |
 | Different descriptions of the same event | Combine Gemma semantic comparison with location, time, and category signals. |
-| False incident relationships | Require AI confidence plus deterministic validation before merging. |
+| False incident relationships | Require deterministic validation (distance, time window, category) before merging. Gemma 4's output is a proposal and its confidence is only a secondary signal. |
 | AI hallucination or incorrect interpretation | Treat AI output as an analysis signal, validate structured responses, and preserve original evidence. |
-| Voice quality and transcription errors | Use speech-to-text preprocessing and allow correction of extracted information. |
+| Voice quality, transcription errors, and the 30-second audio limit | Use Gemma 4's native audio understanding on clips up to 30 seconds, split longer recordings into chunks, keep the original audio as evidence, and allow correction of extracted information. Open-source speech-to-text is an optional fallback. |
 | Poor image quality | Combine image analysis with text, location, time, and other evidence. |
 | Large report volume | Use candidate retrieval, asynchronous processing, caching, and scalable inference workers. |
 | Privacy concerns | Apply authentication, access control, secure storage, and data minimization. |
 | False or malicious submissions | Add validation, abuse controls, evidence preservation, and human review for critical incidents. |
-| Gemma resource requirements | Select an appropriate model variant and optimize inference for the available hardware. |
+| Gemma resource requirements | Use E4B (E2B as fallback), quantization where supported, and background processing. Keep Gemma calls to two per observation. |
 | Incorrect incident merging | Allow authorized users to review and separate incorrectly linked incidents. |
 | Real-time performance | Use background processing and asynchronous AI tasks for heavier operations. |
+| Malformed or inconsistent structured output | Request JSON, validate with Pydantic, retry once, then flag the observation for review. |
+| Unreliable tool calling by a small model | Keep tools read-only, cap tool calls, and fall back to the deterministic pipeline. |
+| Limited hackathon time | Follow the defined MVP scope, add stretch features only after the end-to-end flow works, and use seeded demo data. |
 | Historical context loss | Preserve every original observation and maintain a complete incident timeline. |
 
 ---

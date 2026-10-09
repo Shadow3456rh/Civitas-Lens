@@ -1,26 +1,148 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-public-sans: 'Public Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Surfaces & Canvas - Light theme only (Government-portal style) */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --surface: #ffffff;
+  --surface-subtle: #f1f5f9;
+  --surface-muted: #e2e8f0;
+
+  /* Navy Primary (#1D3557-like) - Trustworthy, authoritative */
+  --primary: #1d3557;
+  --primary-hover: #162842;
+  --primary-active: #0f1d30;
+  --primary-foreground: #ffffff;
+  --primary-subtle: #eef3f8;
+
+  /* Muted Accent (#457B9D) */
+  --accent: #457b9d;
+  --accent-hover: #386682;
+  --accent-foreground: #ffffff;
+  --accent-subtle: #f0f6f9;
+
+  /* Neutrals & Borders (1px borders, subtle contrast) */
+  --muted: #64748b;
+  --muted-foreground: #475569;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --ring: #1d3557;
+
+  /* Radii - Subtle and utilitarian (2px / 4px / 6px / 8px) */
+  --radius-sm: 2px;
+  --radius: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Semantic Severity Tokens */
+  --severity-low-bg: #f0fdf4;
+  --severity-low-text: #166534;
+  --severity-low-border: #bbf7d0;
+
+  --severity-medium-bg: #fefce8;
+  --severity-medium-text: #854d0e;
+  --severity-medium-border: #fef08a;
+
+  --severity-high-bg: #fff7ed;
+  --severity-high-text: #c2410c;
+  --severity-high-border: #fed7aa;
+
+  --severity-critical-bg: #fef2f2;
+  --severity-critical-text: #991b1b;
+  --severity-critical-border: #fecaca;
+
+  /* Semantic Status Tokens */
+  --status-new-bg: #eff6ff;
+  --status-new-text: #1e40af;
+  --status-new-border: #bfdbfe;
+
+  --status-under-review-bg: #eef2ff;
+  --status-under-review-text: #4338ca;
+  --status-under-review-border: #c7d2fe;
+
+  --status-active-bg: #fff7ed;
+  --status-active-text: #9a3412;
+  --status-active-border: #ffedd5;
+
+  --status-resolved-bg: #f0fdf4;
+  --status-resolved-text: #166534;
+  --status-resolved-border: #bbf7d0;
+
+  --status-archived-bg: #f8fafc;
+  --status-archived-text: #475569;
+  --status-archived-border: #e2e8f0;
 }
 
 @theme inline {
+  --font-sans: var(--font-public-sans), system-ui, sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-surface-muted: var(--surface-muted);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-subtle: var(--primary-subtle);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-subtle: var(--accent-subtle);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+
+  --radius-sm: var(--radius-sm);
+  --radius: var(--radius);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Light theme enforcement - WCAG AA standards */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-public-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accessible focus outline */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Printable Incident Record Styles */
+@media print {
+  .no-print, header, footer, nav {
+    display: none !important;
+  }
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  .bg-white, .bg-slate-50 {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .border, .border-slate-200, .border-slate-300 {
+    border-color: #cccccc !important;
+  }
+  main, div {
+    break-inside: avoid;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}

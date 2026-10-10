@@ -31,25 +31,25 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      "inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#028090] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]";
+      "inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]";
 
     const variantStyles: Record<NonNullable<ButtonProps["variant"]>, string> = {
       primary:
-        "bg-[#0a2540] text-white hover:bg-[#06182b] active:bg-[#040e1a] shadow-sm hover:shadow-brand",
+        "bg-[#0c2340] text-white hover:bg-[#07162c] active:bg-[#040e1a] shadow-sm hover:shadow-brand",
       secondary:
         "bg-slate-100 text-slate-800 hover:bg-slate-200 active:bg-slate-300",
       teal:
-        "bg-[#028090] text-white hover:bg-[#00a896] active:bg-[#057a68] shadow-sm hover:shadow-teal-glow",
+        "bg-[#f47216] text-white hover:bg-[#ea580c] active:bg-[#c2410c] shadow-sm",
       gradient:
         "bg-brand-gradient text-white hover:opacity-95 shadow-brand hover:shadow-brand-hover",
       outline:
-        "border border-slate-300/80 bg-white text-slate-800 hover:bg-slate-50 hover:border-[#028090]/50 active:bg-slate-100 shadow-sm",
+        "border border-slate-300/80 bg-white text-slate-800 hover:bg-slate-50 hover:border-[#f47216]/60 active:bg-slate-100 shadow-sm",
       ghost:
-        "text-slate-700 hover:bg-slate-100 hover:text-[#0a2540] active:bg-slate-200",
+        "text-slate-700 hover:bg-slate-100 hover:text-[#0c2340] active:bg-slate-200",
       destructive:
         "bg-rose-600 text-white hover:bg-rose-700 active:bg-rose-800 shadow-sm",
       link:
-        "text-[#028090] underline-offset-4 hover:underline p-0 h-auto font-medium focus-visible:ring-offset-1 active:scale-100",
+        "text-[#f47216] underline-offset-4 hover:underline p-0 h-auto font-medium focus-visible:ring-offset-1 active:scale-100",
     };
 
     const sizeStyles: Record<NonNullable<ButtonProps["size"]>, string> = {

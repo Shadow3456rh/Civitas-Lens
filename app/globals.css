@@ -5,45 +5,57 @@
 :root {
   --font-public-sans: 'Public Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Surfaces & Canvas - Modern Light Theme */
+  /* Surfaces & Canvas - ISRO Portal Theme */
   --background: #f8fafc;
-  --foreground: #091e36;
+  --foreground: #0c2340;
 
   --surface: #ffffff;
   --surface-subtle: #f1f5f9;
   --surface-muted: #e2e8f0;
 
-  /* Civitas Lens Brand Identity (Matching Official Logo) */
-  --civitas-navy: #0a2540;
-  --civitas-navy-dark: #06182b;
-  --civitas-navy-light: #163e68;
-  --civitas-teal: #057a68;
-  --civitas-teal-light: #028090;
-  --civitas-cyan: #00a896;
-  --civitas-cyan-glow: #00c49f;
-  --civitas-cyan-tint: #f0fdfa;
+  /* ISRO Official Brand Identity (Navy Blue & Rocket Flame Orange) */
+  --isro-navy: #0c2340;
+  --isro-navy-dark: #07162c;
+  --isro-navy-light: #163e6d;
+  --isro-orange: #f47216;
+  --isro-orange-dark: #ea580c;
+  --isro-orange-glow: #ff8c38;
+  --isro-orange-tint: #fff7ed;
+  --isro-blue: #0e88d3;
+  --isro-blue-light: #38bdf8;
+  --isro-blue-tint: #eff6ff;
 
-  /* Primary (Civitas Navy) */
-  --primary: #0a2540;
-  --primary-hover: #07192c;
+  /* Brand Aliases */
+  --civitas-navy: #0c2340;
+  --civitas-navy-dark: #07162c;
+  --civitas-navy-light: #163e6d;
+  --civitas-teal: #f47216;
+  --civitas-teal-light: #ea580c;
+  --civitas-cyan: #f47216;
+  --civitas-cyan-glow: #ff8c38;
+  --civitas-cyan-tint: #fff7ed;
+
+  /* Primary (ISRO Deep Space Navy) */
+  --primary: #0c2340;
+  --primary-hover: #07162c;
   --primary-active: #040e1a;
   --primary-foreground: #ffffff;
-  --primary-subtle: #eef4f9;
+  --primary-subtle: #f0f4f8;
 
-  /* Accent (Civitas Teal & Cyan) */
-  --accent: #028090;
-  --accent-hover: #026b78;
+  /* Accent (ISRO Rocket Flame Saffron/Orange) */
+  --accent: #f47216;
+  --accent-hover: #ea580c;
   --accent-foreground: #ffffff;
-  --accent-subtle: #e6f7f5;
+  --accent-subtle: #fff7ed;
 
   /* Neutrals & Borders */
   --muted: #64748b;
   --muted-foreground: #475569;
   --border: #e2e8f0;
   --border-strong: #cbd5e1;
-  --ring: #028090;
+  --ring: #f47216;
 
-  /* Radii - Modern rounded corners */
+  /* Radii - Clean structured corners */
   --radius-sm: 4px;
   --radius: 8px;
   --radius-md: 12px;
@@ -137,35 +149,37 @@ body {
   outline-offset: 2px;
 }
 
-/* Civitas Lens Brand Utility Classes */
+/* ISRO Portal Theme Utility Classes */
 .bg-brand-gradient {
-  background: linear-gradient(135deg, #0a2540 0%, #063959 55%, #028090 85%, #00a896 100%);
+  background: linear-gradient(135deg, #07162c 0%, #0c2340 50%, #163e6d 80%, #f47216 100%);
 }
 
-.bg-teal-gradient {
-  background: linear-gradient(135deg, #028090 0%, #00a896 100%);
+.bg-teal-gradient,
+.bg-isro-gradient {
+  background: linear-gradient(135deg, #f47216 0%, #ea580c 100%);
 }
 
 .bg-hero-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(2, 128, 144, 0.12) 0%, rgba(10, 37, 64, 0.04) 50%, transparent 80%);
+  background: radial-gradient(circle at 50% 0%, rgba(244, 114, 22, 0.15) 0%, rgba(12, 35, 64, 0.05) 50%, transparent 80%);
 }
 
 .text-brand-gradient {
-  background: linear-gradient(135deg, #0a2540 0%, #028090 70%, #00a896 100%);
+  background: linear-gradient(135deg, #0c2340 0%, #0e88d3 50%, #f47216 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .shadow-brand {
-  box-shadow: 0 10px 25px -5px rgba(10, 37, 64, 0.08), 0 8px 10px -6px rgba(2, 128, 144, 0.05);
+  box-shadow: 0 10px 25px -5px rgba(12, 35, 64, 0.12), 0 8px 10px -6px rgba(244, 114, 22, 0.06);
 }
 
 .shadow-brand-hover {
-  box-shadow: 0 20px 30px -10px rgba(10, 37, 64, 0.12), 0 10px 15px -5px rgba(2, 128, 144, 0.1);
+  box-shadow: 0 20px 30px -10px rgba(12, 35, 64, 0.18), 0 10px 15px -5px rgba(244, 114, 22, 0.15);
 }
 
-.shadow-teal-glow {
-  box-shadow: 0 0 25px rgba(0, 168, 150, 0.25);
+.shadow-teal-glow,
+.shadow-orange-glow {
+  box-shadow: 0 0 25px rgba(244, 114, 22, 0.35);
 }
 
 .glass-card {

@@ -123,12 +123,12 @@ function SubmittedReportContent({ id }: { id: string }) {
     <div className="max-w-2xl mx-auto space-y-5">
       {/* Top Header Card */}
       <div className="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-sm text-center space-y-3.5">
-        <div className="w-14 h-14 mx-auto rounded-2xl bg-[#f0fdfa] border border-[#028090]/30 flex items-center justify-center text-[#028090] shadow-xs">
+        <div className="w-14 h-14 mx-auto rounded-2xl bg-[#fff7ed] border border-[#f47216]/30 flex items-center justify-center text-[#f47216] shadow-xs">
           <CheckCircle2 className="w-7 h-7" />
         </div>
 
         <div className="space-y-1">
-          <h1 className="text-xl font-extrabold text-[#0a2540]">Observation Received</h1>
+          <h1 className="text-xl font-extrabold text-[#0c2340]">Observation Received</h1>
           <p className="text-xs text-slate-500">
             Thank you for contributing to community awareness and safety.
           </p>
@@ -139,17 +139,17 @@ function SubmittedReportContent({ id }: { id: string }) {
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
             Tracking Reference Code
           </span>
-          <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#f0fdfa] border border-[#028090]/30 text-sm font-mono font-extrabold text-[#0a2540] shadow-xs">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#fff7ed] border border-[#f47216]/30 text-sm font-mono font-extrabold text-[#0c2340] shadow-xs">
             <span className="tracking-wide">{displayRefCode}</span>
             <button
               type="button"
               onClick={handleCopyId}
-              className="p-1 text-[#028090] hover:text-[#00a896] rounded active:scale-90 transition-transform"
+              className="p-1 text-[#f47216] hover:text-[#ea580c] rounded active:scale-90 transition-transform"
               title="Copy reference code"
               aria-label="Copy reference code"
             >
               {copied ? (
-                <Check className="w-4 h-4 text-[#00a896]" />
+                <Check className="w-4 h-4 text-[#f47216]" />
               ) : (
                 <Copy className="w-4 h-4" />
               )}
@@ -158,7 +158,7 @@ function SubmittedReportContent({ id }: { id: string }) {
           <p className="text-[11px] text-slate-400">
             Save this code to track response progress at any time.
           </p>
-          {copied && <p className="text-[10px] text-[#00a896] font-bold animate-pulse">Reference code copied to clipboard</p>}
+          {copied && <p className="text-[10px] text-[#f47216] font-bold animate-pulse">Reference code copied to clipboard</p>}
         </div>
       </div>
 
@@ -169,8 +169,8 @@ function SubmittedReportContent({ id }: { id: string }) {
             Intelligence Engine Status
           </h2>
           {isPending && (
-            <span className="flex items-center gap-1.5 text-xs text-[#028090] font-bold">
-              <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#00a896]" />
+            <span className="flex items-center gap-1.5 text-xs text-[#f47216] font-bold">
+              <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#f47216]" />
               Processing live…
             </span>
           )}
@@ -180,11 +180,11 @@ function SubmittedReportContent({ id }: { id: string }) {
         <div className="space-y-4 pl-1">
           {/* Step 1: Received */}
           <div className="flex items-start gap-3">
-            <div className="w-6 h-6 rounded-full bg-[#028090] text-white flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-xs">
+            <div className="w-6 h-6 rounded-full bg-[#0c2340] text-white flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-xs">
               <Check className="w-3.5 h-3.5 stroke-[3]" />
             </div>
             <div className="flex-1">
-              <p className="text-xs font-bold text-[#0a2540]">1. Received & Logged</p>
+              <p className="text-xs font-bold text-[#0c2340]">1. Received & Logged</p>
               <p className="text-[11px] text-slate-500">Evidence and coordinates verified in system.</p>
             </div>
           </div>
@@ -194,9 +194,9 @@ function SubmittedReportContent({ id }: { id: string }) {
             <div
               className={`w-6 h-6 rounded-full flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-xs transition-colors ${
                 isPending
-                  ? "bg-[#00a896] text-white animate-pulse"
+                  ? "bg-[#f47216] text-white animate-pulse"
                   : isProcessed || isReviewOrFailed
-                  ? "bg-[#028090] text-white"
+                  ? "bg-[#0c2340] text-white"
                   : "bg-slate-200 text-slate-500"
               }`}
             >
@@ -207,7 +207,7 @@ function SubmittedReportContent({ id }: { id: string }) {
               )}
             </div>
             <div className="flex-1">
-              <p className="text-xs font-bold text-[#0a2540]">2. Incident Analysis</p>
+              <p className="text-xs font-bold text-[#0c2340]">2. Incident Analysis</p>
               <p className="text-[11px] text-slate-500">
                 {isPending
                   ? "Extracting categories, severity, and entities…"
@@ -223,7 +223,7 @@ function SubmittedReportContent({ id }: { id: string }) {
             <div
               className={`w-6 h-6 rounded-full flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-xs transition-colors ${
                 isProcessed
-                  ? "bg-[#028090] text-white"
+                  ? "bg-[#0c2340] text-white"
                   : isReviewOrFailed
                   ? "bg-amber-500 text-white"
                   : "bg-slate-200 text-slate-500"
@@ -238,7 +238,7 @@ function SubmittedReportContent({ id }: { id: string }) {
               )}
             </div>
             <div className="flex-1">
-              <p className="text-xs font-bold text-[#0a2540]">
+              <p className="text-xs font-bold text-[#0c2340]">
                 {isReviewOrFailed
                   ? "Queued for Analyst Review"
                   : isProcessed && data?.incident && data.incident.observation_count > 1
@@ -275,9 +275,9 @@ function SubmittedReportContent({ id }: { id: string }) {
 
         {/* Successfully Processed Summary Card */}
         {isProcessed && data?.summary && (
-          <div className="mt-4 p-4 rounded-xl bg-[#f0fdfa]/70 border border-[#028090]/25 space-y-2">
+          <div className="mt-4 p-4 rounded-xl bg-[#fff7ed]/80 border border-[#f47216]/25 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#028090]">AI Intelligence Summary</span>
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#ea580c]">AI Intelligence Summary</span>
               {data.severity && <Badge severity={data.severity} />}
             </div>
             <p className="text-xs text-slate-800 leading-relaxed font-sans">{data.summary}</p>
@@ -304,11 +304,11 @@ function SubmittedReportContent({ id }: { id: string }) {
         <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm space-y-4">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <h2 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-              <FileText className="w-3.5 h-3.5 text-[#028090]" />
+              <FileText className="w-3.5 h-3.5 text-[#f47216]" />
               Report Details
             </h2>
             {(data.user_category || data.category) && (
-              <span className="text-xs font-bold text-[#0a2540] bg-[#f0fdfa] border border-[#028090]/25 px-2.5 py-0.5 rounded-full">
+              <span className="text-xs font-bold text-[#0c2340] bg-[#fff7ed] border border-[#f47216]/25 px-2.5 py-0.5 rounded-full">
                 {data.user_category || data.category?.replace(/_/g, " ")}
               </span>
             )}
@@ -317,20 +317,20 @@ function SubmittedReportContent({ id }: { id: string }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
               <span className="text-[11px] font-semibold text-slate-500 block flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-[#028090]" />
+                <User className="w-3.5 h-3.5 text-[#f47216]" />
                 Reporter Name
               </span>
-              <p className="font-bold text-[#0a2540] text-sm">
+              <p className="font-bold text-[#0c2340] text-sm">
                 {data.reporter_name || "Not provided (Anonymous)"}
               </p>
             </div>
 
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
               <span className="text-[11px] font-semibold text-slate-500 block flex items-center gap-1.5">
-                <Phone className="w-3.5 h-3.5 text-[#028090]" />
+                <Phone className="w-3.5 h-3.5 text-[#f47216]" />
                 Contact Number
               </span>
-              <p className="font-bold text-[#0a2540] text-sm">
+              <p className="font-bold text-[#0c2340] text-sm">
                 {data.reporter_contact || "Not provided"}
               </p>
             </div>
@@ -367,7 +367,7 @@ function SubmittedReportContent({ id }: { id: string }) {
           href="/report"
           className="w-full inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs rounded-xl border border-slate-200 transition-colors shadow-xs"
         >
-          <PlusCircle className="w-4 h-4 mr-2 text-[#028090]" />
+          <PlusCircle className="w-4 h-4 mr-2 text-[#f47216]" />
           Submit another observation
         </Link>
 

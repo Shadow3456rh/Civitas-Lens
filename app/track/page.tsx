@@ -120,7 +120,7 @@ function TrackContent() {
     <div className="max-w-xl mx-auto space-y-6">
       {/* Title & Introduction */}
       <div className="text-center space-y-2">
-        <h1 className="text-2xl font-extrabold text-[#0a2540]">Track Your Observation</h1>
+        <h1 className="text-2xl font-extrabold text-[#0c2340]">Track Your Observation</h1>
         <p className="text-xs text-slate-500 max-w-md mx-auto">
           Enter the tracking reference code you received when submitting your observation to check municipal triage and response status.
         </p>
@@ -139,14 +139,14 @@ function TrackContent() {
               value={inputCode}
               onChange={(e) => setInputCode(e.target.value)}
               placeholder="e.g. CL-2026-100001"
-              className="pl-10 text-xs h-11 font-mono uppercase rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+              className="pl-10 text-xs h-11 font-mono uppercase rounded-xl border-slate-200 focus:border-[#f47216] focus:ring-[#f47216]/20"
             />
           </div>
           <Button
             type="submit"
             variant="teal"
             disabled={isLoading || !inputCode.trim()}
-            className="min-h-[44px] px-6 shadow-teal-glow text-white text-xs font-bold rounded-xl"
+            className="min-h-[44px] px-6 shadow-orange-glow text-white text-xs font-bold rounded-xl"
           >
             {isLoading ? "Searching…" : "Track"}
           </Button>
@@ -171,17 +171,17 @@ function TrackContent() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3.5">
             <div>
               <span className="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Reference Code</span>
-              <h2 className="text-lg font-extrabold font-mono text-[#0a2540]">{result.reference_code}</h2>
+              <h2 className="text-lg font-extrabold font-mono text-[#0c2340]">{result.reference_code}</h2>
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fdfa] border border-[#028090]/25 text-xs font-semibold text-[#028090] self-start sm:self-auto">
-              <Calendar className="w-3.5 h-3.5 text-[#00a896]" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fff7ed] border border-[#f47216]/25 text-xs font-semibold text-[#ea580c] self-start sm:self-auto">
+              <Calendar className="w-3.5 h-3.5 text-[#f47216]" />
               <span>{new Date(result.submitted_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
             </div>
           </div>
 
           {/* 4-Stage Stepper */}
           <div className="space-y-3">
-            <h3 className="text-xs font-extrabold text-[#0a2540] uppercase tracking-wider">
+            <h3 className="text-xs font-extrabold text-[#0c2340] uppercase tracking-wider">
               Resolution Progress
             </h3>
 
@@ -194,7 +194,7 @@ function TrackContent() {
                     key={stg.id}
                     className={`p-3 rounded-xl border text-left space-y-1 transition-all ${
                       isCurrent
-                        ? "bg-[#f0fdfa] border-[#028090] text-[#0a2540] ring-2 ring-[#00a896]/25 shadow-xs"
+                        ? "bg-[#fff7ed] border-[#f47216] text-[#0c2340] ring-2 ring-[#f47216]/25 shadow-xs"
                         : isPassed
                         ? "bg-emerald-50/70 border-emerald-300 text-emerald-950"
                         : "bg-slate-50/60 border-slate-200 opacity-60"
@@ -205,7 +205,7 @@ function TrackContent() {
                         {idx + 1}. {stg.label}
                       </span>
                       {isPassed && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />}
-                      {isCurrent && <Clock className="w-3.5 h-3.5 text-[#028090] animate-pulse shrink-0" />}
+                      {isCurrent && <Clock className="w-3.5 h-3.5 text-[#f47216] animate-pulse shrink-0" />}
                     </div>
                     <p className="text-[10px] text-slate-500 leading-tight">
                       {stg.desc}
@@ -221,11 +221,11 @@ function TrackContent() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <span className="text-[11px] text-slate-400 block font-medium">Category</span>
-                <span className="font-bold text-[#0a2540]">{result.category}</span>
+                <span className="font-bold text-[#0c2340]">{result.category}</span>
               </div>
               <div>
                 <span className="text-[11px] text-slate-400 block font-medium">Location</span>
-                <span className="font-bold text-[#0a2540] flex items-center gap-1">
+                <span className="font-bold text-[#0c2340] flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
                   <span className="truncate">{result.location_label}</span>
                 </span>
@@ -242,7 +242,7 @@ function TrackContent() {
             {result.incident_linked && result.incident_public_status && (
               <div className="pt-2 border-t border-slate-200/80 flex items-center justify-between text-[11px]">
                 <span className="text-slate-500 font-medium">Municipal Response Status:</span>
-                <span className="font-extrabold text-[#00c49f] bg-[#0a2540] px-2.5 py-0.5 rounded-full uppercase tracking-wider text-[10px]">
+                <span className="font-extrabold text-[#f47216] bg-[#0c2340] px-2.5 py-0.5 rounded-full uppercase tracking-wider text-[10px]">
                   {result.incident_public_status}
                 </span>
               </div>
@@ -250,8 +250,8 @@ function TrackContent() {
           </div>
 
           {/* Privacy Note */}
-          <div className="bg-[#f0fdfa] rounded-xl border border-[#028090]/20 p-3 flex items-start gap-2.5 text-xs text-[#0a2540]">
-            <Shield className="w-4 h-4 text-[#028090] shrink-0 mt-0.5" />
+          <div className="bg-[#fff7ed] rounded-xl border border-[#f47216]/20 p-3 flex items-start gap-2.5 text-xs text-[#0c2340]">
+            <Shield className="w-4 h-4 text-[#f47216] shrink-0 mt-0.5" />
             <p className="leading-relaxed">
               This is a read-only tracking view. To protect citizen privacy, reporter identity and contact information are never displayed publicly.
             </p>
@@ -263,7 +263,7 @@ function TrackContent() {
       <div className="text-center pt-2">
         <Link
           href="/report"
-          className="inline-flex items-center text-xs text-[#028090] font-bold hover:text-[#00a896] transition-colors"
+          className="inline-flex items-center text-xs text-[#f47216] font-bold hover:text-[#ea580c] transition-colors"
         >
           Have another issue to report?
           <ArrowRight className="w-3.5 h-3.5 ml-1" />

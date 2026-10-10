@@ -15,17 +15,17 @@ function FooterContent() {
   if (pathname === "/report" || pathname.startsWith("/report/")) return null;
 
   return (
-    <footer className="w-full bg-[#0a2540] text-slate-300 mt-auto font-sans">
+    <footer className="w-full bg-[#07162c] border-t-4 border-[#f47216] text-slate-300 mt-auto font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-slate-700">
           <div className="md:col-span-5 flex flex-col gap-4">
-            <Link href="/" className="inline-block transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] rounded w-max">
+            <Link href="/" className="inline-block transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216] rounded w-max">
               <span className="text-2xl font-bold text-white tracking-wide">Nagpur Civic Portal</span>
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed max-w-md">
               A prototype platform for citizens to report non-emergency civic issues and help improve our neighborhoods.
             </p>
-            <div className="text-xs font-semibold text-[#00a896] tracking-wide uppercase mt-2">
+            <div className="text-xs font-semibold text-[#f47216] tracking-wide uppercase mt-2">
               See Something Unusual? Help Connect the Dots.
             </div>
           </div>
@@ -35,17 +35,17 @@ function FooterContent() {
               <h2 className="font-bold text-white uppercase tracking-wider text-xs">Citizen Services</h2>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/report" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] rounded">
+                  <Link href="/report" className="hover:text-[#f47216] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216] rounded">
                     Report an Issue
                   </Link>
                 </li>
                 <li>
-                  <Link href="/track" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] rounded">
+                  <Link href="/track" className="hover:text-[#f47216] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216] rounded">
                     Track Your Report
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#how-it-works" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] rounded">
+                  <Link href="/#how-it-works" className="hover:text-[#f47216] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216] rounded">
                     How it Works
                   </Link>
                 </li>
@@ -56,17 +56,17 @@ function FooterContent() {
               <h2 className="font-bold text-white uppercase tracking-wider text-xs">Important Links</h2>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/contact" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] rounded">
+                  <Link href="/contact" className="hover:text-[#f47216] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216] rounded">
                     Contact & Helplines
                   </Link>
                 </li>
                 <li>
-                  <Link href="/accessibility" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] rounded">
+                  <Link href="/accessibility" className="hover:text-[#f47216] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216] rounded">
                     Accessibility Statement
                   </Link>
                 </li>
                 <li>
-                  <Link href="/privacy" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] rounded">
+                  <Link href="/privacy" className="hover:text-[#f47216] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216] rounded">
                     Privacy Policy
                   </Link>
                 </li>
@@ -77,15 +77,15 @@ function FooterContent() {
               <h2 className="font-bold text-white uppercase tracking-wider text-xs">Accessibility</h2>
               <ul className="space-y-3 text-slate-400">
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00a896]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#f47216]"></span>
                   <span>WCAG 2.1 AA Target</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00a896]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#f47216]"></span>
                   <span>High Contrast Support</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00a896]"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#f47216]"></span>
                   <span>Screen Reader Friendly</span>
                 </li>
               </ul>

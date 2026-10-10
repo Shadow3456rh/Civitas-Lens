@@ -99,7 +99,7 @@ export default function HeroMap() {
         <div className="absolute top-[20%] left-[8%] bg-white/95 backdrop-blur-sm p-2.5 rounded-lg shadow-lg border border-slate-200 text-[11px] font-semibold text-slate-700 flex items-center gap-2.5 max-w-[190px]">
           <div className="w-7 h-7 bg-rose-50 text-rose-600 rounded-md flex items-center justify-center text-sm shrink-0">🚧</div>
           <div>
-            <div className="text-[#0a2540] font-bold leading-tight">Pothole Cluster</div>
+            <div className="text-[#0c2340] font-bold leading-tight">Pothole Cluster</div>
             <div className="text-slate-500 font-normal text-[10px]">Ward 14 • 2 mins ago</div>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function HeroMap() {
         <div className="absolute top-[14%] right-[8%] bg-white/95 backdrop-blur-sm p-2.5 rounded-lg shadow-lg border border-slate-200 text-[11px] font-semibold text-slate-700 flex items-center gap-2.5 max-w-[190px]">
           <div className="w-7 h-7 bg-blue-50 text-blue-600 rounded-md flex items-center justify-center text-sm shrink-0">💧</div>
           <div>
-            <div className="text-[#0a2540] font-bold leading-tight">Water Main Leak</div>
+            <div className="text-[#0c2340] font-bold leading-tight">Water Main Leak</div>
             <div className="text-slate-500 font-normal text-[10px]">Civil Lines • 15m ago</div>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function HeroMap() {
         <div className="absolute bottom-[14%] left-[14%] bg-white/95 backdrop-blur-sm p-2.5 rounded-lg shadow-lg border border-slate-200 text-[11px] font-semibold text-slate-700 flex items-center gap-2.5 max-w-[190px]">
           <div className="w-7 h-7 bg-amber-50 text-amber-600 rounded-md flex items-center justify-center text-sm shrink-0">🗑️</div>
           <div>
-            <div className="text-[#0a2540] font-bold leading-tight">Overflowing Bin</div>
+            <div className="text-[#0c2340] font-bold leading-tight">Overflowing Bin</div>
             <div className="text-slate-500 font-normal text-[10px]">Dharampeth • 1h ago</div>
           </div>
         </div>

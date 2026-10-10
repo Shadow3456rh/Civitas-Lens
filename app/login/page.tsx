@@ -128,7 +128,7 @@ function LoginFormContent() {
           <img src="/logo.png" alt="Civitas Lens" className="h-14 w-auto mx-auto object-contain drop-shadow-xs" />
         </Link>
         <div className="space-y-1">
-          <h1 className="text-xl font-extrabold tracking-tight text-[#0a2540]">
+          <h1 className="text-xl font-extrabold tracking-tight text-[#0c2340]">
             {mode === "signin" ? "Sign In to Civitas Lens" : "Create Citizen Account"}
           </h1>
           <p className="text-xs text-slate-500 font-medium">People. Observations. A Safer Tomorrow.</p>
@@ -162,14 +162,14 @@ function LoginFormContent() {
               <button
                 type="button"
                 onClick={() => { setMode("signin"); setErrorMessage(null); }}
-                className={`flex-1 py-2 rounded-lg font-bold transition-all cursor-pointer ${mode === "signin" ? "bg-white text-[#0a2540] shadow-xs" : "text-slate-500 hover:text-slate-900"}`}
+                className={`flex-1 py-2 rounded-lg font-bold transition-all cursor-pointer ${mode === "signin" ? "bg-white text-[#0c2340] shadow-xs" : "text-slate-500 hover:text-slate-900"}`}
               >
                 Sign In
               </button>
               <button
                 type="button"
                 onClick={() => { setMode("signup"); setErrorMessage(null); }}
-                className={`flex-1 py-2 rounded-lg font-bold transition-all cursor-pointer ${mode === "signup" ? "bg-white text-[#0a2540] shadow-xs" : "text-slate-500 hover:text-slate-900"}`}
+                className={`flex-1 py-2 rounded-lg font-bold transition-all cursor-pointer ${mode === "signup" ? "bg-white text-[#0c2340] shadow-xs" : "text-slate-500 hover:text-slate-900"}`}
               >
                 Create Account
               </button>
@@ -188,7 +188,7 @@ function LoginFormContent() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="Rahul Verma"
-                      className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+                      className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#f47216] focus:ring-[#f47216]/20"
                     />
                   </div>
                 </div>
@@ -205,13 +205,13 @@ function LoginFormContent() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+1234567890"
-                    className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+                    className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#f47216] focus:ring-[#f47216]/20"
                   />
                 </div>
                 <p className="text-[10px] text-slate-500 pt-1">Include country code (e.g., +1)</p>
               </div>
 
-              <Button type="submit" variant="teal" disabled={isLoading} className="w-full min-h-[46px] text-xs font-bold shadow-teal-glow text-white rounded-xl">
+              <Button type="submit" variant="teal" disabled={isLoading} className="w-full min-h-[46px] text-xs font-bold shadow-orange-glow text-white rounded-xl">
                 {isLoading ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
                 Send Verification Code
               </Button>
@@ -230,13 +230,13 @@ function LoginFormContent() {
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   placeholder="123456"
-                  className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20 text-center tracking-widest font-mono"
+                  className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#f47216] focus:ring-[#f47216]/20 text-center tracking-widest font-mono"
                   maxLength={6}
                 />
               </div>
             </div>
             
-            <Button type="submit" variant="teal" disabled={isLoading} className="w-full min-h-[46px] text-xs font-bold shadow-teal-glow text-white rounded-xl">
+            <Button type="submit" variant="teal" disabled={isLoading} className="w-full min-h-[46px] text-xs font-bold shadow-orange-glow text-white rounded-xl">
               {isLoading ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
               Verify and Sign In
             </Button>
@@ -245,7 +245,7 @@ function LoginFormContent() {
               <button 
                 type="button" 
                 onClick={() => { setStep("request"); setOtp(""); setSuccessMessage(null); }}
-                className="text-[11px] text-[#028090] hover:underline"
+                className="text-[11px] text-[#f47216] hover:underline"
               >
                 Use a different phone number
               </button>

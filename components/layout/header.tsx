@@ -77,26 +77,26 @@ function HeaderContent() {
   if (isReportFlow) return null;
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white border-b border-slate-200 shadow-sm flex flex-col font-sans">
+    <header className="sticky top-0 z-40 w-full bg-white border-t-4 border-[#f47216] border-b border-slate-200 shadow-sm flex flex-col font-sans">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white focus:text-[#0a2540] focus:font-bold"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white focus:text-[#0c2340] focus:font-bold"
       >
         Skip to main content
       </a>
 
       {/* Utility Bar */}
-      <div className="bg-[#0a2540] text-white py-1 px-4 sm:px-6 lg:px-8 text-xs font-medium">
+      <div className="bg-[#07162c] text-white py-1 px-4 sm:px-6 lg:px-8 text-xs font-medium border-b border-white/10">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 text-slate-200">
               <Globe className="w-3.5 h-3.5" aria-hidden="true" />
               <span className="sr-only">Language options</span>
-              <button className="hover:text-white focus:outline-none focus:ring-1 focus:ring-white px-1">English</button>
+              <button className="hover:text-[#f47216] focus:outline-none focus:ring-1 focus:ring-white px-1 transition-colors">English</button>
               <span aria-hidden="true">|</span>
-              <button className="hover:text-white focus:outline-none focus:ring-1 focus:ring-white px-1">मराठी</button>
+              <button className="hover:text-[#f47216] focus:outline-none focus:ring-1 focus:ring-white px-1 transition-colors">मराठी</button>
               <span aria-hidden="true">|</span>
-              <button className="hover:text-white focus:outline-none focus:ring-1 focus:ring-white px-1">हिन्दी</button>
+              <button className="hover:text-[#f47216] focus:outline-none focus:ring-1 focus:ring-white px-1 transition-colors">हिन्दी</button>
             </div>
             <div className="hidden sm:flex items-center gap-1.5 text-slate-200 border-l border-slate-600 pl-4">
               <Type className="w-3.5 h-3.5" aria-hidden="true" />
@@ -142,7 +142,7 @@ function HeaderContent() {
         <div className="flex items-center justify-between h-24">
           <Link
             href="/"
-            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] rounded p-1 -ml-1 transition-transform"
+            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216] rounded p-1 -ml-1 transition-transform"
             title="Nagpur Civic Portal - Home"
           >
             <img
@@ -157,8 +157,8 @@ function HeaderContent() {
             <Link
               href="/"
               className={cn(
-                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896]",
-                pathname === "/" ? "text-[#0a2540] bg-slate-100" : "text-slate-600 hover:text-[#0a2540] hover:bg-slate-50"
+                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216]",
+                pathname === "/" ? "text-[#f47216] bg-orange-50/60 font-bold" : "text-slate-700 hover:text-[#f47216] hover:bg-slate-50"
               )}
             >
               Home
@@ -166,8 +166,8 @@ function HeaderContent() {
             <Link
               href="/#how-it-works"
               className={cn(
-                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896]",
-                "text-slate-600 hover:text-[#0a2540] hover:bg-slate-50"
+                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216]",
+                "text-slate-700 hover:text-[#f47216] hover:bg-slate-50"
               )}
             >
               How it works
@@ -175,8 +175,8 @@ function HeaderContent() {
             <Link
               href="/track"
               className={cn(
-                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896]",
-                pathname === "/track" ? "text-[#0a2540] bg-slate-100" : "text-slate-600 hover:text-[#0a2540] hover:bg-slate-50"
+                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216]",
+                pathname === "/track" ? "text-[#f47216] bg-orange-50/60 font-bold" : "text-slate-700 hover:text-[#f47216] hover:bg-slate-50"
               )}
             >
               Track a report
@@ -184,8 +184,8 @@ function HeaderContent() {
             <Link
               href="/contact"
               className={cn(
-                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896]",
-                pathname === "/contact" ? "text-[#0a2540] bg-slate-100" : "text-slate-600 hover:text-[#0a2540] hover:bg-slate-50"
+                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216]",
+                pathname === "/contact" ? "text-[#f47216] bg-orange-50/60 font-bold" : "text-slate-700 hover:text-[#f47216] hover:bg-slate-50"
               )}
             >
               Contact
@@ -193,7 +193,7 @@ function HeaderContent() {
             
             <Link
               href="/report"
-              className="ml-2 inline-flex items-center justify-center px-5 py-2.5 text-base font-bold rounded bg-[#00a896] text-white hover:bg-[#028090] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] focus-visible:ring-offset-2"
+              className="ml-2 inline-flex items-center justify-center px-5 py-2.5 text-base font-bold rounded bg-[#f47216] text-white hover:bg-[#ea580c] shadow-sm hover:shadow-[0_0_15px_rgba(244,114,22,0.35)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216] focus-visible:ring-offset-2"
             >
               Report an issue
             </Link>
@@ -204,7 +204,7 @@ function HeaderContent() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896]"
+              className="inline-flex items-center justify-center p-2 rounded text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f47216]"
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle navigation menu"
             >
@@ -254,7 +254,7 @@ function HeaderContent() {
             <Link
               href="/report"
               onClick={() => setMobileMenuOpen(false)}
-              className="block w-full text-center px-3 py-3 rounded bg-[#00a896] text-white font-bold text-base hover:bg-[#028090]"
+              className="block w-full text-center px-3 py-3 rounded bg-[#f47216] text-white font-bold text-base hover:bg-[#ea580c] shadow-sm"
             >
               Report an issue
             </Link>

@@ -621,7 +621,7 @@ export default function ReportPage() {
               <img
                 src={capturedPreviewUrl}
                 alt="Captured observation evidence"
-                className="w-full h-full max-h-[500px] object-contain mx-auto"
+                className="w-full h-full object-cover"
               />
               <div className="absolute top-3 right-3">
                 <Button
@@ -643,7 +643,7 @@ export default function ReportPage() {
                 autoPlay
                 playsInline
                 muted
-                className="h-full max-w-lg mx-auto object-cover"
+                className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
                 <div className="w-64 h-64 border border-white/20 rounded-lg relative">
@@ -819,7 +819,7 @@ export default function ReportPage() {
         {renderProgressHeader()}
 
         <div className="flex-1 overflow-y-auto">
-        <div className="max-w-2xl mx-auto px-4 py-5 space-y-5 pb-24">
+        <div className="max-w-4xl mx-auto px-4 py-5 space-y-5 pb-24">
           {/* Section A: What is the problem? */}
           <section className="bg-white rounded-2xl border border-slate-200/90 p-5 space-y-3 shadow-sm">
             <div>
@@ -1042,7 +1042,7 @@ export default function ReportPage() {
       {renderProgressHeader()}
 
       <div className="flex-1 overflow-y-auto">
-      <div className="max-w-2xl mx-auto px-4 py-5 space-y-5 pb-24">
+      <div className="max-w-4xl mx-auto px-4 py-5 space-y-5 pb-24">
         <div className="space-y-1">
           <h1 className="text-lg font-extrabold text-[#0a2540]">Review Your Report</h1>
           <p className="text-xs text-slate-500">
@@ -1068,11 +1068,11 @@ export default function ReportPage() {
           </div>
 
           {capturedPreviewUrl ? (
-            <div className="rounded-xl border border-slate-200 overflow-hidden bg-black max-h-48 flex items-center justify-center">
+            <div className="rounded-xl border border-slate-200 overflow-hidden bg-black max-h-72 flex items-center justify-center">
               <img
                 src={capturedPreviewUrl}
                 alt="Captured observation evidence"
-                className="w-full h-auto max-h-48 object-contain"
+                className="w-full h-auto max-h-72 object-contain"
               />
             </div>
           ) : (

@@ -168,7 +168,7 @@ export default function DashboardPage() {
     <div className="flex-1 flex flex-col min-h-[calc(100vh-3.5rem)] bg-slate-100">
       {/* Analyst Header & Status Strip */}
       <div className="bg-white border-b border-slate-200 px-4 py-2.5 sm:px-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 w-full">
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#0a2540] text-white text-xs font-bold tracking-wide uppercase shadow-xs">
               <Shield className="w-3.5 h-3.5 text-[#00c49f]" />
@@ -209,7 +209,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Navigation Tabs: Incidents vs Reports */}
-        <div className="flex items-center gap-2 border-t border-slate-100 mt-2.5 pt-2 max-w-7xl mx-auto">
+        <div className="flex items-center gap-2 border-t border-slate-100 mt-2.5 pt-2 w-full">
           <Link
             href="/dashboard"
             className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg border-b-2 text-[#0a2540] border-[#028090] bg-[#f0fdfa] shadow-xs"
@@ -225,8 +225,8 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Main Split Layout: Left Column (List) + Right Column (Map) */}
-      <div className="flex-1 flex flex-col lg:flex-row max-w-7xl mx-auto w-full overflow-hidden">
+      {/* Main Split Layout: Left Column (List) + Right Column (Map spanning screen width) */}
+      <div className="flex-1 flex flex-col lg:flex-row w-full overflow-hidden">
         {/* Left Column: Filterable List */}
         <section className="w-full lg:w-[480px] xl:w-[520px] bg-white border-r border-slate-200 flex flex-col h-[calc(100vh-6.5rem)]">
           {/* Filter Controls Header */}

@@ -74,10 +74,10 @@ export function IncidentClusterMap({
 
       mapInstanceRef.current = map;
 
-      // CartoDB Positron / OSM tiles for clean government style
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+      // OpenStreetMap standard tile layer
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
-        subdomains: "abcd",
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
       // Markers layer group
@@ -85,6 +85,20 @@ export function IncidentClusterMap({
       markersGroupRef.current = markersGroup;
 
       renderMarkers(L, map, markersGroup);
+
+      // Ensure full-width tiles are loaded properly
+      setTimeout(() => {
+        if (isMounted && mapInstanceRef.current) {
+          mapInstanceRef.current.invalidateSize();
+        }
+      }, 150);
+
+      const handleResize = () => {
+        if (mapInstanceRef.current) {
+          mapInstanceRef.current.invalidateSize();
+        }
+      };
+      window.addEventListener("resize", handleResize);
     }
 
     init();

@@ -103,6 +103,7 @@ function ReportDetailContent({ id }: { id: string }) {
   // Link to Incident Modal State
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [targetIncidentId, setTargetIncidentId] = useState("");
+  const [isImageFullscreen, setIsImageFullscreen] = useState(false);
 
   const loadReport = async () => {
     setIsLoading(true);
@@ -416,12 +417,20 @@ function ReportDetailContent({ id }: { id: string }) {
             </h2>
 
             {data.image_signed_url ? (
-              <div className="rounded-xl overflow-hidden border border-slate-200 bg-black">
+              <div
+                className="rounded-xl overflow-hidden border border-slate-200 bg-black cursor-pointer group relative"
+                onClick={() => setIsImageFullscreen(true)}
+                title="Click to view full screen"
+              >
                 <img
                   src={data.image_signed_url}
                   alt="Observation evidence"
-                  className="w-full h-auto max-h-60 object-contain mx-auto"
+                  className="w-full h-auto max-h-96 object-contain mx-auto transition-transform group-hover:scale-[1.01]"
                 />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white text-xs font-bold gap-1.5">
+                  <ExternalLink className="w-4 h-4" />
+                  Cover screen width
+                </div>
               </div>
             ) : (
               <div className="p-6 text-center rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-400">
@@ -542,6 +551,23 @@ function ReportDetailContent({ id }: { id: string }) {
               </Button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Fullscreen Lightbox covering screen width */}
+      {isImageFullscreen && data.image_signed_url && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center p-2 sm:p-6 backdrop-blur-md cursor-zoom-out"
+          onClick={() => setIsImageFullscreen(false)}
+        >
+          <div className="relative w-full h-full flex items-center justify-center">
+            <img
+              src={data.image_signed_url}
+              alt="Full size observation evidence"
+              className="w-full h-full max-h-[92vh] object-contain shadow-2xl"
+            />
+          </div>
+          <p className="text-white/70 text-xs mt-2 font-mono">Click anywhere to close full screen</p>
         </div>
       )}
     </div>

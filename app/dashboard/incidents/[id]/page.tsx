@@ -126,6 +126,7 @@ function IncidentDetailContent({ id }: { id: string }) {
   // Detaching state
   const [detachingObsId, setDetachingObsId] = useState<string | null>(null);
   const [detachConfirmId, setDetachConfirmId] = useState<string | null>(null);
+  const [fullscreenImageUrl, setFullscreenImageUrl] = useState<string | null>(null);
 
   // ---------------------------------------------------------------------------
   // Load Incident Intelligence Data
@@ -482,12 +483,20 @@ function IncidentDetailContent({ id }: { id: string }) {
 
                     {/* Image Evidence (via signed URL) */}
                     {obs.image_signed_url ? (
-                      <div className="relative rounded overflow-hidden border border-slate-200 bg-black max-h-48">
+                      <div
+                        className="relative rounded-xl overflow-hidden border border-slate-200 bg-black max-h-56 cursor-pointer group"
+                        onClick={() => setFullscreenImageUrl(obs.image_signed_url || null)}
+                        title="Click to view full screen"
+                      >
                         <img
                           src={obs.image_signed_url}
                           alt="Observation field evidence"
-                          className="w-full h-44 object-cover"
+                          className="w-full h-48 object-cover transition-transform group-hover:scale-[1.02]"
                         />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white text-xs font-bold gap-1.5">
+                          <ExternalLink className="w-4 h-4" />
+                          Cover screen width
+                        </div>
                       </div>
                     ) : (
                       <div className="p-3 rounded bg-white border border-slate-200 text-xs text-slate-500 italic">
@@ -704,6 +713,23 @@ function IncidentDetailContent({ id }: { id: string }) {
           </div>
         </section>
       </div>
+
+      {/* Fullscreen Observation Image Lightbox */}
+      {fullscreenImageUrl && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center p-2 sm:p-6 backdrop-blur-md cursor-zoom-out"
+          onClick={() => setFullscreenImageUrl(null)}
+        >
+          <div className="relative w-full h-full flex items-center justify-center">
+            <img
+              src={fullscreenImageUrl}
+              alt="Full size observation evidence"
+              className="w-full h-full max-h-[92vh] object-contain shadow-2xl"
+            />
+          </div>
+          <p className="text-white/70 text-xs mt-2 font-mono">Click anywhere to close</p>
+        </div>
+      )}
     </div>
   );
 }

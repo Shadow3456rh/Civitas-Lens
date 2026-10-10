@@ -40,6 +40,8 @@ export async function getServerSupabase() {
 export interface UserAuthContext {
   id: string;
   email: string | null;
+  phone: string | null;
+  full_name: string | null;
   role: "citizen" | "analyst" | "admin";
 }
 
@@ -55,10 +57,10 @@ export async function getCurrentUserAuth(): Promise<UserAuthContext | null> {
       return null;
     }
 
-    // Query profiles table for role
+    // Query profiles table for role, full_name, and phone
     const { data: profile } = await supabase
       .from("profiles")
-      .select("role")
+      .select("role, full_name, phone")
       .eq("id", user.id)
       .single();
 
@@ -67,6 +69,8 @@ export async function getCurrentUserAuth(): Promise<UserAuthContext | null> {
     return {
       id: user.id,
       email: user.email || null,
+      phone: profile?.phone || user.phone || null,
+      full_name: profile?.full_name || null,
       role,
     };
   } catch (err) {

@@ -15,7 +15,7 @@ function HeaderContent() {
   const isReportFlow = pathname === "/report" || pathname.startsWith("/report/");
 
   // Auth State
-  const [userEmail, setUserEmail] = React.useState<string | null>(null);
+  const [userPhone, setUserPhone] = React.useState<string | null>(null);
   const [userRole, setUserRole] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -26,7 +26,7 @@ function HeaderContent() {
       try {
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
-          setUserEmail(user.email || null);
+          setUserPhone(user.phone || null);
           const { data: profile } = await supabase
             .from("profiles")
             .select("role")
@@ -44,7 +44,7 @@ function HeaderContent() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (session?.user) {
-          setUserEmail(session.user.email || null);
+          setUserPhone(session.user.phone || null);
           const { data: profile } = await supabase
             .from("profiles")
             .select("role")
@@ -52,7 +52,7 @@ function HeaderContent() {
             .single();
           setUserRole(profile?.role || "citizen");
         } else {
-          setUserEmail(null);
+          setUserPhone(null);
           setUserRole(null);
         }
       },
@@ -68,7 +68,7 @@ function HeaderContent() {
     if (supabase) {
       await supabase.auth.signOut();
     }
-    setUserEmail(null);
+    setUserPhone(null);
     setUserRole(null);
     router.push("/login");
     router.refresh();
@@ -112,9 +112,9 @@ function HeaderContent() {
               Helpline: 112
             </a>
             <div className="border-l border-slate-600 pl-4 flex items-center">
-              {userEmail ? (
+              {userPhone ? (
                 <div className="flex items-center gap-3">
-                  <span className="text-slate-200 hidden sm:inline-block max-w-[120px] truncate">{userEmail}</span>
+                  <span className="text-slate-200 hidden sm:inline-block max-w-[120px] truncate">{userPhone}</span>
                   <button
                     onClick={handleSignOut}
                     className="flex items-center gap-1 text-slate-300 hover:text-white focus:outline-none focus:ring-1 focus:ring-white px-1 rounded"

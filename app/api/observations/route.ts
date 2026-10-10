@@ -27,6 +27,7 @@ import { z } from "zod";
 import crypto from "crypto";
 import { getAdminClient } from "@/src/lib/supabase/admin";
 import { processObservation } from "@/src/lib/pipeline";
+import { getCurrentUserAuth } from "@/src/lib/supabase/server";
 
 // Allowed MIME types for uploaded evidence images
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
@@ -203,12 +204,25 @@ export async function POST(request: NextRequest) {
     const pointWkt = `POINT(${validatedData.lng} ${validatedData.lat})`;
     const generatedRefCode = generateReferenceCode();
 
+    // Check if user is logged in to automatically attach their info
+    const authContext = await getCurrentUserAuth();
+    let finalReporterId = null;
+    let finalReporterName = validatedData.reporter_name;
+    let finalReporterContact = validatedData.reporter_contact;
+
+    if (authContext) {
+      finalReporterId = authContext.id;
+      if (authContext.full_name) finalReporterName = authContext.full_name;
+      if (authContext.phone) finalReporterContact = authContext.phone;
+    }
+
     const insertPayload: Record<string, any> = {
       raw_text: validatedData.text,
       user_category: validatedData.user_category,
       user_urgency: validatedData.user_urgency,
-      reporter_name: validatedData.reporter_name,
-      reporter_contact: validatedData.reporter_contact,
+      reporter_id: finalReporterId,
+      reporter_name: finalReporterName,
+      reporter_contact: finalReporterContact,
       reference_code: generatedRefCode,
       modality: imageFile ? "image" : "text",
       image_path: imageStoragePath,
@@ -247,8 +261,8 @@ export async function POST(request: NextRequest) {
         ai_raw: {
           user_category: validatedData.user_category,
           user_urgency: validatedData.user_urgency,
-          reporter_name: validatedData.reporter_name,
-          reporter_contact: validatedData.reporter_contact,
+          reporter_name: finalReporterName,
+          reporter_contact: finalReporterContact,
           reference_code: generatedRefCode,
         },
       };

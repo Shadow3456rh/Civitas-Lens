@@ -15,6 +15,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Button, Input, Textarea, Alert, Badge } from "@/components/ui";
 import { MapThumbnail, LocationPicker } from "@/components/map";
+import { getBrowserSupabase } from "@/src/lib/supabase/client";
 import {
   Camera,
   Upload,
@@ -119,6 +120,7 @@ export default function ReportPage() {
   const [userUrgency, setUserUrgency] = useState<"low" | "medium" | "high">("medium");
   const [reporterName, setReporterName] = useState<string>("");
   const [reporterContact, setReporterContact] = useState<string>("");
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   // UI state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -156,6 +158,12 @@ export default function ReportPage() {
     } catch (e) {
       console.warn("Failed to read draft from sessionStorage:", e);
     }
+
+    // Check auth status
+    const supabase = getBrowserSupabase();
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAuthenticated(!!session);
+    });
   }, []);
 
   // ---------------------------------------------------------------------------
@@ -953,45 +961,47 @@ export default function ReportPage() {
           </section>
 
           {/* Section D: Optional Contact Information */}
-          <section className="bg-white rounded-2xl border border-slate-200/90 p-5 space-y-3 shadow-xs">
-            <div>
-              <h3 className="text-sm font-extrabold text-[#0a2540] flex items-center gap-1.5">
-                <User className="w-4 h-4 text-[#028090]" />
-                Your contact details <span className="text-xs text-slate-400 font-normal">(optional)</span>
-              </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Optional. Shared only with authorized municipal response staff if clarification is needed.
-              </p>
-            </div>
-
-            <div className="space-y-3 pt-1">
+          {!isAuthenticated && (
+            <section className="bg-white rounded-2xl border border-slate-200/90 p-5 space-y-3 shadow-xs">
               <div>
-                <label htmlFor="reporter_name" className="block text-xs font-semibold text-slate-700">
-                  Your name
-                </label>
-                <Input
-                  id="reporter_name"
-                  value={reporterName}
-                  onChange={(e) => setReporterName(e.target.value)}
-                  placeholder="e.g. Rahul Verma"
-                  className="text-xs h-10 mt-1 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
-                />
+                <h3 className="text-sm font-extrabold text-[#0a2540] flex items-center gap-1.5">
+                  <User className="w-4 h-4 text-[#028090]" />
+                  Your contact details <span className="text-xs text-slate-400 font-normal">(optional)</span>
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Optional. Shared only with authorized municipal response staff if clarification is needed.
+                </p>
               </div>
 
-              <div>
-                <label htmlFor="reporter_contact" className="block text-xs font-semibold text-slate-700">
-                  Phone number or email
-                </label>
-                <Input
-                  id="reporter_contact"
-                  value={reporterContact}
-                  onChange={(e) => setReporterContact(e.target.value)}
-                  placeholder="e.g. +91 98765 43210 or name@example.com"
-                  className="text-xs h-10 mt-1 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
-                />
+              <div className="space-y-3 pt-1">
+                <div>
+                  <label htmlFor="reporter_name" className="block text-xs font-semibold text-slate-700">
+                    Your name
+                  </label>
+                  <Input
+                    id="reporter_name"
+                    value={reporterName}
+                    onChange={(e) => setReporterName(e.target.value)}
+                    placeholder="e.g. Rahul Verma"
+                    className="text-xs h-10 mt-1 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="reporter_contact" className="block text-xs font-semibold text-slate-700">
+                    Phone number
+                  </label>
+                  <Input
+                    id="reporter_contact"
+                    value={reporterContact}
+                    onChange={(e) => setReporterContact(e.target.value)}
+                    placeholder="e.g. +91 98765 43210"
+                    className="text-xs h-10 mt-1 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+                  />
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* Inline Error Message */}
           {hasAttemptedStep2 && !isStep2Valid && (

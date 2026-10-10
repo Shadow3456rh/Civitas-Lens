@@ -66,6 +66,8 @@ export async function GET(
       incident_id: observation.incident_id,
       user_category: observation.user_category || null,
       user_urgency: observation.user_urgency || null,
+      reporter_name: observation.reporter_name || null,
+      reporter_contact: observation.reporter_contact || null,
       category: observation.category,
       severity: observation.severity,
       summary: observation.summary,

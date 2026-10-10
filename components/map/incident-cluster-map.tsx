@@ -134,7 +134,7 @@ export function IncidentClusterMap({
 
       bounds.extend([inc.lat, inc.lng]);
 
-      const pinColor = SEVERITY_COLORS[inc.severity] || "#1D3557";
+      const pinColor = SEVERITY_COLORS[inc.severity] || "#0a2540";
       const isSelected = inc.id === selectedIncidentId;
 
       // Custom Pin SVG with count badge
@@ -144,7 +144,7 @@ export function IncidentClusterMap({
             <path d="M12 0C5.37258 0 0 5.37258 0 12C0 20.5 12 32 12 32C12 32 24 20.5 24 12C24 5.37258 18.6274 0 12 0Z" fill="${pinColor}" stroke="#FFFFFF" stroke-width="${isSelected ? 3 : 2}"/>
             <circle cx="12" cy="12" r="5" fill="#FFFFFF"/>
           </svg>
-          <div style="position: absolute; top: -6px; right: -8px; background: #1D3557; color: white; font-family: sans-serif; font-size: 10px; font-weight: 700; border-radius: 9999px; min-width: 18px; height: 18px; display: flex; items-center; justify-content: center; padding: 0 4px; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3);">
+          <div style="position: absolute; top: -6px; right: -8px; background: #0a2540; color: white; font-family: sans-serif; font-size: 10px; font-weight: 700; border-radius: 9999px; min-width: 18px; height: 18px; display: flex; items-center; justify-content: center; padding: 0 4px; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3);">
             ${inc.observation_count}
           </div>
         </div>
@@ -171,7 +171,7 @@ export function IncidentClusterMap({
             </span>
           </div>
 
-          <h3 style="font-size: 13px; font-weight: 700; color: #0F172A; margin: 0 0 4px 0; line-height: 1.3;">
+          <h3 style="font-size: 13px; font-weight: 700; color: #0a2540; margin: 0 0 4px 0; line-height: 1.3;">
             ${inc.title}
           </h3>
 
@@ -179,7 +179,7 @@ export function IncidentClusterMap({
             ${inc.summary || "Incident reported."}
           </p>
 
-          <a href="/dashboard/incidents/${inc.id}" style="display: block; text-align: center; background: #1D3557; color: #FFFFFF; font-size: 11px; font-weight: 600; text-decoration: none; padding: 6px 10px; border-radius: 4px;">
+          <a href="/dashboard/incidents/${inc.id}" style="display: block; text-align: center; background: #028090; color: #FFFFFF; font-size: 11px; font-weight: 700; text-decoration: none; padding: 7px 10px; border-radius: 8px;">
             Open Incident Details →
           </a>
         </div>

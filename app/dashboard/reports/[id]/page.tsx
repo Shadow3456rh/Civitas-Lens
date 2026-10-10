@@ -164,7 +164,7 @@ function ReportDetailContent({ id }: { id: string }) {
         <AlertTriangle className="w-10 h-10 text-amber-500 mx-auto" />
         <h2 className="text-base font-bold text-slate-800">Report Not Found</h2>
         <p className="text-xs text-slate-500">{errorMsg || "Invalid observation ID"}</p>
-        <Link href="/dashboard/reports" className="inline-block text-xs font-semibold text-[#1D3557] underline">
+        <Link href="/dashboard/reports" className="inline-block text-xs font-bold text-[#028090] hover:text-[#00a896] underline">
           Return to Reports table
         </Link>
       </div>
@@ -178,24 +178,24 @@ function ReportDetailContent({ id }: { id: string }) {
         <div className="space-y-1">
           <Link
             href="/dashboard/reports"
-            className="text-xs font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1"
+            className="text-xs font-bold text-[#028090] hover:text-[#00a896] flex items-center gap-1 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Reports table
           </Link>
           <div className="flex items-center gap-3">
-            <h1 className="text-xl font-bold font-mono text-[#1D3557]">
+            <h1 className="text-xl font-extrabold font-mono text-[#0a2540]">
               {data.reference_code}
             </h1>
             <span
-              className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase border ${
+              className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase border ${
                 data.processing_status === "processed"
-                  ? "bg-emerald-100 text-emerald-800 border-emerald-300"
+                  ? "bg-emerald-50 text-emerald-800 border-emerald-300"
                   : data.processing_status === "needs_review"
-                  ? "bg-amber-100 text-amber-900 border-amber-300"
+                  ? "bg-amber-50 text-amber-900 border-amber-300"
                   : data.processing_status === "failed"
-                  ? "bg-rose-100 text-rose-800 border-rose-300"
-                  : "bg-sky-100 text-sky-800 border-sky-300"
+                  ? "bg-rose-50 text-rose-800 border-rose-300"
+                  : "bg-sky-50 text-sky-800 border-sky-300"
               }`}
             >
               {data.processing_status.replace(/_/g, " ")}
@@ -211,7 +211,7 @@ function ReportDetailContent({ id }: { id: string }) {
               variant="outline"
               disabled={isActionPending}
               onClick={() => handleAction("detach")}
-              className="text-xs border-slate-300 text-slate-700 hover:bg-slate-100"
+              className="text-xs border-slate-200 text-slate-700 hover:bg-slate-100 rounded-xl"
             >
               <Unlink className="w-3.5 h-3.5 mr-1 text-slate-500" />
               Detach from incident
@@ -222,7 +222,7 @@ function ReportDetailContent({ id }: { id: string }) {
               variant="outline"
               disabled={isActionPending}
               onClick={() => setShowLinkModal(true)}
-              className="text-xs border-[#1D3557] text-[#1D3557] hover:bg-slate-50 font-semibold"
+              className="text-xs border-[#028090] text-[#028090] hover:bg-[#f0fdfa] font-bold rounded-xl"
             >
               <Link2 className="w-3.5 h-3.5 mr-1" />
               Link to incident…
@@ -235,7 +235,7 @@ function ReportDetailContent({ id }: { id: string }) {
               variant="outline"
               disabled={isActionPending}
               onClick={() => handleAction("mark_reviewed")}
-              className="text-xs bg-emerald-50 text-emerald-900 border-emerald-300 hover:bg-emerald-100"
+              className="text-xs bg-emerald-50 text-emerald-900 border-emerald-300 hover:bg-emerald-100 rounded-xl"
             >
               <CheckCircle2 className="w-3.5 h-3.5 mr-1 text-emerald-600" />
               Mark as reviewed
@@ -246,7 +246,7 @@ function ReportDetailContent({ id }: { id: string }) {
               variant="outline"
               disabled={isActionPending}
               onClick={() => handleAction("mark_needs_review")}
-              className="text-xs border-amber-300 text-amber-900 bg-amber-50 hover:bg-amber-100"
+              className="text-xs border-amber-300 text-amber-900 bg-amber-50 hover:bg-amber-100 rounded-xl"
             >
               <AlertTriangle className="w-3.5 h-3.5 mr-1 text-amber-600" />
               Flag for review
@@ -255,9 +255,10 @@ function ReportDetailContent({ id }: { id: string }) {
 
           <Button
             size="sm"
+            variant="teal"
             disabled={isActionPending}
             onClick={() => handleAction("reprocess")}
-            className="text-xs bg-[#1D3557] hover:bg-[#162842] text-white font-bold"
+            className="text-xs shadow-teal-glow text-white font-bold rounded-xl"
           >
             <RotateCw className="w-3.5 h-3.5 mr-1" />
             Re-run AI analysis
@@ -277,10 +278,10 @@ function ReportDetailContent({ id }: { id: string }) {
         {/* Left 2 Columns */}
         <div className="lg:col-span-2 space-y-6">
           {/* Card 1: Original Citizen Complaint (EXACTLY AS WRITTEN) */}
-          <section className="bg-white rounded-lg border border-slate-200 p-5 shadow-xs space-y-3">
+          <section className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-3">
             <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
               <h2 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                <FileText className="w-4 h-4 text-[#1D3557]" />
+                <FileText className="w-4 h-4 text-[#028090]" />
                 Original Citizen Complaint (Unmodified)
               </h2>
               <span className="text-[11px] text-slate-400 font-mono">
@@ -288,7 +289,7 @@ function ReportDetailContent({ id }: { id: string }) {
               </span>
             </div>
 
-            <div className="p-3.5 rounded-md bg-slate-50 border border-slate-200 text-slate-800 text-xs leading-relaxed whitespace-pre-wrap font-sans">
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-800 text-xs leading-relaxed whitespace-pre-wrap font-sans">
               {data.raw_text}
             </div>
 
@@ -307,13 +308,13 @@ function ReportDetailContent({ id }: { id: string }) {
           </section>
 
           {/* Card 2: AI Intelligence Analysis vs User Submission */}
-          <section className="bg-white rounded-lg border border-slate-200 p-5 shadow-xs space-y-4">
+          <section className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-              <h2 className="text-sm font-bold text-[#1D3557] flex items-center gap-1.5">
+              <h2 className="text-sm font-bold text-[#0a2540] flex items-center gap-1.5">
                 <Sparkles className="w-4 h-4 text-amber-500" />
                 AI Intelligence & Verification
               </h2>
-              <span className="text-[10px] text-slate-400 uppercase font-mono">Gemma 4 Verified</span>
+              <span className="text-[10px] text-[#028090] font-bold bg-[#f0fdfa] px-2 py-0.5 rounded-full border border-[#028090]/25">Gemma 4 Verified</span>
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-xs">
@@ -408,14 +409,14 @@ function ReportDetailContent({ id }: { id: string }) {
         {/* Right 1 Column: Evidence Photo, Location Map, Contact */}
         <div className="space-y-6">
           {/* Photo Evidence Card */}
-          <section className="bg-white rounded-lg border border-slate-200 p-4 shadow-xs space-y-3">
-            <h2 className="text-xs font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
-              <Camera className="w-3.5 h-3.5 text-[#1D3557]" />
+          <section className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-3">
+            <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
+              <Camera className="w-3.5 h-3.5 text-[#028090]" />
               Photographic Evidence
             </h2>
 
             {data.image_signed_url ? (
-              <div className="rounded-lg overflow-hidden border border-slate-200 bg-black">
+              <div className="rounded-xl overflow-hidden border border-slate-200 bg-black">
                 <img
                   src={data.image_signed_url}
                   alt="Observation evidence"
@@ -423,16 +424,16 @@ function ReportDetailContent({ id }: { id: string }) {
                 />
               </div>
             ) : (
-              <div className="p-6 text-center rounded bg-slate-50 border border-slate-200 text-xs text-slate-400">
+              <div className="p-6 text-center rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-400">
                 No photograph provided with report.
               </div>
             )}
           </section>
 
           {/* Location & Map Card */}
-          <section className="bg-white rounded-lg border border-slate-200 p-4 shadow-xs space-y-3">
-            <h2 className="text-xs font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#1D3557]" />
+          <section className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-3">
+            <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-[#028090]" />
               Scene Location
             </h2>
 
@@ -449,7 +450,7 @@ function ReportDetailContent({ id }: { id: string }) {
                   lat={data.lat}
                   lng={data.lng}
                   accuracyM={data.location_accuracy_m}
-                  className="h-36 w-full rounded border border-slate-200"
+                  className="h-36 w-full rounded-xl border border-slate-200 overflow-hidden"
                 />
               )}
 
@@ -464,8 +465,8 @@ function ReportDetailContent({ id }: { id: string }) {
           </section>
 
           {/* Staff-Only Reporter Contact Card */}
-          <section className="bg-white rounded-lg border border-slate-200 p-4 shadow-xs space-y-3">
-            <h2 className="text-xs font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
+          <section className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-3">
+            <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
               <Shield className="w-3.5 h-3.5 text-amber-600" />
               Reporter Contact (Staff Eyes Only)
             </h2>
@@ -487,14 +488,14 @@ function ReportDetailContent({ id }: { id: string }) {
 
           {/* Linked Incident Card */}
           {data.incident && (
-            <section className="bg-white rounded-lg border border-slate-200 p-4 shadow-xs space-y-3">
-              <h2 className="text-xs font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-[#1D3557]" />
+            <section className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-3">
+              <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
+                <Layers className="w-3.5 h-3.5 text-[#028090]" />
                 Associated Incident Cluster
               </h2>
 
               <div className="space-y-2 text-xs">
-                <p className="font-bold text-[#1D3557]">{data.incident.title}</p>
+                <p className="font-extrabold text-[#0a2540]">{data.incident.title}</p>
                 <div className="flex items-center gap-2">
                   <span className="text-[11px] text-slate-500">Status: {data.incident.status}</span>
                   <span>·</span>
@@ -502,7 +503,7 @@ function ReportDetailContent({ id }: { id: string }) {
                 </div>
                 <Link
                   href={`/dashboard/incidents/${data.incident.id}`}
-                  className="inline-flex items-center gap-1 text-xs text-[#1D3557] font-semibold hover:underline pt-1"
+                  className="inline-flex items-center gap-1 text-xs text-[#028090] font-bold hover:text-[#00a896] pt-1 transition-colors"
                 >
                   View full incident file →
                 </Link>
@@ -515,8 +516,8 @@ function ReportDetailContent({ id }: { id: string }) {
       {/* Link to Incident Modal */}
       {showLinkModal && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg border border-slate-300 p-5 max-w-md w-full shadow-xl space-y-4">
-            <h3 className="text-sm font-bold text-[#1D3557]">Link Observation to Incident</h3>
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 max-w-md w-full shadow-2xl space-y-4">
+            <h3 className="text-sm font-extrabold text-[#0a2540]">Link Observation to Incident</h3>
             <p className="text-xs text-slate-600">
               Enter the target Incident UUID to merge this observation into that incident cluster:
             </p>
@@ -524,17 +525,18 @@ function ReportDetailContent({ id }: { id: string }) {
               value={targetIncidentId}
               onChange={(e) => setTargetIncidentId(e.target.value)}
               placeholder="e.g. 712535c1-05da-4382-ba88-4c1cd0a0e5f6"
-              className="text-xs font-mono"
+              className="text-xs font-mono rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
             />
             <div className="flex items-center justify-end gap-2 pt-2">
-              <Button size="sm" variant="outline" onClick={() => setShowLinkModal(false)}>
+              <Button size="sm" variant="outline" className="rounded-xl" onClick={() => setShowLinkModal(false)}>
                 Cancel
               </Button>
               <Button
                 size="sm"
+                variant="teal"
                 disabled={!targetIncidentId.trim() || isActionPending}
                 onClick={() => handleAction("link", { incident_id: targetIncidentId.trim() })}
-                className="bg-[#1D3557] text-white"
+                className="shadow-teal-glow text-white font-bold rounded-xl"
               >
                 Confirm Link
               </Button>

@@ -129,22 +129,28 @@ function LoginFormContent() {
 
   return (
     <div className="max-w-md mx-auto w-full space-y-6">
-      {/* Header */}
-      <div className="text-center space-y-2">
-        <div className="w-12 h-12 mx-auto rounded-lg bg-[#1D3557] text-white flex items-center justify-center font-bold text-xl shadow-sm">
-          <Shield className="w-6 h-6 text-white" />
+      {/* Header with Official Logo */}
+      <div className="text-center space-y-3">
+        <Link href="/" className="inline-block transition-transform hover:scale-105">
+          <img
+            src="/logo.png"
+            alt="Civitas Lens"
+            className="h-14 w-auto mx-auto object-contain drop-shadow-xs"
+          />
+        </Link>
+        <div className="space-y-1">
+          <h1 className="text-xl font-extrabold tracking-tight text-[#0a2540]">
+            {mode === "signin" ? "Sign In to Civitas Lens" : "Create Citizen Account"}
+          </h1>
+          <p className="text-xs text-slate-500 font-medium">
+            People. Observations. A Safer Tomorrow.
+          </p>
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">
-          {mode === "signin" ? "Sign in to Civitas Lens" : "Create Citizen Account"}
-        </h1>
-        <p className="text-xs text-slate-500">
-          Civic Incident Intelligence & Situational Awareness Portal
-        </p>
       </div>
 
       {/* Forbidden Role Notice Banner */}
       {errorParam === "forbidden" && (
-        <Alert variant="destructive" className="text-xs space-y-1">
+        <Alert variant="destructive" className="text-xs space-y-1 rounded-xl">
           <div className="flex items-center gap-1.5 font-bold">
             <AlertTriangle className="w-4 h-4" />
             Access Restricted to Analysts & Admins
@@ -157,32 +163,32 @@ function LoginFormContent() {
 
       {/* Error or Success feedback */}
       {errorMessage && (
-        <Alert variant="destructive" className="text-xs">
+        <Alert variant="destructive" className="text-xs rounded-xl">
           {errorMessage}
         </Alert>
       )}
 
       {successMessage && (
-        <div className="p-3 rounded bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-start gap-2">
+        <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-start gap-2">
           <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
           <p>{successMessage}</p>
         </div>
       )}
 
       {/* Card Form */}
-      <div className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm space-y-5">
+      <div className="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-sm space-y-5">
         {/* Toggle Mode Segmented Control */}
-        <div className="flex rounded-md bg-slate-100 p-1 border border-slate-200 text-xs">
+        <div className="flex rounded-xl bg-slate-100/80 p-1 border border-slate-200/90 text-xs">
           <button
             type="button"
             onClick={() => {
               setMode("signin");
               setErrorMessage(null);
             }}
-            className={`flex-1 py-1.5 rounded font-semibold transition-colors ${
+            className={`flex-1 py-2 rounded-lg font-bold transition-all cursor-pointer ${
               mode === "signin"
-                ? "bg-white text-[#1D3557] shadow-sm"
-                : "text-slate-600 hover:text-slate-900"
+                ? "bg-white text-[#0a2540] shadow-xs"
+                : "text-slate-500 hover:text-slate-900"
             }`}
           >
             Sign In
@@ -193,10 +199,10 @@ function LoginFormContent() {
               setMode("signup");
               setErrorMessage(null);
             }}
-            className={`flex-1 py-1.5 rounded font-semibold transition-colors ${
+            className={`flex-1 py-2 rounded-lg font-bold transition-all cursor-pointer ${
               mode === "signup"
-                ? "bg-white text-[#1D3557] shadow-sm"
-                : "text-slate-600 hover:text-slate-900"
+                ? "bg-white text-[#0a2540] shadow-xs"
+                : "text-slate-500 hover:text-slate-900"
             }`}
           >
             Create Account
@@ -218,7 +224,7 @@ function LoginFormContent() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.gov or name@domain.com"
-                className="pl-9 text-xs h-10"
+                className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
               />
             </div>
           </div>
@@ -240,15 +246,16 @@ function LoginFormContent() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="pl-9 text-xs h-10"
+                className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
               />
             </div>
           </div>
 
           <Button
             type="submit"
+            variant="teal"
             disabled={isLoading}
-            className="w-full min-h-[44px] text-xs font-bold bg-[#1D3557] hover:bg-[#162842] text-white shadow"
+            className="w-full min-h-[46px] text-xs font-bold shadow-teal-glow text-white rounded-xl"
           >
             {isLoading ? (
               <>
@@ -262,10 +269,10 @@ function LoginFormContent() {
         </form>
 
         <div className="pt-2 border-t border-slate-100 text-center">
-          <p className="text-[11px] text-slate-500">
+          <p className="text-[11px] text-slate-400 leading-relaxed">
             {mode === "signin"
-              ? "New users receive 'citizen' role automatically upon signup."
-              : "All new accounts start as 'citizen'. Contact an administrator to request 'analyst' or 'admin' privileges."}
+              ? "New users receive 'citizen' role automatically upon registration."
+              : "All new accounts start as 'citizen'. Contact an administrator for municipal analyst privileges."}
           </p>
         </div>
       </div>
@@ -274,7 +281,7 @@ function LoginFormContent() {
       <div className="text-center space-y-2">
         <Link
           href="/report"
-          className="text-xs text-[#1D3557] hover:underline font-semibold inline-flex items-center gap-1"
+          className="text-xs text-[#028090] hover:text-[#00a896] font-bold inline-flex items-center gap-1 transition-colors"
         >
           Submit an observation without signing in <ArrowRight className="w-3.5 h-3.5" />
         </Link>

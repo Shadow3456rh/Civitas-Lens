@@ -544,17 +544,18 @@ export default function ReportPage() {
   ];
 
   const renderProgressHeader = () => (
-    <div className="bg-white border-b border-slate-200 px-4 py-3 sticky top-0 z-30 shadow-xs">
-      <div className="max-w-md mx-auto space-y-2">
+    <div className="bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 py-3.5 sticky top-0 z-30 shadow-xs">
+      <div className="max-w-md mx-auto space-y-2.5">
         <div className="flex items-center justify-between text-xs">
-          <span className="font-bold text-[#1D3557] uppercase tracking-wider">
+          <span className="font-extrabold text-[#0a2540] uppercase tracking-wider flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#00a896]" />
             Step {currentStep} of 3 · {stepTitles[currentStep - 1]}
           </span>
           {currentStep > 1 && (
             <button
               type="button"
               onClick={() => setCurrentStep((prev) => (prev - 1) as FlowStep)}
-              className="text-[#1D3557] hover:underline flex items-center gap-1 font-semibold"
+              className="text-[#028090] hover:text-[#00a896] flex items-center gap-1 font-bold text-xs transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Back
@@ -562,11 +563,11 @@ export default function ReportPage() {
           )}
         </div>
 
-        {/* 3-Step Progress Bar */}
-        <div className="grid grid-cols-3 gap-1.5 h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-          <div className={`h-full transition-colors ${currentStep >= 1 ? "bg-[#1D3557]" : "bg-slate-200"}`} />
-          <div className={`h-full transition-colors ${currentStep >= 2 ? "bg-[#1D3557]" : "bg-slate-200"}`} />
-          <div className={`h-full transition-colors ${currentStep >= 3 ? "bg-[#1D3557]" : "bg-slate-200"}`} />
+        {/* 3-Step Progress Bar with connecting teal gradient */}
+        <div className="grid grid-cols-3 gap-2 h-2 w-full bg-slate-100 rounded-full overflow-hidden p-0.5">
+          <div className={`h-full rounded-full transition-all duration-300 ${currentStep >= 1 ? "bg-teal-gradient shadow-xs" : "bg-slate-200"}`} />
+          <div className={`h-full rounded-full transition-all duration-300 ${currentStep >= 2 ? "bg-teal-gradient shadow-xs" : "bg-slate-200"}`} />
+          <div className={`h-full rounded-full transition-all duration-300 ${currentStep >= 3 ? "bg-teal-gradient shadow-xs" : "bg-slate-200"}`} />
         </div>
       </div>
     </div>
@@ -579,7 +580,7 @@ export default function ReportPage() {
     const isCameraAvailable = cameraStatus === "active" || cameraStatus === "requesting";
 
     return (
-      <main className="min-h-screen bg-slate-900 text-white flex flex-col justify-between">
+      <main className="h-screen bg-slate-900 text-white flex flex-col overflow-hidden">
         {renderProgressHeader()}
 
         {/* Sub-header status bar */}
@@ -613,7 +614,7 @@ export default function ReportPage() {
         </div>
 
         {/* Center: Viewfinder OR Captured Preview */}
-        <div className="relative flex-1 flex items-center justify-center overflow-hidden bg-black min-h-[380px]">
+        <div className="relative flex-1 flex items-center justify-center overflow-hidden bg-black">
           {capturedPreviewUrl ? (
             /* Review captured image */
             <div className="relative w-full h-full flex items-center justify-center">
@@ -642,7 +643,7 @@ export default function ReportPage() {
                 autoPlay
                 playsInline
                 muted
-                className="w-full h-full object-cover"
+                className="h-full max-w-lg mx-auto object-cover"
               />
               <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
                 <div className="w-64 h-64 border border-white/20 rounded-lg relative">
@@ -667,7 +668,7 @@ export default function ReportPage() {
               </div>
 
               <div className="pt-2 flex flex-col gap-2.5">
-                <label className="inline-flex items-center justify-center min-h-[44px] px-4 py-2.5 bg-white text-[#1D3557] font-semibold text-sm rounded shadow cursor-pointer hover:bg-slate-100 transition-colors">
+                <label className="inline-flex items-center justify-center min-h-[46px] px-4 py-2.5 bg-teal-gradient text-white font-bold text-xs rounded-xl shadow-teal-glow cursor-pointer hover:opacity-95 transition-all">
                   <Upload className="w-4 h-4 mr-2" />
                   Upload photo from device
                   <input
@@ -765,21 +766,22 @@ export default function ReportPage() {
                 onClick={handleShutterPress}
                 disabled={cameraStatus !== "active"}
                 aria-label="Take incident photo"
-                className="w-16 h-16 rounded-full border-4 border-white bg-white/90 active:scale-95 hover:bg-white focus:outline-none focus:ring-4 focus:ring-white/50 transition-all flex items-center justify-center shadow-lg disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-18 h-18 rounded-full border-4 border-white/90 bg-white/20 p-1 active:scale-95 hover:bg-white/30 focus:outline-none focus:ring-4 focus:ring-[#00a896]/50 transition-all flex items-center justify-center shadow-lg disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                <div className="w-12 h-12 rounded-full bg-[#1D3557] border-2 border-white flex items-center justify-center">
-                  <div className="w-4 h-4 rounded-full bg-white" />
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#028090] to-[#0a2540] border-2 border-white flex items-center justify-center shadow-inner">
+                  <div className="w-5 h-5 rounded-full bg-white shadow-xs" />
                 </div>
               </button>
             ) : (
               <Button
                 type="button"
+                variant="teal"
                 onClick={() => {
                   stopCamera();
                   stopGpsWatcher();
                   setCurrentStep(2);
                 }}
-                className="flex-1 min-h-[48px] bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow"
+                className="flex-1 min-h-[48px] shadow-teal-glow text-white font-bold text-sm"
               >
                 Continue to Details
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -795,7 +797,7 @@ export default function ReportPage() {
                   stopGpsWatcher();
                   setCurrentStep(2);
                 }}
-                className="min-h-[44px] px-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-medium flex items-center gap-1.5 transition-colors"
+                className="min-h-[44px] px-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
                 title="Skip photo"
               >
                 Skip photo
@@ -813,17 +815,18 @@ export default function ReportPage() {
   // ===========================================================================
   if (currentStep === 2) {
     return (
-      <main className="min-h-screen bg-slate-50 text-slate-900 pb-20">
+      <main className="h-screen bg-slate-50/80 text-slate-900 flex flex-col overflow-hidden">
         {renderProgressHeader()}
 
-        <div className="max-w-md mx-auto px-4 py-5 space-y-6">
+        <div className="flex-1 overflow-y-auto">
+        <div className="max-w-2xl mx-auto px-4 py-5 space-y-5 pb-24">
           {/* Section A: What is the problem? */}
-          <section className="bg-white rounded-lg border border-slate-200 p-4 space-y-3 shadow-xs">
+          <section className="bg-white rounded-2xl border border-slate-200/90 p-5 space-y-3 shadow-sm">
             <div>
-              <label className="block text-sm font-bold text-[#1D3557]">
+              <label className="block text-sm font-extrabold text-[#0a2540]">
                 What is the problem? <span className="text-rose-600">*</span>
               </label>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Choose the category that best describes the issue.
               </p>
             </div>
@@ -836,10 +839,10 @@ export default function ReportPage() {
                     key={chip.id}
                     type="button"
                     onClick={() => setUserCategory(chip.id)}
-                    className={`min-h-[48px] px-3 py-2.5 rounded-lg border text-left text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
+                    className={`min-h-[48px] px-3 py-2.5 rounded-xl border text-left text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-[#1D3557] text-white border-[#1D3557] shadow-sm ring-2 ring-[#1D3557]/20"
-                        : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
+                        ? "bg-[#f0fdfa] text-[#0a2540] border-[#028090] shadow-xs ring-2 ring-[#00a896]/30 font-bold"
+                        : "bg-white text-slate-700 border-slate-200/90 hover:bg-slate-50 hover:border-slate-300"
                     }`}
                   >
                     <span className="text-base shrink-0">{chip.icon}</span>
@@ -857,23 +860,23 @@ export default function ReportPage() {
           </section>
 
           {/* Section B: Describe the issue */}
-          <section className="bg-white rounded-lg border border-slate-200 p-4 space-y-2.5 shadow-xs">
+          <section className="bg-white rounded-2xl border border-slate-200/90 p-5 space-y-2.5 shadow-xs">
             <div className="flex items-center justify-between">
               <div>
-                <label htmlFor="description" className="block text-sm font-bold text-[#1D3557]">
+                <label htmlFor="description" className="block text-sm font-extrabold text-[#0a2540]">
                   Describe the issue <span className="text-rose-600">*</span>
                 </label>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-500 mt-0.5">
                   Tell us what you saw, when it started, and anything that makes it urgent.
                 </p>
               </div>
               <span
-                className={`text-[11px] font-mono shrink-0 ${
+                className={`text-[11px] font-mono shrink-0 px-2 py-0.5 rounded-md ${
                   descriptionText.length < 10
-                    ? "text-amber-600"
+                    ? "text-amber-700 bg-amber-50"
                     : descriptionText.length > 1000
-                    ? "text-rose-600 font-bold"
-                    : "text-slate-500"
+                    ? "text-rose-700 bg-rose-50 font-bold"
+                    : "text-slate-600 bg-slate-100"
                 }`}
               >
                 {descriptionText.length} / 1000
@@ -886,8 +889,8 @@ export default function ReportPage() {
               onChange={(e) => setDescriptionText(e.target.value)}
               maxLength={1000}
               rows={4}
-              placeholder="E.g. Broken water pipe gushing across the road divider near the signal. Water has flooded two lanes and two-wheelers are skidding."
-              className="text-xs resize-none"
+              placeholder="E.g. Broken water pipe gushing across the road divider near the signal. Water has flooded two lanes and vehicles are skidding."
+              className="text-xs resize-none rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
             />
 
             {hasAttemptedStep2 && !isDescriptionValid && (
@@ -902,26 +905,26 @@ export default function ReportPage() {
           </section>
 
           {/* Section C: How urgent is it? */}
-          <section className="bg-white rounded-lg border border-slate-200 p-4 space-y-3 shadow-xs">
+          <section className="bg-white rounded-2xl border border-slate-200/90 p-5 space-y-3 shadow-xs">
             <div>
-              <label className="block text-sm font-bold text-[#1D3557]">
+              <label className="block text-sm font-extrabold text-[#0a2540]">
                 How urgent is it? <span className="text-rose-600">*</span>
               </label>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Helps dispatch teams triage immediate public safety threats.
               </p>
             </div>
 
-            <div className="space-y-2 pt-1">
+            <div className="space-y-2.5 pt-1">
               {URGENCY_CARDS.map((card) => {
                 const isSelected = userUrgency === card.id;
                 return (
                   <label
                     key={card.id}
-                    className={`block p-3 rounded-lg border cursor-pointer transition-all ${
+                    className={`block p-3.5 rounded-xl border cursor-pointer transition-all ${
                       isSelected
-                        ? "border-[#1D3557] bg-slate-50 ring-2 ring-[#1D3557]/20 shadow-xs"
-                        : "border-slate-200 bg-white hover:bg-slate-50/60"
+                        ? "border-[#028090] bg-[#f0fdfa] ring-2 ring-[#00a896]/25 shadow-xs"
+                        : "border-slate-200/90 bg-white hover:bg-slate-50/80"
                     }`}
                   >
                     <div className="flex items-start gap-3">
@@ -931,11 +934,11 @@ export default function ReportPage() {
                         value={card.id}
                         checked={isSelected}
                         onChange={() => setUserUrgency(card.id as any)}
-                        className="mt-1 h-4 w-4 text-[#1D3557] border-slate-300 focus:ring-[#1D3557]"
+                        className="mt-1 h-4 w-4 text-[#028090] border-slate-300 focus:ring-[#028090]"
                       />
                       <div className="space-y-0.5 flex-1">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-slate-900">{card.title}</span>
+                          <span className="text-xs font-bold text-[#0a2540]">{card.title}</span>
                           <span className="text-[11px] text-slate-500">· {card.subtitle}</span>
                         </div>
                         <p className="text-[11px] text-slate-500 leading-relaxed">
@@ -950,13 +953,13 @@ export default function ReportPage() {
           </section>
 
           {/* Section D: Optional Contact Information */}
-          <section className="bg-white rounded-lg border border-slate-200 p-4 space-y-3 shadow-xs">
+          <section className="bg-white rounded-2xl border border-slate-200/90 p-5 space-y-3 shadow-xs">
             <div>
-              <h3 className="text-sm font-bold text-[#1D3557] flex items-center gap-1.5">
-                <User className="w-4 h-4 text-slate-500" />
-                Your contact details <span className="text-xs text-slate-500 font-normal">(optional)</span>
+              <h3 className="text-sm font-extrabold text-[#0a2540] flex items-center gap-1.5">
+                <User className="w-4 h-4 text-[#028090]" />
+                Your contact details <span className="text-xs text-slate-400 font-normal">(optional)</span>
               </h3>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Optional. Shared only with authorized municipal response staff if clarification is needed.
               </p>
             </div>
@@ -971,7 +974,7 @@ export default function ReportPage() {
                   value={reporterName}
                   onChange={(e) => setReporterName(e.target.value)}
                   placeholder="e.g. Rahul Verma"
-                  className="text-xs h-10 mt-1"
+                  className="text-xs h-10 mt-1 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
                 />
               </div>
 
@@ -984,7 +987,7 @@ export default function ReportPage() {
                   value={reporterContact}
                   onChange={(e) => setReporterContact(e.target.value)}
                   placeholder="e.g. +91 98765 43210 or name@example.com"
-                  className="text-xs h-10 mt-1"
+                  className="text-xs h-10 mt-1 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
                 />
               </div>
             </div>
@@ -992,7 +995,7 @@ export default function ReportPage() {
 
           {/* Inline Error Message */}
           {hasAttemptedStep2 && !isStep2Valid && (
-            <Alert variant="destructive" className="text-xs">
+            <Alert variant="destructive" className="text-xs rounded-xl">
               Please choose a problem category and provide at least 10 characters of description to continue.
             </Alert>
           )}
@@ -1003,7 +1006,7 @@ export default function ReportPage() {
               type="button"
               variant="outline"
               onClick={() => setCurrentStep(1)}
-              className="flex-1 min-h-[44px]"
+              className="flex-1 min-h-[46px] rounded-xl border-slate-200 text-slate-700 hover:bg-slate-100 font-semibold text-xs"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
@@ -1011,6 +1014,7 @@ export default function ReportPage() {
 
             <Button
               type="button"
+              variant="teal"
               onClick={() => {
                 setHasAttemptedStep2(true);
                 if (isStep2Valid) {
@@ -1018,12 +1022,13 @@ export default function ReportPage() {
                 }
               }}
               disabled={!isStep2Valid}
-              className="flex-1 min-h-[44px] bg-[#1D3557] hover:bg-[#162842] text-white disabled:opacity-50"
+              className="flex-1 min-h-[46px] shadow-teal-glow text-white font-bold text-xs disabled:opacity-50"
             >
               Continue to Review
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
+        </div>
         </div>
       </main>
     );
@@ -1033,28 +1038,29 @@ export default function ReportPage() {
   // STEP 3: REVIEW AND SUBMIT
   // ===========================================================================
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 pb-20">
+    <main className="h-screen bg-[#f8fafc] text-slate-900 flex flex-col overflow-hidden">
       {renderProgressHeader()}
 
-      <div className="max-w-md mx-auto px-4 py-5 space-y-5">
+      <div className="flex-1 overflow-y-auto">
+      <div className="max-w-2xl mx-auto px-4 py-5 space-y-5 pb-24">
         <div className="space-y-1">
-          <h1 className="text-base font-bold text-[#1D3557]">Review Your Report</h1>
+          <h1 className="text-lg font-extrabold text-[#0a2540]">Review Your Report</h1>
           <p className="text-xs text-slate-500">
-            Check the details below before submitting to the city incident intelligence center.
+            Check the details below before submitting to the Civitas Lens intelligence center.
           </p>
         </div>
 
         {/* Review Card 1: Photo & Evidence */}
-        <div className="bg-white rounded-lg border border-slate-200 p-4 space-y-3 shadow-xs">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-            <h2 className="text-xs font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
-              <Camera className="w-3.5 h-3.5 text-[#1D3557]" />
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-4 space-y-3 shadow-xs">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+            <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
+              <Camera className="w-3.5 h-3.5 text-[#028090]" />
               Photographic Evidence
             </h2>
             <button
               type="button"
               onClick={() => setCurrentStep(1)}
-              className="text-xs text-[#1D3557] font-semibold hover:underline flex items-center gap-1"
+              className="text-xs text-[#028090] font-bold hover:text-[#00a896] flex items-center gap-1 transition-colors"
             >
               <Edit2 className="w-3 h-3" />
               Edit
@@ -1062,7 +1068,7 @@ export default function ReportPage() {
           </div>
 
           {capturedPreviewUrl ? (
-            <div className="rounded border border-slate-200 overflow-hidden bg-black max-h-48 flex items-center justify-center">
+            <div className="rounded-xl border border-slate-200 overflow-hidden bg-black max-h-48 flex items-center justify-center">
               <img
                 src={capturedPreviewUrl}
                 alt="Captured observation evidence"
@@ -1070,23 +1076,23 @@ export default function ReportPage() {
               />
             </div>
           ) : (
-            <p className="text-xs text-slate-500 italic">
-              No photo attached (text-only report).
+            <p className="text-xs text-slate-500 italic py-1">
+              No photo attached (text-only observation).
             </p>
           )}
         </div>
 
         {/* Review Card 2: Incident Location */}
-        <div className="bg-white rounded-lg border border-slate-200 p-4 space-y-3 shadow-xs">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-            <h2 className="text-xs font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#1D3557]" />
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-4 space-y-3 shadow-xs">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+            <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-[#028090]" />
               Location
             </h2>
             <button
               type="button"
               onClick={() => setCurrentStep(1)}
-              className="text-xs text-[#1D3557] font-semibold hover:underline flex items-center gap-1"
+              className="text-xs text-[#028090] font-bold hover:text-[#00a896] flex items-center gap-1 transition-colors"
             >
               <Edit2 className="w-3 h-3" />
               Edit
@@ -1094,7 +1100,7 @@ export default function ReportPage() {
           </div>
 
           <div className="space-y-2">
-            <p className="text-xs font-bold text-slate-800">
+            <p className="text-xs font-bold text-[#0a2540]">
               {location.label || "Pinned Location"}
             </p>
             <p className="text-[11px] text-slate-500 font-mono">
@@ -1109,23 +1115,23 @@ export default function ReportPage() {
                 lat={location.lat}
                 lng={location.lng}
                 accuracyM={location.accuracyM}
-                className="h-28 w-full rounded border border-slate-200"
+                className="h-28 w-full rounded-xl border border-slate-200 overflow-hidden"
               />
             )}
           </div>
         </div>
 
         {/* Review Card 3: Problem Details & Urgency */}
-        <div className="bg-white rounded-lg border border-slate-200 p-4 space-y-3 shadow-xs">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-            <h2 className="text-xs font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
-              <FileText className="w-3.5 h-3.5 text-[#1D3557]" />
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-4 space-y-3 shadow-xs">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+            <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-[#028090]" />
               Details & Urgency
             </h2>
             <button
               type="button"
               onClick={() => setCurrentStep(2)}
-              className="text-xs text-[#1D3557] font-semibold hover:underline flex items-center gap-1"
+              className="text-xs text-[#028090] font-bold hover:text-[#00a896] flex items-center gap-1 transition-colors"
             >
               <Edit2 className="w-3 h-3" />
               Edit
@@ -1136,17 +1142,17 @@ export default function ReportPage() {
             <div className="flex items-center gap-3">
               <div>
                 <span className="text-[11px] text-slate-500 block">Category</span>
-                <span className="font-bold text-slate-800">{userCategory || "Not selected"}</span>
+                <span className="font-extrabold text-[#0a2540]">{userCategory || "Not selected"}</span>
               </div>
               <div className="border-l border-slate-200 pl-3">
                 <span className="text-[11px] text-slate-500 block">Urgency</span>
                 <span
-                  className={`inline-block px-2 py-0.5 rounded text-[11px] font-bold uppercase border ${
+                  className={`inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase border ${
                     userUrgency === "high"
-                      ? "bg-rose-100 text-rose-800 border-rose-300"
+                      ? "bg-rose-50 text-rose-800 border-rose-300"
                       : userUrgency === "medium"
-                      ? "bg-amber-100 text-amber-800 border-amber-300"
-                      : "bg-slate-100 text-slate-700 border-slate-300"
+                      ? "bg-amber-50 text-amber-800 border-amber-300"
+                      : "bg-[#f0fdfa] text-[#028090] border-[#00a896]/30"
                   }`}
                 >
                   {userUrgency}
@@ -1156,14 +1162,14 @@ export default function ReportPage() {
 
             <div>
               <span className="text-[11px] text-slate-500 block mb-1">Description</span>
-              <p className="p-2.5 rounded bg-slate-50 border border-slate-200 text-slate-800 whitespace-pre-wrap leading-relaxed">
+              <p className="p-3 rounded-xl bg-slate-50 border border-slate-200/90 text-slate-800 whitespace-pre-wrap leading-relaxed">
                 {descriptionText}
               </p>
             </div>
 
             {(reporterName || reporterContact) && (
-              <div className="border-t border-slate-100 pt-2 text-[11px] text-slate-600">
-                <span className="font-semibold text-slate-700">Reporter: </span>
+              <div className="border-t border-slate-100 pt-2.5 text-[11px] text-slate-600">
+                <span className="font-bold text-[#0a2540]">Reporter: </span>
                 {reporterName || "Anonymous"} {reporterContact ? `(${reporterContact})` : ""}
               </div>
             )}
@@ -1171,8 +1177,8 @@ export default function ReportPage() {
         </div>
 
         {/* Privacy Note */}
-        <div className="bg-slate-100/90 rounded-md border border-slate-200 p-3 flex items-start gap-2.5 text-xs text-slate-600">
-          <Shield className="w-4 h-4 text-[#1D3557] shrink-0 mt-0.5" />
+        <div className="bg-[#f0fdfa] rounded-2xl border border-[#028090]/20 p-3.5 flex items-start gap-3 text-xs text-[#0a2540]">
+          <Shield className="w-4 h-4 text-[#028090] shrink-0 mt-0.5" />
           <p className="leading-relaxed">
             Your observation evidence is analyzed by Civitas Lens to correlate public incidents and dispatch municipal responders. Contact details are never displayed publicly.
           </p>
@@ -1180,18 +1186,19 @@ export default function ReportPage() {
 
         {/* Submit Error Banner if Any */}
         {submitError && (
-          <Alert variant="destructive" className="text-xs">
+          <Alert variant="destructive" className="text-xs rounded-xl">
             {submitError}
           </Alert>
         )}
 
         {/* Submit & Edit Buttons */}
-        <div className="space-y-2 pt-2">
+        <div className="space-y-2.5 pt-2">
           <Button
             type="button"
+            variant="teal"
             onClick={handleSubmit}
             disabled={isSubmitting || location.lat === null || location.lng === null || !isStep2Valid}
-            className="w-full min-h-[48px] text-sm font-bold bg-[#1D3557] hover:bg-[#162842] text-white shadow"
+            className="w-full min-h-[48px] text-sm font-bold shadow-teal-glow text-white rounded-xl"
           >
             {isSubmitting ? (
               <>
@@ -1208,11 +1215,12 @@ export default function ReportPage() {
             variant="ghost"
             onClick={() => setCurrentStep(2)}
             disabled={isSubmitting}
-            className="w-full text-xs text-slate-600"
+            className="w-full text-xs text-slate-600 hover:text-[#0a2540]"
           >
             Back to edit details
           </Button>
         </div>
+      </div>
       </div>
     </main>
   );

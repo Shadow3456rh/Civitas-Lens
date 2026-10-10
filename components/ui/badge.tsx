@@ -74,7 +74,7 @@ const statusConfig: Record<
 };
 
 const variantStyles: Record<"default" | "secondary" | "outline", string> = {
-  default: "bg-[#eef3f8] text-[#1d3557] border-slate-300 font-medium",
+  default: "bg-[#f0fdfa] text-[#0a2540] border-[#028090]/30 font-bold",
   secondary: "bg-slate-100 text-slate-800 border-slate-200",
   outline: "bg-transparent text-slate-700 border-slate-300",
 };
@@ -93,7 +93,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     ref
   ) => {
     let styleClasses = variantStyles[variant];
-    let dotClass = "bg-[#1d3557]";
+    let dotClass = "bg-[#028090]";
     let defaultText: React.ReactNode = children;
 
     if (severity && severityConfig[severity]) {

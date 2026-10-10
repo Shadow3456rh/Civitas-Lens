@@ -12,15 +12,15 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Civitas Lens | Incident-Intelligence Platform",
+  title: "Civitas Lens | People. Observations. A Safer Tomorrow.",
   description:
-    "See Beyond the Observation. Understand the Bigger Picture. AI incident-intelligence web application for real-time civic situational awareness.",
+    "AI incident-intelligence platform for real-time civic situational awareness. People. Observations. A Safer Tomorrow.",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1d3557",
+  themeColor: "#0a2540",
 };
 
 import { Suspense } from "react";

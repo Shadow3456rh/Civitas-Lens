@@ -85,8 +85,8 @@ export function LocationPicker({
         html: `
           <div style="transform: translate(-16px, -36px); filter: drop-shadow(0 3px 6px rgba(0,0,0,0.35)); cursor: grab;">
             <svg width="34" height="42" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0C5.37258 0 0 5.37258 0 12C0 20.5 12 32 12 32C12 32 24 20.5 24 12C24 5.37258 18.6274 0 12 0Z" fill="#1D3557" stroke="#FFFFFF" stroke-width="2"/>
-              <circle cx="12" cy="12" r="4.5" fill="#FFFFFF"/>
+              <path d="M12 0C5.37258 0 0 5.37258 0 12C0 20.5 12 32 12 32C12 32 24 20.5 24 12C24 5.37258 18.6274 0 12 0Z" fill="#0A2540" stroke="#FFFFFF" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4.5" fill="#00A896"/>
             </svg>
           </div>
         `,
@@ -119,10 +119,10 @@ export function LocationPicker({
       if (accuracyM && accuracyM > 0) {
         const circle = L.circle([lat, lng], {
           radius: accuracyM,
-          color: "#1D3557",
+          color: "#028090",
           weight: 1.5,
-          fillColor: "#457B9D",
-          fillOpacity: 0.12,
+          fillColor: "#00A896",
+          fillOpacity: 0.15,
         }).addTo(map);
         circleRef.current = circle;
       }
@@ -154,8 +154,8 @@ export function LocationPicker({
 
         {/* Floating guidance overlay */}
         <div className="absolute top-2 left-2 right-2 z-[400] flex items-center justify-between pointer-events-none">
-          <span className="bg-white/95 backdrop-blur-sm text-slate-800 text-xs px-2.5 py-1 rounded shadow-sm border border-slate-200 font-medium flex items-center gap-1.5 pointer-events-auto">
-            <MapPin className="w-3.5 h-3.5 text-[#1D3557]" />
+          <span className="bg-white/95 backdrop-blur-sm text-[#0a2540] text-xs px-3 py-1.5 rounded-xl shadow-xs border border-slate-200 font-bold flex items-center gap-1.5 pointer-events-auto">
+            <MapPin className="w-3.5 h-3.5 text-[#028090]" />
             Tap map or drag pin to position
           </span>
 
@@ -165,12 +165,12 @@ export function LocationPicker({
               onClick={onRetryGps}
               disabled={isLocating}
               aria-label="Try GPS again"
-              className="bg-white/95 backdrop-blur-sm hover:bg-slate-50 active:bg-slate-100 text-[#1D3557] text-xs px-2.5 py-1 rounded shadow-sm border border-slate-300 font-medium flex items-center gap-1.5 pointer-events-auto transition-colors disabled:opacity-50"
+              className="bg-white/95 backdrop-blur-sm hover:bg-[#f0fdfa] text-[#028090] text-xs px-3 py-1.5 rounded-xl shadow-xs border border-[#028090]/30 font-bold flex items-center gap-1.5 pointer-events-auto transition-colors disabled:opacity-50"
             >
               {isLocating ? (
-                <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#1D3557]" />
+                <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#028090]" />
               ) : (
-                <Locate className="w-3.5 h-3.5 text-[#1D3557]" />
+                <Locate className="w-3.5 h-3.5 text-[#028090]" />
               )}
               {isLocating ? "Locating…" : "Try GPS"}
             </button>

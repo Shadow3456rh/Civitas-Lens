@@ -5,48 +5,59 @@
 :root {
   --font-public-sans: 'Public Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Surfaces & Canvas - Light theme only (Government-portal style) */
+  /* Surfaces & Canvas - Modern Light Theme */
   --background: #f8fafc;
-  --foreground: #0f172a;
+  --foreground: #091e36;
 
   --surface: #ffffff;
   --surface-subtle: #f1f5f9;
   --surface-muted: #e2e8f0;
 
-  /* Navy Primary (#1D3557-like) - Trustworthy, authoritative */
-  --primary: #1d3557;
-  --primary-hover: #162842;
-  --primary-active: #0f1d30;
+  /* Civitas Lens Brand Identity (Matching Official Logo) */
+  --civitas-navy: #0a2540;
+  --civitas-navy-dark: #06182b;
+  --civitas-navy-light: #163e68;
+  --civitas-teal: #057a68;
+  --civitas-teal-light: #028090;
+  --civitas-cyan: #00a896;
+  --civitas-cyan-glow: #00c49f;
+  --civitas-cyan-tint: #f0fdfa;
+
+  /* Primary (Civitas Navy) */
+  --primary: #0a2540;
+  --primary-hover: #07192c;
+  --primary-active: #040e1a;
   --primary-foreground: #ffffff;
-  --primary-subtle: #eef3f8;
+  --primary-subtle: #eef4f9;
 
-  /* Muted Accent (#457B9D) */
-  --accent: #457b9d;
-  --accent-hover: #386682;
+  /* Accent (Civitas Teal & Cyan) */
+  --accent: #028090;
+  --accent-hover: #026b78;
   --accent-foreground: #ffffff;
-  --accent-subtle: #f0f6f9;
+  --accent-subtle: #e6f7f5;
 
-  /* Neutrals & Borders (1px borders, subtle contrast) */
+  /* Neutrals & Borders */
   --muted: #64748b;
   --muted-foreground: #475569;
   --border: #e2e8f0;
   --border-strong: #cbd5e1;
-  --ring: #1d3557;
+  --ring: #028090;
 
-  /* Radii - Subtle and utilitarian (2px / 4px / 6px / 8px) */
-  --radius-sm: 2px;
-  --radius: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
+  /* Radii - Modern rounded corners */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
 
   /* Semantic Severity Tokens */
   --severity-low-bg: #f0fdf4;
   --severity-low-text: #166534;
   --severity-low-border: #bbf7d0;
 
-  --severity-medium-bg: #fefce8;
-  --severity-medium-text: #854d0e;
-  --severity-medium-border: #fef08a;
+  --severity-medium-bg: #fffbeb;
+  --severity-medium-text: #92400e;
+  --severity-medium-border: #fde68a;
 
   --severity-high-bg: #fff7ed;
   --severity-high-text: #c2410c;
@@ -61,17 +72,17 @@
   --status-new-text: #1e40af;
   --status-new-border: #bfdbfe;
 
-  --status-under-review-bg: #eef2ff;
-  --status-under-review-text: #4338ca;
-  --status-under-review-border: #c7d2fe;
+  --status-under-review-bg: #f5f3ff;
+  --status-under-review-text: #5b21b6;
+  --status-under-review-border: #ddd6fe;
 
   --status-active-bg: #fff7ed;
   --status-active-text: #9a3412;
   --status-active-border: #ffedd5;
 
-  --status-resolved-bg: #f0fdf4;
-  --status-resolved-text: #166534;
-  --status-resolved-border: #bbf7d0;
+  --status-resolved-bg: #ecfdf5;
+  --status-resolved-text: #065f46;
+  --status-resolved-border: #a7f3d0;
 
   --status-archived-bg: #f8fafc;
   --status-archived-text: #475569;
@@ -108,9 +119,10 @@
   --radius: var(--radius);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
 }
 
-/* Light theme enforcement - WCAG AA standards */
+/* Base Body Styling */
 body {
   background-color: var(--background);
   color: var(--foreground);
@@ -121,8 +133,45 @@ body {
 
 /* Accessible focus outline */
 :focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* Civitas Lens Brand Utility Classes */
+.bg-brand-gradient {
+  background: linear-gradient(135deg, #0a2540 0%, #063959 55%, #028090 85%, #00a896 100%);
+}
+
+.bg-teal-gradient {
+  background: linear-gradient(135deg, #028090 0%, #00a896 100%);
+}
+
+.bg-hero-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(2, 128, 144, 0.12) 0%, rgba(10, 37, 64, 0.04) 50%, transparent 80%);
+}
+
+.text-brand-gradient {
+  background: linear-gradient(135deg, #0a2540 0%, #028090 70%, #00a896 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.shadow-brand {
+  box-shadow: 0 10px 25px -5px rgba(10, 37, 64, 0.08), 0 8px 10px -6px rgba(2, 128, 144, 0.05);
+}
+
+.shadow-brand-hover {
+  box-shadow: 0 20px 30px -10px rgba(10, 37, 64, 0.12), 0 10px 15px -5px rgba(2, 128, 144, 0.1);
+}
+
+.shadow-teal-glow {
+  box-shadow: 0 0 25px rgba(0, 168, 150, 0.25);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
 }
 
 /* Printable Incident Record Styles */

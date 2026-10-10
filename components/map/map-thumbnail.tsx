@@ -64,8 +64,8 @@ export function MapThumbnail({
         html: `
           <div style="transform: translate(-16px, -36px); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
             <svg width="32" height="38" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0C5.37258 0 0 5.37258 0 12C0 20.5 12 32 12 32C12 32 24 20.5 24 12C24 5.37258 18.6274 0 12 0Z" fill="#1D3557" stroke="#FFFFFF" stroke-width="2"/>
-              <circle cx="12" cy="12" r="4.5" fill="#FFFFFF"/>
+              <path d="M12 0C5.37258 0 0 5.37258 0 12C0 20.5 12 32 12 32C12 32 24 20.5 24 12C24 5.37258 18.6274 0 12 0Z" fill="#0a2540" stroke="#FFFFFF" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4.5" fill="#00a896"/>
             </svg>
           </div>
         `,
@@ -79,9 +79,9 @@ export function MapThumbnail({
       if (accuracyM && accuracyM > 0) {
         L.circle([lat, lng], {
           radius: accuracyM,
-          color: "#1D3557",
+          color: "#028090",
           weight: 1.5,
-          fillColor: "#457B9D",
+          fillColor: "#00a896",
           fillOpacity: 0.15,
         }).addTo(map);
       }

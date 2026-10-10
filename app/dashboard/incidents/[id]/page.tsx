@@ -258,7 +258,7 @@ function IncidentDetailContent({ id }: { id: string }) {
         </div>
         <h1 className="text-lg font-bold text-slate-900">Incident Not Found</h1>
         <p className="text-xs text-slate-500">{fetchError || "The requested incident record could not be located."}</p>
-        <Link href="/dashboard" className="inline-flex items-center text-xs font-semibold text-[#1D3557] hover:underline">
+        <Link href="/dashboard" className="inline-flex items-center text-xs font-bold text-[#028090] hover:text-[#00a896]">
           <ArrowLeft className="w-4 h-4 mr-1" /> Return to Dashboard
         </Link>
       </div>
@@ -272,13 +272,13 @@ function IncidentDetailContent({ id }: { id: string }) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#f8fafc] py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Navigation & Print Controls */}
         <div className="flex items-center justify-between no-print">
           <Link
             href="/dashboard"
-            className="inline-flex items-center text-xs font-semibold text-[#1D3557] hover:text-[#162842] transition-colors"
+            className="inline-flex items-center text-xs font-bold text-[#028090] hover:text-[#0a2540] transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-1.5" />
             Back to Incident List
@@ -288,9 +288,9 @@ function IncidentDetailContent({ id }: { id: string }) {
             <button
               type="button"
               onClick={() => window.print()}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-slate-300 bg-white text-xs font-medium text-slate-700 hover:bg-slate-50 shadow-sm transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-700 hover:bg-slate-50 shadow-xs transition-colors"
             >
-              <Printer className="w-3.5 h-3.5 text-slate-500" />
+              <Printer className="w-3.5 h-3.5 text-slate-400" />
               Print Incident Record
             </button>
           </div>
@@ -299,21 +299,21 @@ function IncidentDetailContent({ id }: { id: string }) {
         {/* ===================================================================
             HEADER: Title, Badges, Time Range, Observation Count
            =================================================================== */}
-        <header className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm space-y-4">
+        <header className="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-sm space-y-4">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div className="space-y-2 flex-1">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge severity={incident.severity} />
                 <Badge status={currentStatus as any} />
-                <span className="text-xs font-semibold px-2.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[#f0fdfa] text-[#0a2540] border border-[#028090]/25">
                   {formattedCategory}
                 </span>
-                <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">
+                <span className="text-xs font-bold text-[#028090] bg-[#f0fdfa] border border-[#028090]/25 px-2.5 py-0.5 rounded-full">
                   {incident.observation_count} {incident.observation_count === 1 ? "Observation" : "Observations"}
                 </span>
               </div>
 
-              <h1 className="text-2xl font-bold text-slate-900 tracking-tight leading-snug">
+              <h1 className="text-2xl font-extrabold text-[#0a2540] tracking-tight leading-snug">
                 {incident.title}
               </h1>
 
@@ -330,7 +330,7 @@ function IncidentDetailContent({ id }: { id: string }) {
             </div>
 
             {/* STATUS CHANGER (New -> Under Review -> Active -> Resolved -> Archived) */}
-            <div className="bg-slate-50 border border-slate-200 p-3 rounded-lg space-y-1.5 md:min-w-[220px] shrink-0 no-print">
+            <div className="bg-slate-50/80 border border-slate-200/90 p-3.5 rounded-xl space-y-1.5 md:min-w-[220px] shrink-0 no-print">
               <label htmlFor="status-select" className="block text-[11px] font-bold text-slate-600 uppercase tracking-wide">
                 Change Status
               </label>
@@ -339,7 +339,7 @@ function IncidentDetailContent({ id }: { id: string }) {
                 value={currentStatus}
                 disabled={isUpdatingStatus}
                 onChange={(e) => handleStatusChange(e.target.value)}
-                className="w-full h-9 rounded border border-slate-300 bg-white px-2.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#1D3557] disabled:opacity-50"
+                className="w-full h-9 rounded-lg border border-slate-300 bg-white px-2.5 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#028090] disabled:opacity-50"
               >
                 <option value="new">New</option>
                 <option value="under_review">Under Review</option>
@@ -359,13 +359,13 @@ function IncidentDetailContent({ id }: { id: string }) {
            =================================================================== */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* AI-Generated Summary Card */}
-          <div className="lg:col-span-2 bg-white rounded-lg border border-slate-200 p-5 shadow-sm space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#1D3557] flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-[#1D3557]" />
+          <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/90 p-6 shadow-sm space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-[#0a2540] flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-[#028090]" />
                 AI-Generated Summary
               </span>
-              <span className="text-[10px] text-slate-500 font-medium bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+              <span className="text-[10px] text-[#028090] font-bold bg-[#f0fdfa] px-2.5 py-0.5 rounded-full border border-[#028090]/25">
                 Gemma 4 Intelligence Synthesis
               </span>
             </div>
@@ -375,7 +375,7 @@ function IncidentDetailContent({ id }: { id: string }) {
             </p>
 
             <div className="pt-2 flex items-center gap-2 text-[11px] text-slate-500 border-t border-slate-100">
-              <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-[#00a896]" />
               <span>
                 Synthesized from {incident.observation_count} verified citizen observation{incident.observation_count === 1 ? "" : "s"}.
               </span>
@@ -383,10 +383,10 @@ function IncidentDetailContent({ id }: { id: string }) {
           </div>
 
           {/* Small Incident Multi-Observation Map */}
-          <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-sm space-y-2">
+          <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-[#1D3557]" />
+              <span className="text-xs font-extrabold uppercase tracking-wider text-[#0a2540] flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-[#028090]" />
                 Cluster Geography
               </span>
               <span className="text-[11px] text-slate-500 font-mono">
@@ -448,11 +448,11 @@ function IncidentDetailContent({ id }: { id: string }) {
                         {obs.reference_code && (
                           <Link
                             href={`/dashboard/reports/${obs.id}`}
-                            className="text-xs font-mono font-bold text-[#1D3557] bg-blue-50 border border-blue-200 hover:border-blue-400 px-2 py-0.5 rounded transition-colors inline-flex items-center gap-1"
+                            className="text-xs font-mono font-extrabold text-[#0a2540] bg-[#f0fdfa] border border-[#028090]/30 hover:border-[#028090] px-2.5 py-0.5 rounded-full transition-colors inline-flex items-center gap-1"
                             title="Open full report inspection"
                           >
                             <span>{obs.reference_code}</span>
-                            <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                            <ExternalLink className="w-2.5 h-2.5 text-[#028090]" />
                           </Link>
                         )}
                         <EvidenceBadge
@@ -518,7 +518,7 @@ function IncidentDetailContent({ id }: { id: string }) {
                             <button
                               type="button"
                               onClick={() => toggleDescriptionExpander(obs.id)}
-                              className="text-[11px] font-bold text-[#1D3557] hover:underline mt-1.5 inline-flex items-center gap-1"
+                              className="text-[11px] font-bold text-[#028090] hover:text-[#00a896] mt-1.5 inline-flex items-center gap-1 transition-colors"
                             >
                               {expandedDescriptions[obs.id] ? "Show less" : "Read more"}
                             </button>
@@ -546,7 +546,7 @@ function IncidentDetailContent({ id }: { id: string }) {
                       <button
                         type="button"
                         onClick={() => toggleDecisionExpander(obs.id)}
-                        className="w-full flex items-center justify-between text-xs font-semibold text-[#1D3557] hover:text-[#162842] py-1"
+                        className="w-full flex items-center justify-between text-xs font-bold text-[#0a2540] hover:text-[#028090] py-1 transition-colors"
                       >
                         <span className="flex items-center gap-1.5">
                           <Sparkles className="w-3.5 h-3.5 text-amber-500" />
@@ -660,7 +660,7 @@ function IncidentDetailContent({ id }: { id: string }) {
               <p className="text-xs text-slate-500 italic">No timeline events recorded yet.</p>
             ) : (
               events.map((evt) => {
-                let badgeColor = "bg-[#1D3557]";
+                let badgeColor = "bg-[#0a2540]";
                 let title = "Event Logged";
 
                 if (evt.type === "created") {

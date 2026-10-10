@@ -164,26 +164,26 @@ export default function ReportsDashboardPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-xl font-bold text-[#1D3557]">Operations Dashboard</h1>
+              <h1 className="text-xl font-extrabold text-[#0a2540]">Operations Console</h1>
               <p className="text-xs text-slate-500">
                 Manage correlated incidents and individual citizen observation reports.
               </p>
             </div>
 
             {/* Dashboard Sub-nav Tabs: Incidents vs Reports */}
-            <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-lg border border-slate-200 self-start sm:self-auto">
+            <div className="flex items-center gap-1.5 bg-slate-100/80 p-1 rounded-xl border border-slate-200/90 self-start sm:self-auto">
               <Link
                 href="/dashboard"
-                className="px-3.5 py-1.5 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors flex items-center gap-1.5"
+                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-[#0a2540] transition-colors flex items-center gap-1.5"
               >
                 <Layers className="w-3.5 h-3.5" />
                 Incidents
               </Link>
               <Link
                 href="/dashboard/reports"
-                className="px-3.5 py-1.5 rounded-md text-xs font-bold bg-white text-[#1D3557] shadow-xs border border-slate-200 flex items-center gap-1.5"
+                className="px-3.5 py-1.5 rounded-lg text-xs font-extrabold bg-[#f0fdfa] text-[#0a2540] shadow-xs border border-[#028090]/30 flex items-center gap-1.5"
               >
-                <FileText className="w-3.5 h-3.5 text-[#1D3557]" />
+                <FileText className="w-3.5 h-3.5 text-[#028090]" />
                 Reports ({totalCount})
               </Link>
             </div>
@@ -199,7 +199,7 @@ export default function ReportsDashboardPage() {
               }}
               className={`pb-1 border-b-2 transition-colors cursor-pointer ${
                 activeTab === "all"
-                  ? "border-[#1D3557] text-[#1D3557] font-bold"
+                  ? "border-[#028090] text-[#0a2540] font-extrabold"
                   : "border-transparent text-slate-500 hover:text-slate-800"
               }`}
             >
@@ -213,11 +213,11 @@ export default function ReportsDashboardPage() {
               }}
               className={`pb-1 border-b-2 transition-colors flex items-center gap-1.5 cursor-pointer ${
                 activeTab === "needs_attention"
-                  ? "border-amber-600 text-amber-900 font-bold"
+                  ? "border-amber-500 text-amber-900 font-extrabold"
                   : "border-transparent text-slate-500 hover:text-slate-800"
               }`}
             >
-              <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
+              <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
               Needs Attention
             </button>
           </div>
@@ -349,7 +349,7 @@ export default function ReportsDashboardPage() {
                       className="hover:bg-slate-50/80 transition-colors cursor-pointer group"
                     >
                       {/* Reference Code */}
-                      <td className="py-3 px-4 font-mono font-bold text-[#1D3557] group-hover:underline whitespace-nowrap">
+                      <td className="py-3 px-4 font-mono font-extrabold text-[#0a2540] group-hover:text-[#028090] whitespace-nowrap transition-colors">
                         {rep.reference_code}
                       </td>
 
@@ -359,10 +359,10 @@ export default function ReportsDashboardPage() {
                           <img
                             src={rep.image_signed_url}
                             alt="Observation"
-                            className="w-10 h-10 rounded object-cover border border-slate-200"
+                            className="w-10 h-10 rounded-lg object-cover border border-slate-200"
                           />
                         ) : (
-                          <div className="w-10 h-10 rounded bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400">
+                          <div className="w-10 h-10 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400">
                             <FileText className="w-4 h-4" />
                           </div>
                         )}
@@ -404,13 +404,13 @@ export default function ReportsDashboardPage() {
                           <Link
                             href={`/dashboard/incidents/${rep.incident_id}`}
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1 text-xs text-[#1D3557] font-semibold hover:underline"
+                            className="inline-flex items-center gap-1 text-xs text-[#028090] font-bold hover:text-[#00a896] transition-colors"
                           >
                             <span>Incident</span>
-                            <ExternalLink className="w-3 h-3 text-slate-400" />
+                            <ExternalLink className="w-3 h-3 text-[#028090]" />
                           </Link>
                         ) : (
-                          <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
                             Unlinked
                           </span>
                         )}
@@ -424,7 +424,7 @@ export default function ReportsDashboardPage() {
                             variant="outline"
                             disabled={reprocessingId === rep.id}
                             onClick={(e) => handleRerunAnalysis(rep.id, e)}
-                            className="text-xs h-7 px-2 border-amber-300 text-amber-900 bg-amber-50 hover:bg-amber-100"
+                            className="text-xs h-7 px-2 border-amber-300 text-amber-900 bg-amber-50 hover:bg-amber-100 rounded-lg"
                           >
                             {reprocessingId === rep.id ? (
                               <RefreshCw className="w-3 h-3 mr-1 animate-spin" />
@@ -436,7 +436,7 @@ export default function ReportsDashboardPage() {
                         ) : (
                           <Link
                             href={`/dashboard/reports/${rep.id}`}
-                            className="text-xs text-[#1D3557] font-semibold hover:underline"
+                            className="text-xs text-[#028090] font-bold hover:text-[#00a896] transition-colors"
                           >
                             Details →
                           </Link>

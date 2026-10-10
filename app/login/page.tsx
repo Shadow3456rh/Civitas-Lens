@@ -20,7 +20,7 @@ function LoginFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const nextPath = searchParams.get("next") || "/dashboard";
+  const nextPath = searchParams.get("next") || "/";
   const errorParam = searchParams.get("error");
   const roleParam = searchParams.get("role");
 

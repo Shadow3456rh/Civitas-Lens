@@ -197,7 +197,69 @@ export async function POST(request: NextRequest) {
     }
 
     // -------------------------------------------------------------------------
-    // If neither EXIF nor visual geotag was found -> Return clear error
+    // Strategy 3: LLM Vision Extractor (Gemma)
+    // -------------------------------------------------------------------------
+    const llmBaseUrl = process.env.LLM_BASE_URL;
+    const llmModel = process.env.LLM_MODEL || "gemma4:e2b";
+
+    if (llmBaseUrl) {
+      try {
+        const base64Image = buffer.toString("base64");
+        
+        const response = await fetch(`${llmBaseUrl.replace(/\/$/, '')}/chat/completions`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${process.env.LLM_API_KEY || "dummy"}`,
+          },
+          body: JSON.stringify({
+            model: llmModel,
+            messages: [
+              {
+                role: "user",
+                content: [
+                  { 
+                    type: "text", 
+                    text: "Extract the GPS coordinates (Latitude and Longitude) from this image watermark if present. Respond with ONLY valid JSON: {\"lat\": number, \"lng\": number}. If no coordinates are visible, return {\"error\": \"not found\"}." 
+                  },
+                  { 
+                    type: "image_url", 
+                    image_url: { url: `data:image/jpeg;base64,${base64Image}` } 
+                  }
+                ]
+              }
+            ],
+            response_format: { type: "json_object" }
+          }),
+          signal: AbortSignal.timeout(15000)
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          const content = result.choices?.[0]?.message?.content;
+          if (content) {
+            const parsed = JSON.parse(content);
+            if (typeof parsed.lat === "number" && typeof parsed.lng === "number" && !isNaN(parsed.lat) && !isNaN(parsed.lng)) {
+              return NextResponse.json({
+                success: true,
+                is_geotagged: true,
+                latitude: parsed.lat,
+                longitude: parsed.lng,
+                location_name: parsed.address || null,
+                confidence: 0.85,
+                source: "llm_vision_extracted",
+                model: llmModel,
+              });
+            }
+          }
+        }
+      } catch (llmErr: any) {
+        console.warn("LLM Vision extraction failed:", llmErr?.message);
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // If neither EXIF, OCR, nor LLM Vision found geotag -> Return clear error
     // -------------------------------------------------------------------------
     return NextResponse.json({
       success: false,

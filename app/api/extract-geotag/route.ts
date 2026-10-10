@@ -211,6 +211,7 @@ export async function POST(request: NextRequest) {
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${process.env.LLM_API_KEY || "dummy"}`,
+            "ngrok-skip-browser-warning": "true",
           },
           body: JSON.stringify({
             model: llmModel,

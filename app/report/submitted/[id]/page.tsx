@@ -14,7 +14,7 @@
 
 import React, { useState, useEffect, use, Suspense } from "react";
 import Link from "next/link";
-import { Button, Badge, Skeleton } from "@/components/ui";
+import { Badge, Skeleton } from "@/components/ui";
 import { EvidenceBadge } from "@/components/evidence-badge";
 import {
   CheckCircle2,
@@ -24,6 +24,10 @@ import {
   PlusCircle,
   Eye,
   Clock,
+  User,
+  Phone,
+  FileText,
+  MapPin,
 } from "lucide-react";
 
 interface SubmittedReportPageProps {
@@ -39,6 +43,9 @@ interface ObservationStatusData {
   incident_id: string | null;
   user_category?: string | null;
   user_urgency?: string | null;
+  reporter_name?: string | null;
+  reporter_contact?: string | null;
+  raw_text?: string | null;
   category?: string | null;
   severity?: "low" | "medium" | "high" | "critical" | null;
   summary?: string | null;
@@ -260,7 +267,7 @@ function SubmittedReportContent({ id }: { id: string }) {
             <div className="space-y-0.5">
               <p className="font-bold">Human Review Queued</p>
               <p className="text-[11px] text-amber-800 leading-relaxed">
-                We've received your report and an analyst will review it. No further action is required from you.
+                We&apos;ve received your report and an analyst will review it. No further action is required from you.
               </p>
             </div>
           </div>
@@ -291,6 +298,61 @@ function SubmittedReportContent({ id }: { id: string }) {
           </div>
         )}
       </div>
+
+      {/* Report Details Card */}
+      {data && (
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h2 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-[#028090]" />
+              Report Details
+            </h2>
+            {(data.user_category || data.category) && (
+              <span className="text-xs font-bold text-[#0a2540] bg-[#f0fdfa] border border-[#028090]/25 px-2.5 py-0.5 rounded-full">
+                {data.user_category || data.category?.replace(/_/g, " ")}
+              </span>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+              <span className="text-[11px] font-semibold text-slate-500 block flex items-center gap-1.5">
+                <User className="w-3.5 h-3.5 text-[#028090]" />
+                Reporter Name
+              </span>
+              <p className="font-bold text-[#0a2540] text-sm">
+                {data.reporter_name || "Not provided (Anonymous)"}
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+              <span className="text-[11px] font-semibold text-slate-500 block flex items-center gap-1.5">
+                <Phone className="w-3.5 h-3.5 text-[#028090]" />
+                Contact Number
+              </span>
+              <p className="font-bold text-[#0a2540] text-sm">
+                {data.reporter_contact || "Not provided"}
+              </p>
+            </div>
+          </div>
+
+          {data.raw_text && (
+            <div className="space-y-1 pt-1">
+              <span className="text-[11px] font-semibold text-slate-500 block">Reported Description</span>
+              <p className="text-xs text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-100 leading-relaxed whitespace-pre-wrap">
+                {data.raw_text}
+              </p>
+            </div>
+          )}
+
+          {data.location_label && (
+            <div className="flex items-center gap-1.5 text-xs text-slate-600 pt-1">
+              <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+              <span className="font-medium truncate">{data.location_label}</span>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Action Buttons */}
       <div className="space-y-2.5 pt-1">

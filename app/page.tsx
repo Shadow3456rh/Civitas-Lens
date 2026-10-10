@@ -4,7 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui";
 import { 
-  Camera, Search, ArrowRight, Shield, Activity, 
+  Camera, Search, ArrowRight, Shield, 
   MapPin, CheckCircle, Clock, Zap, Target
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
@@ -84,10 +84,6 @@ export default function HomePage() {
             {/* Right Column: Visual Map */}
             <div className="relative h-[400px] lg:h-[500px] w-full rounded-2xl shadow-sm border-2 border-slate-200/60 overflow-hidden bg-slate-50">
               <HeroMap />
-              <div className="absolute bottom-4 left-4 z-[500] bg-white/95 backdrop-blur px-3 py-1.5 rounded border border-slate-200 shadow-sm flex items-center gap-2">
-                <Activity className="w-4 h-4 text-[#00a896]" />
-                <span className="text-xs font-bold text-slate-700">Live: 142 Reports in the last 24 hours</span>
-              </div>
             </div>
           </div>
         </div>
@@ -193,21 +189,6 @@ export default function HomePage() {
           </div>
         </section>
       )}
-
-      {/* ===================================================================
-          EMERGENCY CTA BOX
-         =================================================================== */}
-      <section className="py-16 bg-white">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <div className="border-2 border-red-200 bg-red-50 p-8 rounded-xl">
-            <h2 className="text-2xl font-bold text-red-700 mb-2">Need Immediate Emergency Assistance?</h2>
-            <p className="text-red-600/80 mb-6">This platform is for non-emergency civic issues only. For fire, crime, or medical emergencies, please call the national helpline immediately.</p>
-            <a href="tel:112" className="inline-flex items-center justify-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg text-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-              Call 112 Now
-            </a>
-          </div>
-        </div>
-      </section>
 
     </main>
   );

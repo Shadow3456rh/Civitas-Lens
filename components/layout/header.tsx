@@ -150,10 +150,6 @@ function HeaderContent() {
               alt="Nagpur Civic Portal Logo"
               className="h-16 w-auto object-contain transition-transform group-hover:scale-[1.02]"
             />
-            <div className="flex flex-col">
-              <span className="text-xl md:text-2xl font-bold text-[#0a2540] leading-tight">Nagpur Civic Portal</span>
-              <span className="text-xs md:text-sm font-semibold text-slate-500 uppercase tracking-widest">(Prototype)</span>
-            </div>
           </Link>
 
           {/* Desktop Navigation Links */}

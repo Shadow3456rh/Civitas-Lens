@@ -92,23 +92,8 @@ export default function HeroMap() {
         <div className="absolute inset-0 bg-slate-100 animate-pulse z-10" />
       )}
 
-      {/* Overlay UI: AI Connections */}
+      {/* Overlay UI: Floating Incident Cards */}
       <div className="absolute inset-0 pointer-events-none z-[400] flex items-center justify-center">
-        {/* Dotted lines SVG */}
-        <svg className="absolute inset-0 w-full h-full" style={{ filter: "drop-shadow(0px 2px 4px rgba(0,0,0,0.1))" }}>
-          <path d="M 22% 32% Q 50% 15% 50% 50%" fill="none" stroke="#00a896" strokeWidth="2" strokeDasharray="5 5" className="animate-pulse" />
-          <path d="M 78% 26% Q 78% 48% 50% 50%" fill="none" stroke="#00a896" strokeWidth="2" strokeDasharray="5 5" className="animate-pulse" />
-          <path d="M 30% 78% Q 42% 62% 50% 50%" fill="none" stroke="#00a896" strokeWidth="2" strokeDasharray="5 5" className="animate-pulse" />
-        </svg>
-
-        {/* AI Center Node */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0a2540] text-white px-3.5 py-1.5 rounded-full text-xs font-bold border-2 border-[#00a896] shadow-xl flex items-center gap-2 whitespace-nowrap">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00a896] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00c49f]"></span>
-          </span>
-          AI finds possible connections
-        </div>
         
         {/* Floating Cards */}
         <div className="absolute top-[20%] left-[8%] bg-white/95 backdrop-blur-sm p-2.5 rounded-lg shadow-lg border border-slate-200 text-[11px] font-semibold text-slate-700 flex items-center gap-2.5 max-w-[190px]">

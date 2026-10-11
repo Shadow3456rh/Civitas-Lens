@@ -18,9 +18,9 @@
   --civitas-navy-dark: #06182b;
   --civitas-navy-light: #163e68;
   --civitas-teal: #057a68;
-  --civitas-teal-light: #028090;
-  --civitas-cyan: #00a896;
-  --civitas-cyan-glow: #00c49f;
+  --civitas-orange-light: #ea580c;
+  --civitas-cyan: #f97316;
+  --civitas-cyan-glow: #fb923c;
   --civitas-cyan-tint: #f0fdfa;
 
   /* Primary (Civitas Navy) */
@@ -31,7 +31,7 @@
   --primary-subtle: #eef4f9;
 
   /* Accent (Civitas Teal & Cyan) */
-  --accent: #028090;
+  --accent: #ea580c;
   --accent-hover: #026b78;
   --accent-foreground: #ffffff;
   --accent-subtle: #e6f7f5;
@@ -41,7 +41,7 @@
   --muted-foreground: #475569;
   --border: #e2e8f0;
   --border-strong: #cbd5e1;
-  --ring: #028090;
+  --ring: #ea580c;
 
   /* Radii - Modern rounded corners */
   --radius-sm: 4px;
@@ -139,33 +139,33 @@ body {
 
 /* Civitas Lens Brand Utility Classes */
 .bg-brand-gradient {
-  background: linear-gradient(135deg, #0a2540 0%, #063959 55%, #028090 85%, #00a896 100%);
+  background: linear-gradient(135deg, #0a2540 0%, #063959 55%, #ea580c 85%, #f97316 100%);
 }
 
-.bg-teal-gradient {
-  background: linear-gradient(135deg, #028090 0%, #00a896 100%);
+.bg-orange-gradient {
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
 }
 
 .bg-hero-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(2, 128, 144, 0.12) 0%, rgba(10, 37, 64, 0.04) 50%, transparent 80%);
+  background: radial-gradient(circle at 50% 0%, rgba(234, 88, 12, 0.12) 0%, rgba(10, 37, 64, 0.04) 50%, transparent 80%);
 }
 
 .text-brand-gradient {
-  background: linear-gradient(135deg, #0a2540 0%, #028090 70%, #00a896 100%);
+  background: linear-gradient(135deg, #0a2540 0%, #ea580c 70%, #f97316 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .shadow-brand {
-  box-shadow: 0 10px 25px -5px rgba(10, 37, 64, 0.08), 0 8px 10px -6px rgba(2, 128, 144, 0.05);
+  box-shadow: 0 10px 25px -5px rgba(10, 37, 64, 0.08), 0 8px 10px -6px rgba(234, 88, 12, 0.05);
 }
 
 .shadow-brand-hover {
-  box-shadow: 0 20px 30px -10px rgba(10, 37, 64, 0.12), 0 10px 15px -5px rgba(2, 128, 144, 0.1);
+  box-shadow: 0 20px 30px -10px rgba(10, 37, 64, 0.12), 0 10px 15px -5px rgba(234, 88, 12, 0.1);
 }
 
-.shadow-teal-glow {
-  box-shadow: 0 0 25px rgba(0, 168, 150, 0.25);
+.shadow-orange-glow {
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.25);
 }
 
 .glass-card {

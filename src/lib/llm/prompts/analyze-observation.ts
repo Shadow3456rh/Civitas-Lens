@@ -101,13 +101,37 @@ export function buildAnalyzeObservationPrompt(input: AnalyzeObservationInput): C
   return messages;
 }
 
-/**
- * Executes observation analysis via LLM with JSON schema validation.
- */
 export async function analyzeObservation(
   input: AnalyzeObservationInput,
   options?: CallJsonOptions,
 ): Promise<ObservationAnalysis> {
   const messages = buildAnalyzeObservationPrompt(input);
-  return callJson(observationAnalysisSchema, messages, options);
+  try {
+    return await callJson(observationAnalysisSchema, messages, options);
+  } catch (err) {
+    console.warn("LLM analyzeObservation failed, using fallback:", err);
+    
+    const catMap: Record<string, string> = {
+      "Road / pothole": "infrastructure",
+      "Water / drainage": "infrastructure",
+      "Garbage / sanitation": "environmental",
+      "Streetlight / electricity": "infrastructure",
+      "Safety / suspicious activity": "safety_concern",
+      "Accident": "accident",
+      "Environment / pollution": "environmental",
+      "Fire": "safety_concern",
+      "Other": "other"
+    };
+    
+    const defaultCat = (input.userCategory && catMap[input.userCategory]) ? catMap[input.userCategory] : "other";
+
+    return {
+      category: defaultCat as any,
+      severity: "medium",
+      summary: input.rawText?.slice(0, 500) || "Observation submitted without description.",
+      location_context: input.locationLabel?.slice(0, 300) || "Unknown location",
+      key_entities: ["fallback_generated"],
+      confidence: 0.5,
+    };
+  }
 }

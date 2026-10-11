@@ -86,5 +86,14 @@ export async function synthesizeIncidentSummary(
   options?: CallJsonOptions,
 ): Promise<IncidentSynthesis> {
   const messages = buildSynthesizeIncidentPrompt(input);
-  return callJson(incidentSynthesisSchema, messages, options);
+  try {
+    return await callJson(incidentSynthesisSchema, messages, options);
+  } catch (err) {
+    console.warn("LLM synthesizeIncidentSummary failed, using fallback:", err);
+    return {
+      title: input.currentTitle || "Reported Incident",
+      summary: "Incident synthesized from multiple reports. (Fallback summary)",
+      severity: "medium",
+    };
+  }
 }

@@ -46,7 +46,7 @@ export default function HomePage() {
             <div className="max-w-2xl">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0a2540] leading-tight tracking-tight">
                 See Something Unusual? <br className="hidden sm:block" />
-                <span className="text-[#00a896]">Help Connect the Dots.</span>
+                <span className="text-[#f97316]">Help Connect the Dots.</span>
               </h1>
               
               <p className="mt-6 text-lg text-slate-600 leading-relaxed font-medium">
@@ -57,7 +57,7 @@ export default function HomePage() {
                 <Link href="/report" className="w-full sm:w-auto">
                   <Button
                     size="lg"
-                    className="w-full sm:w-auto px-8 py-6 text-base font-bold bg-[#00a896] hover:bg-[#028090] text-white rounded-lg shadow-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00a896]"
+                    className="w-full sm:w-auto px-8 py-6 text-base font-bold bg-[#f97316] hover:bg-[#ea580c] text-white rounded-lg shadow-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f97316]"
                   >
                     <Camera className="w-5 h-5 mr-2" />
                     Submit a report
@@ -76,7 +76,7 @@ export default function HomePage() {
               </div>
 
               <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-slate-500 bg-slate-50 border border-slate-200 px-4 py-2 rounded max-w-max">
-                <Shield className="w-4 h-4 text-[#00a896]" />
+                <Shield className="w-4 h-4 text-[#f97316]" />
                 Your observation matters. Your privacy matters too.
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function HomePage() {
               <Link 
                 key={idx} 
                 href={cat.link}
-                className="group flex flex-col items-center text-center p-6 bg-white border-2 border-slate-200 rounded-xl hover:border-[#00a896] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] transition-all"
+                className="group flex flex-col items-center text-center p-6 bg-white border-2 border-slate-200 rounded-xl hover:border-[#f97316] hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316] transition-all"
               >
                 <div className="w-14 h-14 bg-slate-100 group-hover:bg-[#f0fdfa] rounded-full flex items-center justify-center text-2xl mb-4 transition-colors">
                   {cat.icon}
@@ -144,7 +144,7 @@ export default function HomePage() {
               <div key={idx} className="flex flex-col items-center text-center">
                 <div className="w-16 h-16 bg-[#0a2540] text-white rounded-full flex items-center justify-center mb-6 shadow-md border-4 border-slate-50 relative">
                   {item.icon}
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#00a896] text-white font-bold text-xs rounded-full flex items-center justify-center border-2 border-white">
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#f97316] text-white font-bold text-xs rounded-full flex items-center justify-center border-2 border-white">
                     {item.step}
                   </div>
                 </div>
@@ -163,7 +163,7 @@ export default function HomePage() {
         <section className="py-12 bg-slate-50 border-b border-slate-200">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3 mb-6">
-              <CheckCircle className="w-6 h-6 text-[#00a896]" />
+              <CheckCircle className="w-6 h-6 text-[#f97316]" />
               <h2 className="text-xl font-bold text-[#0a2540]">Recently Resolved</h2>
             </div>
             
@@ -171,7 +171,7 @@ export default function HomePage() {
               {recentReports.map((report) => (
                 <div key={report.id} className="bg-white border border-slate-200 rounded p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="bg-[#f0fdfa] text-[#00a896] p-2 rounded">
+                    <div className="bg-[#f0fdfa] text-[#f97316] p-2 rounded">
                       <MapPin className="w-5 h-5" />
                     </div>
                     <div>

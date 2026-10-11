@@ -142,7 +142,7 @@ function HeaderContent() {
         <div className="flex items-center justify-between h-24">
           <Link
             href="/"
-            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] rounded p-1 -ml-1 transition-transform"
+            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316] rounded p-1 -ml-1 transition-transform"
             title="Nagpur Civic Portal - Home"
           >
             <img
@@ -157,7 +157,7 @@ function HeaderContent() {
             <Link
               href="/"
               className={cn(
-                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896]",
+                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316]",
                 pathname === "/" ? "text-[#0a2540] bg-slate-100" : "text-slate-600 hover:text-[#0a2540] hover:bg-slate-50"
               )}
             >
@@ -166,7 +166,7 @@ function HeaderContent() {
             <Link
               href="/#how-it-works"
               className={cn(
-                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896]",
+                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316]",
                 "text-slate-600 hover:text-[#0a2540] hover:bg-slate-50"
               )}
             >
@@ -175,7 +175,7 @@ function HeaderContent() {
             <Link
               href="/track"
               className={cn(
-                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896]",
+                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316]",
                 pathname === "/track" ? "text-[#0a2540] bg-slate-100" : "text-slate-600 hover:text-[#0a2540] hover:bg-slate-50"
               )}
             >
@@ -184,7 +184,7 @@ function HeaderContent() {
             <Link
               href="/contact"
               className={cn(
-                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896]",
+                "px-3 py-2 text-base font-semibold rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316]",
                 pathname === "/contact" ? "text-[#0a2540] bg-slate-100" : "text-slate-600 hover:text-[#0a2540] hover:bg-slate-50"
               )}
             >
@@ -193,7 +193,7 @@ function HeaderContent() {
             
             <Link
               href="/report"
-              className="ml-2 inline-flex items-center justify-center px-5 py-2.5 text-base font-bold rounded bg-[#00a896] text-white hover:bg-[#028090] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896] focus-visible:ring-offset-2"
+              className="ml-2 inline-flex items-center justify-center px-5 py-2.5 text-base font-bold rounded bg-[#f97316] text-white hover:bg-[#ea580c] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316] focus-visible:ring-offset-2"
             >
               Report an issue
             </Link>
@@ -204,7 +204,7 @@ function HeaderContent() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00a896]"
+              className="inline-flex items-center justify-center p-2 rounded text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f97316]"
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle navigation menu"
             >
@@ -254,7 +254,7 @@ function HeaderContent() {
             <Link
               href="/report"
               onClick={() => setMobileMenuOpen(false)}
-              className="block w-full text-center px-3 py-3 rounded bg-[#00a896] text-white font-bold text-base hover:bg-[#028090]"
+              className="block w-full text-center px-3 py-3 rounded bg-[#f97316] text-white font-bold text-base hover:bg-[#ea580c]"
             >
               Report an issue
             </Link>

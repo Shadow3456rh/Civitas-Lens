@@ -103,13 +103,7 @@ function LoginFormContent() {
 
       const role = profile?.role || "citizen";
 
-      if (nextPath.startsWith("/dashboard") && role !== "analyst" && role !== "admin") {
-        setErrorMessage(
-          "Access Restricted: Signed in successfully as 'citizen', but /dashboard is restricted to analysts and administrators.",
-        );
-        setIsLoading(false);
-        return;
-      }
+
 
       router.push(nextPath);
       router.refresh();
@@ -135,17 +129,7 @@ function LoginFormContent() {
         </div>
       </div>
 
-      {errorParam === "forbidden" && (
-        <Alert variant="destructive" className="text-xs space-y-1 rounded-xl">
-          <div className="flex items-center gap-1.5 font-bold">
-            <AlertTriangle className="w-4 h-4" />
-            Access Restricted to Analysts & Admins
-          </div>
-          <p className="text-slate-700">
-            You are signed in as a <strong>{roleParam || "citizen"}</strong>. The Incident Intelligence Dashboard is restricted to municipal analysts and authorized administrators.
-          </p>
-        </Alert>
-      )}
+
 
       {errorMessage && <Alert variant="destructive" className="text-xs rounded-xl">{errorMessage}</Alert>}
       {successMessage && (
@@ -188,7 +172,7 @@ function LoginFormContent() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="Rahul Verma"
-                      className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+                      className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#ea580c] focus:ring-[#f97316]/20"
                     />
                   </div>
                 </div>
@@ -205,13 +189,13 @@ function LoginFormContent() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+1234567890"
-                    className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+                    className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#ea580c] focus:ring-[#f97316]/20"
                   />
                 </div>
                 <p className="text-[10px] text-slate-500 pt-1">Include country code (e.g., +1)</p>
               </div>
 
-              <Button type="submit" variant="teal" disabled={isLoading} className="w-full min-h-[46px] text-xs font-bold shadow-teal-glow text-white rounded-xl">
+              <Button type="submit" variant="teal" disabled={isLoading} className="w-full min-h-[46px] text-xs font-bold shadow-orange-glow text-white rounded-xl">
                 {isLoading ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
                 Send Verification Code
               </Button>
@@ -230,13 +214,13 @@ function LoginFormContent() {
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   placeholder="123456"
-                  className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20 text-center tracking-widest font-mono"
+                  className="pl-9 text-xs h-10 rounded-xl border-slate-200 focus:border-[#ea580c] focus:ring-[#f97316]/20 text-center tracking-widest font-mono"
                   maxLength={6}
                 />
               </div>
             </div>
             
-            <Button type="submit" variant="teal" disabled={isLoading} className="w-full min-h-[46px] text-xs font-bold shadow-teal-glow text-white rounded-xl">
+            <Button type="submit" variant="teal" disabled={isLoading} className="w-full min-h-[46px] text-xs font-bold shadow-orange-glow text-white rounded-xl">
               {isLoading ? <RefreshCw className="w-4 h-4 mr-2 animate-spin" /> : null}
               Verify and Sign In
             </Button>
@@ -245,7 +229,7 @@ function LoginFormContent() {
               <button 
                 type="button" 
                 onClick={() => { setStep("request"); setOtp(""); setSuccessMessage(null); }}
-                className="text-[11px] text-[#028090] hover:underline"
+                className="text-[11px] text-[#ea580c] hover:underline"
               >
                 Use a different phone number
               </button>
@@ -255,7 +239,7 @@ function LoginFormContent() {
       </div>
 
       <div className="text-center space-y-2">
-        <Link href="/report" className="text-xs text-[#028090] hover:text-[#00a896] font-bold inline-flex items-center gap-1 transition-colors">
+        <Link href="/report" className="text-xs text-[#ea580c] hover:text-[#f97316] font-bold inline-flex items-center gap-1 transition-colors">
           Submit an observation without signing in <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>

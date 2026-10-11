@@ -132,5 +132,15 @@ export async function compareObservation(
   }
 
   const messages = buildCompareObservationPrompt(input);
-  return callJson(relationshipDecisionSchema, messages, options);
+  try {
+    return await callJson(relationshipDecisionSchema, messages, options);
+  } catch (err) {
+    console.warn("LLM compareObservation failed, using fallback:", err);
+    return {
+      matched_incident_id: null,
+      related: false,
+      reason: "Fallback due to LLM failure. New incident created.",
+      confidence: 1.0,
+    };
+  }
 }

@@ -165,7 +165,7 @@ function ReportDetailContent({ id }: { id: string }) {
         <AlertTriangle className="w-10 h-10 text-amber-500 mx-auto" />
         <h2 className="text-base font-bold text-slate-800">Report Not Found</h2>
         <p className="text-xs text-slate-500">{errorMsg || "Invalid observation ID"}</p>
-        <Link href="/dashboard/reports" className="inline-block text-xs font-bold text-[#028090] hover:text-[#00a896] underline">
+        <Link href="/dashboard/reports" className="inline-block text-xs font-bold text-[#ea580c] hover:text-[#f97316] underline">
           Return to Reports table
         </Link>
       </div>
@@ -179,7 +179,7 @@ function ReportDetailContent({ id }: { id: string }) {
         <div className="space-y-1">
           <Link
             href="/dashboard/reports"
-            className="text-xs font-bold text-[#028090] hover:text-[#00a896] flex items-center gap-1 transition-colors"
+            className="text-xs font-bold text-[#ea580c] hover:text-[#f97316] flex items-center gap-1 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Reports table
@@ -223,7 +223,7 @@ function ReportDetailContent({ id }: { id: string }) {
               variant="outline"
               disabled={isActionPending}
               onClick={() => setShowLinkModal(true)}
-              className="text-xs border-[#028090] text-[#028090] hover:bg-[#f0fdfa] font-bold rounded-xl"
+              className="text-xs border-[#ea580c] text-[#ea580c] hover:bg-[#f0fdfa] font-bold rounded-xl"
             >
               <Link2 className="w-3.5 h-3.5 mr-1" />
               Link to incident…
@@ -259,7 +259,7 @@ function ReportDetailContent({ id }: { id: string }) {
             variant="teal"
             disabled={isActionPending}
             onClick={() => handleAction("reprocess")}
-            className="text-xs shadow-teal-glow text-white font-bold rounded-xl"
+            className="text-xs shadow-orange-glow text-white font-bold rounded-xl"
           >
             <RotateCw className="w-3.5 h-3.5 mr-1" />
             Re-run AI analysis
@@ -282,7 +282,7 @@ function ReportDetailContent({ id }: { id: string }) {
           <section className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-3">
             <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
               <h2 className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                <FileText className="w-4 h-4 text-[#028090]" />
+                <FileText className="w-4 h-4 text-[#ea580c]" />
                 Original Citizen Complaint (Unmodified)
               </h2>
               <span className="text-[11px] text-slate-400 font-mono">
@@ -315,7 +315,7 @@ function ReportDetailContent({ id }: { id: string }) {
                 <Sparkles className="w-4 h-4 text-amber-500" />
                 AI Intelligence & Verification
               </h2>
-              <span className="text-[10px] text-[#028090] font-bold bg-[#f0fdfa] px-2 py-0.5 rounded-full border border-[#028090]/25">Gemma 4 Verified</span>
+              <span className="text-[10px] text-[#ea580c] font-bold bg-[#f0fdfa] px-2 py-0.5 rounded-full border border-[#ea580c]/25">Gemma 4 Verified</span>
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-xs">
@@ -412,7 +412,7 @@ function ReportDetailContent({ id }: { id: string }) {
           {/* Photo Evidence Card */}
           <section className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-3">
             <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
-              <Camera className="w-3.5 h-3.5 text-[#028090]" />
+              <Camera className="w-3.5 h-3.5 text-[#ea580c]" />
               Photographic Evidence
             </h2>
 
@@ -442,7 +442,7 @@ function ReportDetailContent({ id }: { id: string }) {
           {/* Location & Map Card */}
           <section className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-3">
             <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#028090]" />
+              <MapPin className="w-3.5 h-3.5 text-[#ea580c]" />
               Scene Location
             </h2>
 
@@ -499,7 +499,7 @@ function ReportDetailContent({ id }: { id: string }) {
           {data.incident && (
             <section className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs space-y-3">
               <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-[#028090]" />
+                <Layers className="w-3.5 h-3.5 text-[#ea580c]" />
                 Associated Incident Cluster
               </h2>
 
@@ -512,7 +512,7 @@ function ReportDetailContent({ id }: { id: string }) {
                 </div>
                 <Link
                   href={`/dashboard/incidents/${data.incident.id}`}
-                  className="inline-flex items-center gap-1 text-xs text-[#028090] font-bold hover:text-[#00a896] pt-1 transition-colors"
+                  className="inline-flex items-center gap-1 text-xs text-[#ea580c] font-bold hover:text-[#f97316] pt-1 transition-colors"
                 >
                   View full incident file →
                 </Link>
@@ -534,7 +534,7 @@ function ReportDetailContent({ id }: { id: string }) {
               value={targetIncidentId}
               onChange={(e) => setTargetIncidentId(e.target.value)}
               placeholder="e.g. 712535c1-05da-4382-ba88-4c1cd0a0e5f6"
-              className="text-xs font-mono rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+              className="text-xs font-mono rounded-xl border-slate-200 focus:border-[#ea580c] focus:ring-[#f97316]/20"
             />
             <div className="flex items-center justify-end gap-2 pt-2">
               <Button size="sm" variant="outline" className="rounded-xl" onClick={() => setShowLinkModal(false)}>
@@ -545,7 +545,7 @@ function ReportDetailContent({ id }: { id: string }) {
                 variant="teal"
                 disabled={!targetIncidentId.trim() || isActionPending}
                 onClick={() => handleAction("link", { incident_id: targetIncidentId.trim() })}
-                className="shadow-teal-glow text-white font-bold rounded-xl"
+                className="shadow-orange-glow text-white font-bold rounded-xl"
               >
                 Confirm Link
               </Button>

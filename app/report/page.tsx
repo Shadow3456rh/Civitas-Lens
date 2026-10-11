@@ -613,14 +613,14 @@ export default function ReportPage() {
       <div className="max-w-md mx-auto space-y-2.5">
         <div className="flex items-center justify-between text-xs">
           <span className="font-extrabold text-[#0a2540] uppercase tracking-wider flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#00a896]" />
+            <span className="w-2 h-2 rounded-full bg-[#f97316]" />
             Step {currentStep} of 3 · {stepTitles[currentStep - 1]}
           </span>
           {currentStep > 1 && (
             <button
               type="button"
               onClick={() => setCurrentStep((prev) => (prev - 1) as FlowStep)}
-              className="text-[#028090] hover:text-[#00a896] flex items-center gap-1 font-bold text-xs transition-colors"
+              className="text-[#ea580c] hover:text-[#f97316] flex items-center gap-1 font-bold text-xs transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Back
@@ -630,9 +630,9 @@ export default function ReportPage() {
 
         {/* 3-Step Progress Bar with connecting teal gradient */}
         <div className="grid grid-cols-3 gap-2 h-2 w-full bg-slate-100 rounded-full overflow-hidden p-0.5">
-          <div className={`h-full rounded-full transition-all duration-300 ${currentStep >= 1 ? "bg-teal-gradient shadow-xs" : "bg-slate-200"}`} />
-          <div className={`h-full rounded-full transition-all duration-300 ${currentStep >= 2 ? "bg-teal-gradient shadow-xs" : "bg-slate-200"}`} />
-          <div className={`h-full rounded-full transition-all duration-300 ${currentStep >= 3 ? "bg-teal-gradient shadow-xs" : "bg-slate-200"}`} />
+          <div className={`h-full rounded-full transition-all duration-300 ${currentStep >= 1 ? "bg-orange-gradient shadow-xs" : "bg-slate-200"}`} />
+          <div className={`h-full rounded-full transition-all duration-300 ${currentStep >= 2 ? "bg-orange-gradient shadow-xs" : "bg-slate-200"}`} />
+          <div className={`h-full rounded-full transition-all duration-300 ${currentStep >= 3 ? "bg-orange-gradient shadow-xs" : "bg-slate-200"}`} />
         </div>
       </div>
     </div>
@@ -645,23 +645,23 @@ export default function ReportPage() {
     const isCameraAvailable = cameraStatus === "active" || cameraStatus === "requesting";
 
     return (
-      <main className="h-screen bg-slate-900 text-white flex flex-col overflow-hidden">
+      <main className="h-screen bg-slate-50 text-slate-900 flex flex-col overflow-hidden">
         {renderProgressHeader()}
 
         {/* Sub-header status bar */}
-        <div className="p-3 bg-black/60 border-b border-white/10 flex items-center justify-between text-xs font-mono">
+        <div className="p-3 bg-white border-b border-slate-200 flex items-center justify-between text-xs font-mono shadow-sm">
           <div className="flex items-center gap-2">
             <span
               className={`w-2 h-2 rounded-full ${geotagExtracted
-                  ? "bg-teal-400"
+                  ? "bg-orange-500"
                   : gpsStatus === "locked"
-                    ? "bg-emerald-400 animate-pulse"
+                    ? "bg-emerald-500 animate-pulse"
                     : gpsStatus === "locating"
-                      ? "bg-amber-400 animate-ping"
-                      : "bg-rose-400"
+                      ? "bg-amber-500 animate-ping"
+                      : "bg-rose-500"
                 }`}
             />
-            <span className="text-slate-300">
+            <span className="text-slate-600 font-semibold">
               {geotagExtracted
                 ? "Geotag GPS locked"
                 : gpsStatus === "locked"
@@ -675,9 +675,9 @@ export default function ReportPage() {
           <button
             type="button"
             onClick={() => setShowManualPinPicker(!showManualPinPicker)}
-            className="text-xs text-sky-400 hover:text-sky-300 underline font-sans flex items-center gap-1 cursor-pointer"
+            className="text-xs text-[#ea580c] hover:text-[#f97316] underline font-sans flex items-center gap-1 cursor-pointer font-bold"
           >
-            <MapPin className="w-3.5 h-3.5 text-rose-400" />
+            <MapPin className="w-3.5 h-3.5" />
             {showManualPinPicker ? "Close map" : "Adjust on map"}
           </button>
         </div>
@@ -690,9 +690,9 @@ export default function ReportPage() {
               {/* Geotag / Verification Pill Indicator */}
               <div className="absolute top-3 left-3 z-20">
                 <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-md backdrop-blur-md ${geotagExtracted
-                    ? "bg-[#00a896]/90 text-white border border-[#00c49f]/40"
+                    ? "bg-[#f97316]/90 text-white border border-[#fb923c]/40"
                     : captureSource === "live_camera"
-                      ? "bg-[#028090]/90 text-white border border-sky-400/40"
+                      ? "bg-[#ea580c]/90 text-white border border-sky-400/40"
                       : "bg-slate-800/90 text-slate-200 border border-slate-700"
                   }`}>
                   {geotagExtracted ? (
@@ -739,11 +739,11 @@ export default function ReportPage() {
               {geotagAlert && (
                 <div className="w-full max-w-md px-4 pb-2 z-10">
                   <div className={`p-2.5 rounded-xl text-xs flex items-center gap-2 ${geotagAlert.type === "success"
-                      ? "bg-teal-950/80 border border-teal-500/50 text-teal-200"
+                      ? "bg-orange-950/80 border border-orange-500/50 text-orange-200"
                       : "bg-amber-950/80 border border-amber-500/50 text-amber-200"
                     }`}>
                     {geotagAlert.type === "success" ? (
-                      <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-orange-400 shrink-0" />
                     ) : (
                       <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
                     )}
@@ -808,7 +808,7 @@ export default function ReportPage() {
                       setStep1Mode("options");
                       geotagFileInputRef.current?.click();
                     }}
-                    className="min-h-[46px] text-xs font-bold shadow-teal-glow rounded-xl"
+                    className="min-h-[46px] text-xs font-bold shadow-orange-glow rounded-xl"
                   >
                     <Upload className="w-4 h-4 mr-2" />
                     Upload Geotagged Image
@@ -827,17 +827,34 @@ export default function ReportPage() {
             )
           ) : (
             /* ================= VIEW C: STEP 1 OPTIONS SELECTION (OPTION 1 VS OPTION 2) ================= */
-            <div className="w-full h-full overflow-y-auto px-4 py-6 flex flex-col items-center justify-center">
-              <div className="w-full max-w-md space-y-4 my-auto">
+            <div className="relative w-full h-full overflow-y-auto px-6 py-16 md:py-24 flex flex-col items-center bg-slate-50">
+              {/* Background Decorative Elements */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {/* Colored Blurred Blobs */}
+                <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#ea580c]/10 blur-[100px]" />
+                <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-[#0a2540]/5 blur-[100px]" />
+                {/* Subtle Dot Pattern */}
+                <div 
+                  className="absolute inset-0 opacity-[0.4]" 
+                  style={{ 
+                    backgroundImage: 'radial-gradient(#ea580c 1px, transparent 1px)', 
+                    backgroundSize: '24px 24px' 
+                  }} 
+                />
+              </div>
+
+              <div className="relative w-full max-w-2xl space-y-10 mx-auto z-10">
                 {/* Intro Title */}
-                <div className="text-center space-y-1">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-[#028090] to-[#0a2540] border border-[#00a896]/30 text-white shadow-teal-glow mb-1">
-                    <Camera className="w-6 h-6 text-[#00c49f]" />
+                <div className="text-center space-y-4 flex flex-col items-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white shadow-sm border border-slate-200/60 text-[#ea580c] mb-2">
+                    <Camera className="w-8 h-8" />
                   </div>
-                  <h2 className="text-lg font-extrabold text-white">Provide Evidence & Location</h2>
-                  <p className="text-xs text-slate-400 max-w-xs mx-auto">
-                    Select your preferred method to provide the incident photo and location.
-                  </p>
+                  <div className="space-y-2">
+                    <h2 className="text-4xl font-extrabold text-[#0a2540] tracking-tight">Provide Evidence & Location</h2>
+                    <p className="text-base text-slate-500 leading-relaxed max-w-lg mx-auto">
+                      Select your preferred method to provide the incident photo and location.
+                    </p>
+                  </div>
                 </div>
 
                 {/* Hidden File Input for Geotagged Photo */}
@@ -849,109 +866,109 @@ export default function ReportPage() {
                   onChange={handleGeotagUpload}
                 />
 
-                {/* Option 1: Upload Geotagged Photo */}
-                <div
-                  onClick={() => !isExtractingGeotag && geotagFileInputRef.current?.click()}
-                  className="group relative p-4 rounded-2xl bg-gradient-to-b from-slate-800/90 to-slate-800/60 border-2 border-[#028090]/80 hover:border-[#00a896] hover:shadow-teal-glow transition-all cursor-pointer space-y-2.5"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-xl bg-[#028090]/20 border border-[#028090]/40 flex items-center justify-center text-[#00c49f] group-hover:scale-105 transition-transform">
-                        <Upload className="w-5 h-5 text-[#00c49f]" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-mono font-bold text-[#00c49f] uppercase tracking-wider">
-                            Option 1
-                          </span>
-                          <span className="text-[10px] bg-teal-500/20 text-teal-300 border border-teal-500/30 font-bold px-2 py-0.5 rounded-full">
-                            Auto-reads Location
-                          </span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {/* Option 1: Upload Geotagged Photo */}
+                  <div
+                    onClick={() => !isExtractingGeotag && geotagFileInputRef.current?.click()}
+                    className="group relative p-6 rounded-3xl bg-white border-2 border-slate-200 hover:border-[#ea580c] hover:shadow-xl transition-all cursor-pointer flex flex-col justify-between space-y-4 shadow-sm"
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-2 mb-4">
+                        <div className="w-14 h-14 rounded-2xl bg-[#ea580c]/10 flex items-center justify-center text-[#ea580c] group-hover:scale-105 transition-transform">
+                          <Upload className="w-7 h-7" />
                         </div>
-                        <h3 className="text-sm font-bold text-white group-hover:text-[#00c49f] transition-colors">
+                        <span className="text-[10px] bg-[#ea580c]/10 text-[#ea580c] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                          Auto-reads Location
+                        </span>
+                      </div>
+                      
+                      <div className="space-y-1.5 mb-3 text-left">
+                        <span className="text-xs font-mono font-bold text-[#ea580c] uppercase tracking-wider">
+                          Option 1
+                        </span>
+                        <h3 className="text-xl font-extrabold text-[#0a2540] group-hover:text-[#ea580c] transition-colors leading-tight">
                           Upload Geotagged Image
                         </h3>
                       </div>
+
+                      <p className="text-sm text-slate-500 leading-relaxed text-left">
+                        Upload a photo taken with GPS enabled. The incident location is extracted directly using the Gemma 4 vision model.
+                      </p>
+                    </div>
+
+                    <div className="pt-4 mt-auto border-t border-slate-100 flex items-center justify-between text-sm text-[#ea580c] font-bold">
+                      <span className="flex items-center gap-1.5">
+                        {isExtractingGeotag ? (
+                          <>
+                            <RefreshCw className="w-4 h-4 animate-spin" />
+                            Extracting…
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle2 className="w-4 h-4" />
+                            GPS from image
+                          </>
+                        )}
+                      </span>
+                      <span className="inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        Choose
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-300 leading-relaxed">
-                    Upload a photo taken with GPS enabled. The incident location is extracted directly using the Gemma 4 vision model without requesting device location.
-                  </p>
-
-                  <div className="pt-1 flex items-center justify-between text-xs text-[#00c49f] font-semibold">
-                    <span className="flex items-center gap-1.5">
-                      {isExtractingGeotag ? (
-                        <>
-                          <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                          Extracting location with Gemma 4…
-                        </>
-                      ) : (
-                        <>
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#00c49f]" />
-                          Takes location from image
-                        </>
-                      )}
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-xs font-bold group-hover:translate-x-1 transition-transform">
-                      Choose file
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                </div>
-
-                {/* Option 2: Take Picture (Live Camera) */}
-                <div
-                  onClick={handleStartCamera}
-                  className="group relative p-4 rounded-2xl bg-gradient-to-b from-slate-800/90 to-slate-800/60 border border-slate-700 hover:border-sky-400 hover:shadow-lg transition-all cursor-pointer space-y-2.5"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:scale-105 transition-transform">
-                        <Camera className="w-5 h-5 text-sky-400" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">
-                            Option 2
-                          </span>
-                          <span className="text-[10px] bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold px-2 py-0.5 rounded-full">
-                            Live Camera
-                          </span>
+                  {/* Option 2: Take Picture (Live Camera) */}
+                  <div
+                    onClick={handleStartCamera}
+                    className="group relative p-6 rounded-3xl bg-white border-2 border-slate-200 hover:border-[#ea580c] hover:shadow-xl transition-all cursor-pointer flex flex-col justify-between space-y-4 shadow-sm"
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-2 mb-4">
+                        <div className="w-14 h-14 rounded-2xl bg-[#ea580c]/10 flex items-center justify-center text-[#ea580c] group-hover:scale-105 transition-transform">
+                          <Camera className="w-7 h-7" />
                         </div>
-                        <h3 className="text-sm font-bold text-white group-hover:text-sky-300 transition-colors">
+                        <span className="text-[10px] bg-[#ea580c]/10 text-[#ea580c] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                          Live Camera
+                        </span>
+                      </div>
+                      
+                      <div className="space-y-1.5 mb-3 text-left">
+                        <span className="text-xs font-mono font-bold text-[#ea580c] uppercase tracking-wider">
+                          Option 2
+                        </span>
+                        <h3 className="text-xl font-extrabold text-[#0a2540] group-hover:text-[#ea580c] transition-colors leading-tight">
                           Take Picture
                         </h3>
                       </div>
+
+                      <p className="text-sm text-slate-500 leading-relaxed text-left">
+                        Open your device's camera to capture real-time photo evidence. Incident coordinates are acquired using your device's GPS.
+                      </p>
                     </div>
-                  </div>
 
-                  <p className="text-xs text-slate-300 leading-relaxed">
-                    Open your device&apos;s camera to capture real-time photo evidence. Incident coordinates are acquired using your device&apos;s GPS.
-                  </p>
-
-                  <div className="pt-1 flex items-center justify-between text-xs text-sky-400 font-semibold">
-                    <span className="flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-sky-400" />
-                      Uses device GPS
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-xs font-bold group-hover:translate-x-1 transition-transform">
-                      Open Camera
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
+                    <div className="pt-4 mt-auto border-t border-slate-100 flex items-center justify-between text-sm text-[#ea580c] font-bold">
+                      <span className="flex items-center gap-1.5">
+                        <MapPin className="w-4 h-4" />
+                        Uses device GPS
+                      </span>
+                      <span className="inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        Camera
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Geotag Warning if previous file had no GPS */}
                 {geotagAlert && (
-                  <Alert variant="destructive" className="text-xs rounded-xl bg-amber-950/60 border-amber-600/50 text-amber-200">
-                    <AlertTriangle className="w-4 h-4 text-amber-400 mr-2 shrink-0" />
+                  <Alert variant="destructive" className="text-sm rounded-xl text-left">
+                    <AlertTriangle className="w-4 h-4 mr-2 shrink-0" />
                     <span>{geotagAlert.message}</span>
                   </Alert>
                 )}
 
                 {/* Secondary Option: Skip Photo */}
-                <div className="pt-1 text-center">
+                <div className="pt-2 text-center">
                   <Button
                     type="button"
                     variant="ghost"
@@ -960,7 +977,7 @@ export default function ReportPage() {
                       stopGpsWatcher();
                       setCurrentStep(2);
                     }}
-                    className="text-xs text-slate-400 hover:text-white"
+                    className="text-sm font-semibold text-slate-500 hover:text-[#0a2540] hover:bg-slate-100/50 rounded-full px-6 py-2 transition-colors"
                   >
                     Skip photo · Continue with text only
                   </Button>
@@ -1001,16 +1018,16 @@ export default function ReportPage() {
         </div>
 
         {/* Bottom Action Bar */}
-        <div className="relative z-20 p-4 bg-black/90 border-t border-white/10 flex flex-col items-center gap-3">
+        <div className="relative z-20 p-4 bg-white border-t border-slate-200 flex flex-col items-center gap-3">
           {/* Location badge snippet */}
-          <div className="w-full max-w-sm flex items-center justify-between text-xs text-slate-300 px-1 truncate">
+          <div className="w-full max-w-sm flex items-center justify-between text-xs text-slate-600 px-1 truncate">
             <span className="flex items-center gap-1.5 truncate">
-              <MapPin className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+              <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
               <span className="truncate">
                 {location.label || (isGeocoding ? "Resolving address…" : "Location locked")}
               </span>
             </span>
-            <span className="text-[11px] text-slate-400 shrink-0 font-mono">
+            <span className="text-[11px] text-slate-400 shrink-0 font-mono font-semibold">
               {location.lat !== null && location.lng !== null
                 ? `${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`
                 : "No GPS"}
@@ -1028,7 +1045,7 @@ export default function ReportPage() {
                   stopGpsWatcher();
                   setCurrentStep(2);
                 }}
-                className="w-full min-h-[48px] shadow-teal-glow text-white font-bold text-sm rounded-xl"
+                className="w-full min-h-[48px] shadow-orange-glow text-white font-bold text-sm rounded-xl"
               >
                 Continue to Details
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -1039,7 +1056,7 @@ export default function ReportPage() {
                 <button
                   type="button"
                   onClick={() => geotagFileInputRef.current?.click()}
-                  className="min-h-[44px] min-w-[44px] p-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white flex items-center justify-center cursor-pointer transition-colors"
+                  className="min-h-[44px] min-w-[44px] p-2.5 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition-colors"
                   title="Upload geotagged photo instead"
                   aria-label="Upload geotagged photo instead"
                 >
@@ -1051,10 +1068,10 @@ export default function ReportPage() {
                   onClick={handleShutterPress}
                   disabled={cameraStatus !== "active"}
                   aria-label="Take incident photo"
-                  className="w-18 h-18 rounded-full border-4 border-white/90 bg-white/20 p-1 active:scale-95 hover:bg-white/30 focus:outline-none focus:ring-4 focus:ring-[#00a896]/50 transition-all flex items-center justify-center shadow-lg disabled:opacity-40 disabled:cursor-not-allowed mx-auto"
+                  className="w-18 h-18 rounded-full border-4 border-slate-300 bg-white p-1 active:scale-95 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-[#ea580c]/30 transition-all flex items-center justify-center shadow-md disabled:opacity-40 disabled:cursor-not-allowed mx-auto"
                 >
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#028090] to-[#0a2540] border-2 border-white flex items-center justify-center shadow-inner">
-                    <div className="w-5 h-5 rounded-full bg-white shadow-xs" />
+                  <div className="w-14 h-14 rounded-full bg-[#ea580c] border-2 border-white flex items-center justify-center shadow-inner">
+                    <div className="w-5 h-5 rounded-full bg-white shadow-sm" />
                   </div>
                 </button>
 
@@ -1065,7 +1082,7 @@ export default function ReportPage() {
                     stopGpsWatcher();
                     setCurrentStep(2);
                   }}
-                  className="min-h-[44px] px-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                  className="min-h-[44px] px-3.5 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 text-xs font-bold flex items-center gap-1.5 transition-colors"
                   title="Skip photo"
                 >
                   Skip
@@ -1082,7 +1099,7 @@ export default function ReportPage() {
                   stopGpsWatcher();
                   setCurrentStep(2);
                 }}
-                className="w-full min-h-[44px] bg-slate-800 border-slate-700 text-white hover:bg-slate-700 text-xs rounded-xl"
+                className="w-full min-h-[44px] bg-white border-slate-200 text-slate-700 hover:bg-slate-50 font-bold text-xs rounded-xl"
               >
                 Skip photo · Continue to Details
                 <ArrowRight className="w-4 h-4 ml-1.5" />
@@ -1124,7 +1141,7 @@ export default function ReportPage() {
                       type="button"
                       onClick={() => setUserCategory(chip.id)}
                       className={`min-h-[48px] px-3 py-2.5 rounded-xl border text-left text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${isSelected
-                          ? "bg-[#f0fdfa] text-[#0a2540] border-[#028090] shadow-xs ring-2 ring-[#00a896]/30 font-bold"
+                          ? "bg-[#f0fdfa] text-[#0a2540] border-[#ea580c] shadow-xs ring-2 ring-[#f97316]/30 font-bold"
                           : "bg-white text-slate-700 border-slate-200/90 hover:bg-slate-50 hover:border-slate-300"
                         }`}
                     >
@@ -1172,7 +1189,7 @@ export default function ReportPage() {
                 maxLength={1000}
                 rows={4}
                 placeholder="E.g. Broken water pipe gushing across the road divider near the signal. Water has flooded two lanes and vehicles are skidding."
-                className="text-xs resize-none rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+                className="text-xs resize-none rounded-xl border-slate-200 focus:border-[#ea580c] focus:ring-[#f97316]/20"
               />
 
               {hasAttemptedStep2 && !isDescriptionValid && (
@@ -1192,7 +1209,7 @@ export default function ReportPage() {
         <section className="bg-white rounded-2xl border border-slate-200/90 p-5 space-y-3 shadow-xs">
           <div>
             <h3 className="text-sm font-extrabold text-[#0a2540] flex items-center gap-1.5">
-              <User className="w-4 h-4 text-[#028090]" />
+              <User className="w-4 h-4 text-[#ea580c]" />
               Your contact details <span className="text-xs text-slate-400 font-normal">(optional)</span>
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
@@ -1210,7 +1227,7 @@ export default function ReportPage() {
                 value={reporterName}
                 onChange={(e) => setReporterName(e.target.value)}
                 placeholder="e.g. Rahul Verma"
-                className="text-xs h-10 mt-1 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+                className="text-xs h-10 mt-1 rounded-xl border-slate-200 focus:border-[#ea580c] focus:ring-[#f97316]/20"
               />
             </div>
 
@@ -1223,7 +1240,7 @@ export default function ReportPage() {
                 value={reporterContact}
                 onChange={(e) => setReporterContact(e.target.value)}
                 placeholder="e.g. +91 98765 43210"
-                className="text-xs h-10 mt-1 rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+                className="text-xs h-10 mt-1 rounded-xl border-slate-200 focus:border-[#ea580c] focus:ring-[#f97316]/20"
               />
             </div>
                 </div>
@@ -1259,7 +1276,7 @@ export default function ReportPage() {
                   }
                 }}
                 disabled={!isStep2Valid}
-                className="flex-1 min-h-[46px] shadow-teal-glow text-white font-bold text-xs disabled:opacity-50"
+                className="flex-1 min-h-[46px] shadow-orange-glow text-white font-bold text-xs disabled:opacity-50"
               >
                 Continue to Review
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -1291,13 +1308,13 @@ export default function ReportPage() {
             <div className="bg-white rounded-2xl border border-slate-200/90 p-4 space-y-3 shadow-xs">
               <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
-                  <Camera className="w-3.5 h-3.5 text-[#028090]" />
+                  <Camera className="w-3.5 h-3.5 text-[#ea580c]" />
                   Photographic Evidence
                 </h2>
                 <button
                   type="button"
                   onClick={() => setCurrentStep(1)}
-                  className="text-xs text-[#028090] font-bold hover:text-[#00a896] flex items-center gap-1 transition-colors"
+                  className="text-xs text-[#ea580c] font-bold hover:text-[#f97316] flex items-center gap-1 transition-colors"
                 >
                   <Edit2 className="w-3 h-3" />
                   Edit
@@ -1315,13 +1332,13 @@ export default function ReportPage() {
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
                     {geotagExtracted ? (
-                      <span className="inline-flex items-center gap-1 text-[#00a896] font-semibold bg-[#f0fdfa] px-2.5 py-0.5 rounded-full border border-[#00a896]/20">
-                        <MapPin className="w-3 h-3 text-[#00a896]" />
+                      <span className="inline-flex items-center gap-1 text-[#f97316] font-semibold bg-[#f0fdfa] px-2.5 py-0.5 rounded-full border border-[#f97316]/20">
+                        <MapPin className="w-3 h-3 text-[#f97316]" />
                         Location extracted directly from photo geotag (EXIF)
                       </span>
                     ) : captureSource === "live_camera" ? (
-                      <span className="inline-flex items-center gap-1 text-[#028090] font-semibold bg-[#f0fdfa] px-2.5 py-0.5 rounded-full border border-[#028090]/20">
-                        <Camera className="w-3 h-3 text-[#028090]" />
+                      <span className="inline-flex items-center gap-1 text-[#ea580c] font-semibold bg-[#f0fdfa] px-2.5 py-0.5 rounded-full border border-[#ea580c]/20">
+                        <Camera className="w-3 h-3 text-[#ea580c]" />
                         Captured with live camera & device GPS
                       </span>
                     ) : null}
@@ -1338,13 +1355,13 @@ export default function ReportPage() {
             <div className="bg-white rounded-2xl border border-slate-200/90 p-4 space-y-3 shadow-xs">
               <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-[#028090]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#ea580c]" />
                   Location
                 </h2>
                 <button
                   type="button"
                   onClick={() => setCurrentStep(1)}
-                  className="text-xs text-[#028090] font-bold hover:text-[#00a896] flex items-center gap-1 transition-colors"
+                  className="text-xs text-[#ea580c] font-bold hover:text-[#f97316] flex items-center gap-1 transition-colors"
                 >
                   <Edit2 className="w-3 h-3" />
                   Edit
@@ -1377,13 +1394,13 @@ export default function ReportPage() {
             <div className="bg-white rounded-2xl border border-slate-200/90 p-4 space-y-3 shadow-xs">
               <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <h2 className="text-xs font-bold text-[#0a2540] uppercase tracking-wide flex items-center gap-1.5">
-                  <FileText className="w-3.5 h-3.5 text-[#028090]" />
+                  <FileText className="w-3.5 h-3.5 text-[#ea580c]" />
                   Report Details
                 </h2>
                 <button
                   type="button"
                   onClick={() => setCurrentStep(2)}
-                  className="text-xs text-[#028090] font-bold hover:text-[#00a896] flex items-center gap-1 transition-colors"
+                  className="text-xs text-[#ea580c] font-bold hover:text-[#f97316] flex items-center gap-1 transition-colors"
                 >
                   <Edit2 className="w-3 h-3" />
                   Edit
@@ -1410,8 +1427,8 @@ export default function ReportPage() {
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-2.5">
-                      <div className="w-7 h-7 rounded-lg bg-[#f0fdfa] border border-[#028090]/20 flex items-center justify-center shrink-0">
-                        <User className="w-3.5 h-3.5 text-[#028090]" />
+                      <div className="w-7 h-7 rounded-lg bg-[#f0fdfa] border border-[#ea580c]/20 flex items-center justify-center shrink-0">
+                        <User className="w-3.5 h-3.5 text-[#ea580c]" />
                       </div>
                       <div className="truncate">
                         <span className="text-[10px] text-slate-400 block font-medium">Reporter Name</span>
@@ -1422,8 +1439,8 @@ export default function ReportPage() {
                     </div>
 
                     <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-2.5">
-                      <div className="w-7 h-7 rounded-lg bg-[#f0fdfa] border border-[#028090]/20 flex items-center justify-center shrink-0">
-                        <Phone className="w-3.5 h-3.5 text-[#028090]" />
+                      <div className="w-7 h-7 rounded-lg bg-[#f0fdfa] border border-[#ea580c]/20 flex items-center justify-center shrink-0">
+                        <Phone className="w-3.5 h-3.5 text-[#ea580c]" />
                       </div>
                       <div className="truncate">
                         <span className="text-[10px] text-slate-400 block font-medium">Contact Number</span>
@@ -1438,8 +1455,8 @@ export default function ReportPage() {
             </div>
 
             {/* Privacy Note */}
-            <div className="bg-[#f0fdfa] rounded-2xl border border-[#028090]/20 p-3.5 flex items-start gap-3 text-xs text-[#0a2540]">
-              <Shield className="w-4 h-4 text-[#028090] shrink-0 mt-0.5" />
+            <div className="bg-[#f0fdfa] rounded-2xl border border-[#ea580c]/20 p-3.5 flex items-start gap-3 text-xs text-[#0a2540]">
+              <Shield className="w-4 h-4 text-[#ea580c] shrink-0 mt-0.5" />
               <p className="leading-relaxed">
                 Your observation evidence is analyzed by Civitas Lens to correlate public incidents and dispatch municipal responders. Contact details are never displayed publicly.
               </p>
@@ -1459,7 +1476,7 @@ export default function ReportPage() {
                 variant="teal"
                 onClick={handleSubmit}
                 disabled={isSubmitting || location.lat === null || location.lng === null || !isStep2Valid}
-                className="w-full min-h-[48px] text-sm font-bold shadow-teal-glow text-white rounded-xl"
+                className="w-full min-h-[48px] text-sm font-bold shadow-orange-glow text-white rounded-xl"
               >
                 {isSubmitting ? (
                   <>

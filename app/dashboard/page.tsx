@@ -171,7 +171,7 @@ export default function DashboardPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 w-full">
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#0a2540] text-white text-xs font-bold tracking-wide uppercase shadow-xs">
-              <Shield className="w-3.5 h-3.5 text-[#00c49f]" />
+              <Shield className="w-3.5 h-3.5 text-[#fb923c]" />
               Analyst Workspace
             </span>
             <span className="text-xs text-slate-500 font-medium hidden sm:inline">
@@ -212,7 +212,7 @@ export default function DashboardPage() {
         <div className="flex items-center gap-2 border-t border-slate-100 mt-2.5 pt-2 w-full">
           <Link
             href="/dashboard"
-            className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg border-b-2 text-[#0a2540] border-[#028090] bg-[#f0fdfa] shadow-xs"
+            className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg border-b-2 text-[#0a2540] border-[#ea580c] bg-[#f0fdfa] shadow-xs"
           >
             Incidents Workspace
           </Link>
@@ -238,7 +238,7 @@ export default function DashboardPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search incidents or keywords..."
-                className="pl-9 text-xs h-9 bg-white rounded-xl border-slate-200 focus:border-[#028090] focus:ring-[#00a896]/20"
+                className="pl-9 text-xs h-9 bg-white rounded-xl border-slate-200 focus:border-[#ea580c] focus:ring-[#f97316]/20"
               />
             </div>
 
@@ -247,7 +247,7 @@ export default function DashboardPage() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#028090]"
+                className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#ea580c]"
               >
                 {CATEGORIES.map((cat) => (
                   <option key={cat.id} value={cat.id}>
@@ -259,7 +259,7 @@ export default function DashboardPage() {
               <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#028090]"
+                className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#ea580c]"
               >
                 {STATUSES.map((st) => (
                   <option key={st.id} value={st.id}>
@@ -338,7 +338,7 @@ export default function DashboardPage() {
                     setSelectedSeverity("all");
                     setSelectedTimeRange("all");
                   }}
-                  className="text-xs font-bold text-[#028090] hover:text-[#00a896]"
+                  className="text-xs font-bold text-[#ea580c] hover:text-[#f97316]"
                 >
                   Reset all filters
                 </button>
@@ -356,7 +356,7 @@ export default function DashboardPage() {
                     onClick={() => setSelectedIncidentId(incident.id)}
                     className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-[#f0fdfa] border-[#028090] ring-2 ring-[#00a896]/20 shadow-xs"
+                        ? "bg-[#f0fdfa] border-[#ea580c] ring-2 ring-[#f97316]/20 shadow-xs"
                         : "bg-white border-slate-200/90 hover:border-slate-300 hover:shadow-xs"
                     }`}
                   >
@@ -378,14 +378,14 @@ export default function DashboardPage() {
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-[#0a2540] bg-[#f0fdfa] border border-[#028090]/25 px-2 py-0.5 rounded-full text-[10px]">
+                        <span className="font-bold text-[#0a2540] bg-[#f0fdfa] border border-[#ea580c]/25 px-2 py-0.5 rounded-full text-[10px]">
                           {incident.observation_count}{" "}
                           {incident.observation_count === 1 ? "obs" : "obs"}
                         </span>
                         <Link
                           href={`/dashboard/incidents/${incident.id}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="text-[#028090] font-bold hover:text-[#00a896] flex items-center gap-0.5 transition-colors"
+                          className="text-[#ea580c] font-bold hover:text-[#f97316] flex items-center gap-0.5 transition-colors"
                           title="Open full incident record"
                         >
                           View <ChevronRight className="w-3.5 h-3.5" />

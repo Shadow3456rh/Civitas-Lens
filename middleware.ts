@@ -68,13 +68,7 @@ export async function middleware(request: NextRequest) {
 
     const role = profile?.role || "citizen";
 
-    // 3. Only analyst and admin are authorized to enter /dashboard
-    if (role !== "analyst" && role !== "admin") {
-      const forbiddenUrl = new URL("/login", request.url);
-      forbiddenUrl.searchParams.set("error", "forbidden");
-      forbiddenUrl.searchParams.set("role", role);
-      return NextResponse.redirect(forbiddenUrl);
-    }
+
   }
 
   return response;

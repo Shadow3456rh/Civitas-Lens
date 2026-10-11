@@ -193,7 +193,7 @@ export function IncidentClusterMap({
             ${inc.summary || "Incident reported."}
           </p>
 
-          <a href="/dashboard/incidents/${inc.id}" style="display: block; text-align: center; background: #028090; color: #FFFFFF; font-size: 11px; font-weight: 700; text-decoration: none; padding: 7px 10px; border-radius: 8px;">
+          <a href="/dashboard/incidents/${inc.id}" style="display: block; text-align: center; background: #ea580c; color: #FFFFFF; font-size: 11px; font-weight: 700; text-decoration: none; padding: 7px 10px; border-radius: 8px;">
             Open Incident Details →
           </a>
         </div>

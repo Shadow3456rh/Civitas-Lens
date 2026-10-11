@@ -181,9 +181,9 @@ export default function ReportsDashboardPage() {
               </Link>
               <Link
                 href="/dashboard/reports"
-                className="px-3.5 py-1.5 rounded-lg text-xs font-extrabold bg-[#f0fdfa] text-[#0a2540] shadow-xs border border-[#028090]/30 flex items-center gap-1.5"
+                className="px-3.5 py-1.5 rounded-lg text-xs font-extrabold bg-[#f0fdfa] text-[#0a2540] shadow-xs border border-[#ea580c]/30 flex items-center gap-1.5"
               >
-                <FileText className="w-3.5 h-3.5 text-[#028090]" />
+                <FileText className="w-3.5 h-3.5 text-[#ea580c]" />
                 Reports ({totalCount})
               </Link>
             </div>
@@ -199,7 +199,7 @@ export default function ReportsDashboardPage() {
               }}
               className={`pb-1 border-b-2 transition-colors cursor-pointer ${
                 activeTab === "all"
-                  ? "border-[#028090] text-[#0a2540] font-extrabold"
+                  ? "border-[#ea580c] text-[#0a2540] font-extrabold"
                   : "border-transparent text-slate-500 hover:text-slate-800"
               }`}
             >
@@ -349,7 +349,7 @@ export default function ReportsDashboardPage() {
                       className="hover:bg-slate-50/80 transition-colors cursor-pointer group"
                     >
                       {/* Reference Code */}
-                      <td className="py-3 px-4 font-mono font-extrabold text-[#0a2540] group-hover:text-[#028090] whitespace-nowrap transition-colors">
+                      <td className="py-3 px-4 font-mono font-extrabold text-[#0a2540] group-hover:text-[#ea580c] whitespace-nowrap transition-colors">
                         {rep.reference_code}
                       </td>
 
@@ -404,10 +404,10 @@ export default function ReportsDashboardPage() {
                           <Link
                             href={`/dashboard/incidents/${rep.incident_id}`}
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1 text-xs text-[#028090] font-bold hover:text-[#00a896] transition-colors"
+                            className="inline-flex items-center gap-1 text-xs text-[#ea580c] font-bold hover:text-[#f97316] transition-colors"
                           >
                             <span>Incident</span>
-                            <ExternalLink className="w-3 h-3 text-[#028090]" />
+                            <ExternalLink className="w-3 h-3 text-[#ea580c]" />
                           </Link>
                         ) : (
                           <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
@@ -436,7 +436,7 @@ export default function ReportsDashboardPage() {
                         ) : (
                           <Link
                             href={`/dashboard/reports/${rep.id}`}
-                            className="text-xs text-[#028090] font-bold hover:text-[#00a896] transition-colors"
+                            className="text-xs text-[#ea580c] font-bold hover:text-[#f97316] transition-colors"
                           >
                             Details →
                           </Link>
